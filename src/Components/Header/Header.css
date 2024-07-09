@@ -17,7 +17,8 @@
     border: 1px solid #ccc;
     padding: 0 10px;
     margin-right: 10px;
-    
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
 }
 
 

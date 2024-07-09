@@ -19,7 +19,6 @@ import { amber, deepOrange, grey } from '@mui/material/colors';
 
 function App() {
 
-  const theme = useTheme();
   const {onToggleButton, tg} = useTelegram();
 
 
@@ -27,13 +26,9 @@ function App() {
     tg.ready();
   }, [])
 
-  const darkModeTheme = createTheme(themeDesign('dark'));
-
-
 
 
   return (
-  <ThemeProvider theme={darkModeTheme}>
     <div className="App">
       <Header/>
       <Routes>
@@ -41,7 +36,6 @@ function App() {
         <Route path={'form'} element={<Form />}/>
       </Routes>
     </div>
-    </ThemeProvider>
   );
 }
 
