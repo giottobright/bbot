@@ -16,7 +16,17 @@ const Header = (props) => {
             </span>
             <TextField            sx={{ 
                     label: { color: 'var(--tg-theme-text-color)' },
-                    input: { color: 'var(--tg-theme-text-color)' } 
+                    input: { color: 'var(--tg-theme-text-color)' },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: 'var(--tg-theme-bg-color)',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: 'var(--tg-theme-bg-color)',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: 'var(--tg-theme-bg-color)',
+                        },}
                 }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
         </div>
     );
