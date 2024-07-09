@@ -15,6 +15,11 @@ const products = [
     {id: '8', title: 'Stella', price: '155 rub', description: 'a Belgian pilsner beer'}
 ]
 
+const getTotalPrice = (items = []) => {
+    return items.reduce((acc, item) => {
+        return acc += item.price
+    }, 0)
+}
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
