@@ -3,6 +3,8 @@ import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useCallback, useEffect} from "react";
+import { Container, Grid, Card, CardContent, Typography, IconButton, TextField, InputAdornment } from '@mui/material';
+
 
 const products = [
     {id: '1', title: 'Guiness', price: 120, description: 'a distinctive dark and creamy stout'},
@@ -71,15 +73,28 @@ const ProductList = () => {
     }
 
     return (
-        <div className={'list'}>
-            {products.map(item => (
-                <ProductItem
-                    product={item}
-                    onAdd={onAdd}
-                    className={'item'}
-                />
-            ))}
-        </div>
+        <Grid container spacing={2} className="category-container">
+        {products.map((item, index) => (
+          <Grid item xs={4} key={index}>
+            <Card className="category-card">
+            <ProductItem
+                product={item}
+                onAdd={onAdd}
+                className={'item'}
+            />
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+        // <div className={'list'}>
+        //     {products.map(item => (
+        //         <ProductItem
+        //             product={item}
+        //             onAdd={onAdd}
+        //             className={'item'}
+        //         />
+        //     ))}
+        // </div>
     );
 };
 

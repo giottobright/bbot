@@ -4,7 +4,7 @@ import { useTelegram } from '../../hooks/useTelegram';
 import './Header.css';
 import TextField from '@mui/material/TextField';
 import { green } from '@mui/material/colors';
-import { Container, Grid, Card, CardContent, Typography, IconButton, TextField, InputAdornment } from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Header = (props) => {
@@ -13,10 +13,7 @@ const Header = (props) => {
     return (
         <div className={'header'}>
             {/* <Button onClick={onClose}>Закрыть</Button> */}
-            <span className={'username'}>
-                {user?.username}
-            </span>
-            <TextField            sx={{ 
+            <TextField sx={{ 
                     label: { color: 'var(--tg-theme-text-color)' },
                     input: { color: 'var(--tg-theme-text-color)' },
                     '& .MuiOutlinedInput-root': {
@@ -35,13 +32,7 @@ const Header = (props) => {
                                 color: 'var(--tg-theme-text-color)', // Change the label color to white when focused
                             },
                         },
-                }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'             InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}/>
+                }} id="outlined-search" label="Search field" type="search" className='searchbar'/>
         </div>
     );
 };
