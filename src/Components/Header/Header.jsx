@@ -28,7 +28,7 @@ const Header = (props) => {
                             borderColor: 'var(--tg-theme-text-color)',
                         },},
                         '& .MuiInputLabel-root': {
-                            color: 'var(--tg-theme-bg-color)',
+                            color: 'var(--tg-theme-text-color)',
                             '&.Mui-focused': {
                                 color: 'var(--tg-theme-text-color)', // Change the label color to white when focused
                             },
