@@ -4,7 +4,7 @@ import {useTelegram} from './hooks/useTelegram';
 import Header from './Components/Header/Header';
 const {user, onClose} = useTelegram();
 const tg = window.Telegram.WebApp;
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProductList from './Components/ProductList/ProductList';
 import Form from './Components/Form/Form';
 
@@ -20,6 +20,7 @@ function App() {
 
 
   return (
+    
     <div className="App">
       <Header/>
       <Routes>

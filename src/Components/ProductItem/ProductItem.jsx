@@ -4,14 +4,16 @@ import './ProductItem.css'
 
 const ProductItem = ({product, className, onAdd}) => {
     const onAddHandler = () => {
-        onAdd(product)
+        onAdd(product);
     }
 
+
+
   return (
-    <div className={'product '+ className}>
+    <div className={'product'}>
         <div className={'img'}/>
         <div className={'title'}>{product.title}</div>
-        <div className={'description'}>{product.description}</div>
+        {/* <div className={'description'}>{product.description}</div> */}
         <div className={'price'}>
             <span>Стоимость: <b>{product.price}</b></span>
         </div>
@@ -19,7 +21,9 @@ const ProductItem = ({product, className, onAdd}) => {
             Добавить в корзину
         </Button>
     </div>
+    
   )
+
 }
 
-export default ProductItem
+export default ProductItem;

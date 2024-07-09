@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
-import { useState } from "react";
-import { useTelegram } from "../../hooks/useTelegram";
+import {useTelegram} from "../../hooks/useTelegram";
+import {useCallback, useEffect} from "react";
 
 const products = [
     {id: '1', title: 'Guiness', price: '120 rub', description: 'a distinctive dark and creamy stout'},
@@ -15,47 +15,45 @@ const products = [
     {id: '8', title: 'Stella', price: '155 rub', description: 'a Belgian pilsner beer'}
 ]
 
-const getTotalPrice  =  (items = [])  =>  {
-    return items.reduce((acc, item) => acc + item.price, 0);
-}
 
 const ProductList = () => {
-    const [addedItems, setAddedItems] = useState([])
-    const {tg} = useTelegram();
-    const onAdd =  (product)  =>  {
-        const alreadyAdded = addedItems.find(item  => item.id === product.id);
+    const [addedItems, setAddedItems] = useState([]);
+    const {tg, queryId} = useTelegram();
+
+
+    const onAdd = (product) => {
+        const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
 
         if(alreadyAdded) {
-            newItems = addedItems.filter(item => item.id!== product.id);
-        } else{
+            newItems = addedItems.filter(item => item.id !== product.id);
+        } else {
             newItems = [...addedItems, product];
         }
 
-        setAddedItems(newItems);
+        setAddedItems(newItems)
 
         if(newItems.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
-            tgg.MainButton.setParams({
-                text: 'Купить ${getTotalPrice(newItems)}'
-            });
+            tg.MainButton.setParams({
+                text: `Купить ${getTotalPrice(newItems)}`
+            })
         }
-
     }
 
     return (
         <div className={'list'}>
-            {products.map(item => {
+            {products.map(item => (
                 <ProductItem
                     product={item}
                     onAdd={onAdd}
-                    className={'item'} 
+                    className={'item'}
                 />
-            })}
+            ))}
         </div>
-    )
-}
+    );
+};
 
 export default ProductList;
