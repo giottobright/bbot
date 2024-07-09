@@ -10,4 +10,14 @@
     margin-left: auto;
 }
 
+.searchbar {
+    width: 300px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    margin-right: 10px;
+
+}
+
 
