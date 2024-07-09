@@ -4,6 +4,8 @@ import { useTelegram } from '../../hooks/useTelegram';
 import './Header.css';
 import TextField from '@mui/material/TextField';
 import { green } from '@mui/material/colors';
+import { Container, Grid, Card, CardContent, Typography, IconButton, TextField, InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Header = (props) => {
     const {user, onClose} = useTelegram();
@@ -33,7 +35,13 @@ const Header = (props) => {
                                 color: 'var(--tg-theme-text-color)', // Change the label color to white when focused
                             },
                         },
-                }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
+                }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'             InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}/>
         </div>
     );
 };
