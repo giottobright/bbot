@@ -13,7 +13,7 @@ const Header = (props) => {
             <span className={'username'}>
                 {user?.username}
             </span>
-            <TextField fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
+            <TextField sx={{ label: { color: 'var(--tg-theme-bg-color)' } }} fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
         </div>
     );
 };
