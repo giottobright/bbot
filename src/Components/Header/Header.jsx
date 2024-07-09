@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import { useTelegram } from '../../hooks/useTelegram';
 import './Header.css';
 import TextField from '@mui/material/TextField';
+import { green } from '@mui/material/colors';
 
 const Header = (props) => {
     const {user, onClose} = useTelegram();
@@ -13,7 +14,10 @@ const Header = (props) => {
             <span className={'username'}>
                 {user?.username}
             </span>
-            <TextField sx={{ label: { color: 'var(--tg-theme-bg-color)' }, input: {color: green} }} fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
+            <TextField            sx={{ 
+                    label: { color: 'var(--tg-theme-bg-color)' },
+                    input: { color: 'var(--tg-theme-bg-color)' } 
+                }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
         </div>
     );
 };
