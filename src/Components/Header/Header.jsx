@@ -15,8 +15,8 @@ const Header = (props) => {
                 {user?.username}
             </span>
             <TextField            sx={{ 
-                    label: { color: 'var(--tg-theme-bg-color)' },
-                    input: { color: 'var(--tg-theme-bg-color)' } 
+                    label: { color: 'var(--tg-theme-text-color)' },
+                    input: { color: 'var(--tg-theme-text-color)' } 
                 }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
         </div>
     );
