@@ -11,9 +11,15 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import themeDesign from './themeDesign';
+import Box from '@mui/material/Box';
+import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
+import { amber, deepOrange, grey } from '@mui/material/colors';
 
 
 function App() {
+
+  const theme = useTheme();
   const {onToggleButton, tg} = useTelegram();
 
 
@@ -21,10 +27,13 @@ function App() {
     tg.ready();
   }, [])
 
+  const darkModeTheme = createTheme(themeDesign('dark'));
+
+
 
 
   return (
-    
+  <ThemeProvider theme={darkModeTheme}>
     <div className="App">
       <Header/>
       <Routes>
@@ -32,6 +41,7 @@ function App() {
         <Route path={'form'} element={<Form />}/>
       </Routes>
     </div>
+    </ThemeProvider>
   );
 }
 
