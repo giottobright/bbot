@@ -19,14 +19,20 @@ const Header = (props) => {
                     input: { color: 'var(--tg-theme-text-color)' },
                     '& .MuiOutlinedInput-root': {
                         '& fieldset': {
-                            borderColor: 'var(--tg-theme-bg-color)',
+                            borderColor: 'var(--tg-theme-text-color)',
                         },
                         '&:hover fieldset': {
-                            borderColor: 'var(--tg-theme-bg-color)',
+                            borderColor: 'var(--tg-theme-text-color)',
                         },
                         '&.Mui-focused fieldset': {
-                            borderColor: 'var(--tg-theme-bg-color)',
-                        },}
+                            borderColor: 'var(--tg-theme-text-color)',
+                        },},
+                        '& .MuiInputLabel-root': {
+                            color: 'var(--tg-theme-bg-color)',
+                            '&.Mui-focused': {
+                                color: 'var(--tg-theme-text-color)', // Change the label color to white when focused
+                            },
+                        },
                 }}  fullWidth id="outlined-search" label="Search field" type="search" className='searchbar'/>
         </div>
     );
