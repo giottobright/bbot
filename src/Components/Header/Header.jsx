@@ -29,6 +29,7 @@ const Header = (props) => {
                     '& .MuiInputBase-input': {
                         height: '30px', // Set height of the input element
                         padding: '0 14px', // Adjust padding
+                        color: 'var(--tg-theme-text-color)',
                     },
                     '& .MuiInputLabel-root': {
                         color: 'var(--tg-theme-text-color)',
