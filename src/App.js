@@ -34,7 +34,7 @@ function App() {
       <Header/>
       <Routes>
         <Route index element={<MainScreen />}/>
-        <Route path={'product_list'} element={<ProductList />}/>
+        <Route path={'productlist'} element={<ProductList />}/>
         <Route path={'form'} element={<Form />}/>
       </Routes>
     </div>
