@@ -3,7 +3,7 @@ import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import './MainScreen.css';
 
 const categories = [
-  { label: 'Светлое', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgk8troztGKvW7YaVIcWw1I9WrqEdbFTYeqQ&s' },
+  { label: 'Светлое', image: 'https://www.homebrewhappyhour.com/wp-content/uploads/2022/01/carbonation-artwork-1536x864.png' },
   { label: 'Темное', image: 'https://media.gettyimages.com/id/1298643776/video/dark-beer-bubbles.jpg?s=640x640&k=20&c=BrEnvc0SQaE2PwZlKx34YvEXLpLZoKYKNpE_FiZxF2A=' },
   { label: 'Сидр', image: 'https://media.cntraveler.com/photos/598088a3b7a86962e8e27c11/16:9/w_1280,c_limit/cider-GettyImages-573622633.jpg' },
 ];
