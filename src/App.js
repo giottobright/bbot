@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import { amber, deepOrange, grey } from '@mui/material/colors';
 import MainScreen from './Components/MainScreen/MainScreen'
+import '@telegram-apps/telegram-ui/dist/styles.css';
 
 
 function App() {

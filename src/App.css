@@ -6,8 +6,8 @@
 
 /* Set the background and text color */
 body {
-  background: black;
-  color: white;
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-text-color);
   overflow-x: hidden; /* Prevent horizontal scrolling */
   margin: 0;
   padding: 0;
