@@ -40,7 +40,7 @@ const Header = (props) => {
                             transform: 'translate(0, -0.1em) scale(0.8)', // Change the label color to white when focused
                         },
                     },
-                }} id="outlined-search" fullWidth label="Search field" type="search" className='searchbar' height='30px'/>
+                }} id="outlined-search" fullWidth label="Найти..." type="search" className='searchbar' height='30px'/>
         </div>
     );
 };
