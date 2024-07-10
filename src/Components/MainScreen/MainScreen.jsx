@@ -12,9 +12,9 @@ function MainScreen() {
   return (
     <div className="main-screen">
       <h1 className="main-heading">По цвету</h1>
-      <Grid container spacing={2} className="category-container">
+      <Grid Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} className="category-container">
         {categories.map((category, index) => (
-          <Grid item xs={4} key={index}>
+          <Grid item xs={2} sm={4} md={4} key={index}>
             <Card className="category-card">
               <div className="image-container">
                 <img src={category.image} alt={category.label} />
