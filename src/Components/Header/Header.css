@@ -1,3 +1,5 @@
+
+
 .header {
     width: 100%;
     height: 50px;
@@ -6,23 +8,18 @@
     padding: 0 20px;
 }
 
-.username {
-    margin-left: auto;
-}
-
 .searchbar {
     width: 95%;
-    height:95%;
-    border-radius: 15px;
-    border: 1px solid #ccc;
     margin-right: 10px;
-    /* background: var(--tg-theme-bg-color);
-    color: var(--tg-theme-text-color); */
-    
 }
 
-.searchbar .label {
-    color: red;
+.searchbar .MuiOutlinedInput-input {
+    padding: 0 14px; /* Adjust padding to fit the input height */
+    height: 30px; /* Ensure input height is consistent */
+}
+
+.searchbar .MuiInputLabel-root {
+    top: -12px; /* Adjust label position */
 }
 
 

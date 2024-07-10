@@ -15,6 +15,7 @@ import themeDesign from './themeDesign';
 import Box from '@mui/material/Box';
 import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import { amber, deepOrange, grey } from '@mui/material/colors';
+import MainScreen from './Components/MainScreen/MainScreen'
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
     <div className="App">
       <Header/>
       <Routes>
-        <Route index element={<ProductList />}/>
+        <Route index element={<MainScreen />}/>
+        <Route path={'product_list'} element={<ProductList />}/>
         <Route path={'form'} element={<Form />}/>
       </Routes>
     </div>

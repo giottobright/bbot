@@ -26,29 +26,29 @@ const ProductItem = ({product, className, onAdd}) => {
     //         Добавить в корзину
     //     </Button>
     // </div>
-        <Card sx={{ maxWidth: 345, height: 300 }}>
-        <CardActionArea>
-          <CardMedia
+    <Card className="product-card" sx={{ width: 345, height: 400 }}>
+    <CardActionArea className='card-desc'>
+        <CardMedia
             component="img"
             height="140"
-            image=""
-            alt="green iguana"
-          />
-          <CardContent>
+            image={product.image}
+            alt={product.title}
+        />
+        <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {product.title}
+                {product.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
                 {product.description}
             </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-        </CardActions>
-      </Card>
+        </CardContent>
+    </CardActionArea>
+    <CardActions>
+        <Button className={'add-btn'} onClick={onAddHandler}>
+            Добавить в корзину
+        </Button>
+    </CardActions>
+</Card>
     
   )
 
