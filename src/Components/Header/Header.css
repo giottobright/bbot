@@ -12,12 +12,12 @@
 }
 
 .searchbar .MuiOutlinedInput-input {
-    padding: 0 14px; /* Adjust padding to fit the input height */
-    height: 30px; /* Ensure input height is consistent */
+    padding: 0 14px;
+    height: 30px;
 }
 
 .searchbar .MuiInputLabel-root {
-    top: -12px; /* Adjust label position */
+    top: -12px;
 }
 
 
