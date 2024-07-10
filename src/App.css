@@ -1,8 +1,19 @@
 * {
   margin: 0;
+  padding: 0; /* Also reset padding */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
+/* Set the background and text color */
 body {
   background: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin: 0;
+  padding: 0;
+  width: 100vw; /* Ensure body width doesn't exceed the viewport width */
+}
+
+html {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }

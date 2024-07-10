@@ -14,20 +14,23 @@ const categories = [
     { label: 'Из других стран', image: 'international.jpg' },
   ];
 
-function MainScreen() {
-  return (
-    <Grid container spacing={2} className="category-container">
-    {categories.map((category, index) => (
-      <Grid item xs={4} key={index}>
-        <Card className="category-card">
-          <CardContent>
-            <Typography variant="subtitle1">{category.label}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    ))}
-  </Grid>
-  )
-}
+  function MainScreen() {
+    return (
+      <div className="main-screen">
+        <h1 className="main-heading">По цвету</h1>
+        <Grid container spacing={2} className="category-container">
+          {categories.map((category, index) => (
+            <Grid item xs={4} key={index}>
+              <Card className="category-card">
+                <CardContent>
+                  <Typography variant="subtitle1">{category.label}</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+    );
+  }
 
 export default MainScreen
