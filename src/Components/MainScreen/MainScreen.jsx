@@ -19,17 +19,17 @@ const categories = [
 function MainScreen() {
   return (
     <div className="main-screen">
-        <Typography fontSize={20} fontWeight={500} className="category-title">
+      <Typography fontSize={20} fontWeight={500} className="category-title">
         По цвету
       </Typography>
-      <Grid container  spacing={{ xs: 3, md: 3 }} className="category-container">
+      <Grid container spacing={0.5} className="category-container">
         {categories.map((category, index) => (
-          <Grid xs={4} key={index}>
-            <Card sx={{ maxWidth: 400 }} className='card'>
+          <Grid  item xs={4} sm={4} md={4} key={index}>
+            <Card className='card'>
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  height="130"
+                  height="200"
                   image={category.image}
                   alt="category image"
                 />

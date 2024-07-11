@@ -1,45 +1,26 @@
 .main-screen {
-  padding: 20px;
+  padding: 10px;
 }
 
 .main-screen .category-title {
-  color: black
-}
-
-.main-heading {
+  color: black;
   margin-bottom: 20px;
-  font-size: 24px;
-  padding-left: 1%;
-}
-
-.search-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-left: 16px;
 }
 
 .category-container {
   margin-bottom: 20px;
-  padding-left: 1%;
+  padding: 0px;
 }
 
-
-
-
 .card {
-  margin: 10px;
-  height: 130px;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.3s ease-in-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card .cardContent {
   padding: 0;
   position: relative;
-}
-
-.category-container {
-  justify-content: left;
 }
 
 .overlay {
