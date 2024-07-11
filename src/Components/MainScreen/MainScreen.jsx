@@ -19,7 +19,7 @@ const categories = [
 function MainScreen() {
   return (
     <div className="main-screen">
-        <Typography variant="h5" className="category-title">
+        <Typography fontSize={20} fontWeight={500} className="category-title">
         По цвету
       </Typography>
       <Grid container  spacing={{ xs: 3, md: 3 }} className="category-container">
