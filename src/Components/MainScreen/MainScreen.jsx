@@ -22,9 +22,9 @@ function MainScreen() {
         <Typography variant="h5" className="category-title">
         По цвету
       </Typography>
-      <Grid container spacing={{ xs: 2, md: 3 }} className="category-container">
+      <Grid container  spacing={{ xs: 3, md: 3 }} className="category-container">
         {categories.map((category, index) => (
-          <Grid xs={6} key={index}>
+          <Grid xs={4} key={index}>
             <Card sx={{ maxWidth: 400 }} className='card'>
               <CardActionArea>
                 <CardMedia
@@ -35,7 +35,7 @@ function MainScreen() {
                 />
                 <CardContent className='cardContent'>
                   <div className="overlay">
-                    <Typography variant="h6" className='cardText'>
+                    <Typography fontSize={15} className='cardText'>
                       {category.label}
                     </Typography>
                   </div>
