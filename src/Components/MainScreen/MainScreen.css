@@ -1,96 +1,81 @@
 .main-screen {
-    padding: 20px; /* Consistent padding for the container */
-  }
-  
-  .main-heading {
-    margin-bottom: 20px; /* Add space below the heading */
-    font-size: 24px; /* Adjust font size as needed */
-    padding-left: 1%;
-  }
-  
-  .search-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-left: 16px; /* Consistent left padding */
-  }
-  
-  .category-container {
-    margin-bottom: 20px;
-    padding-left: 1%; /* Consistent left padding */
-  }
-  
-  .category-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    text-align: center;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  }
-  
-  .promotion-header {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding-left: 16px; /* Consistent left padding */
-  }
-  
-  .promotion-container {
-    margin-bottom: 20px;
-    padding-left: 16px; /* Consistent left padding */
-  }
-  
-  .promotion-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  }
+  padding: 20px;
+}
 
-  .main-screen {
-    text-align: left;
-  }
-  
-  .main-heading {
-    margin-bottom: 20px;
-  }
-  
-  .category-container {justify-content: left;  }
-  
-  .category-card {
-    position: relative;
-  }
-  
-  .image-container {
-    position: relative;
-  }
-  
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .overlay-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    text-align: center;
-  }
+.main-heading {
+  margin-bottom: 20px;
+  font-size: 24px;
+  padding-left: 1%;
+}
 
-  .card {
-    margin: 10px;
-  }
+.search-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
 
-  .card .cardText {
-    color: black;
-  }
+.category-container {
+  margin-bottom: 20px;
+  padding-left: 1%;
+}
+
+.category-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.promotion-header {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding-left: 16px;
+}
+
+.promotion-container {
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
+
+.promotion-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.card {
+  margin: 10px;
+  height: 130px;
+}
+
+.card .cardContent {
+  padding: 0;
+  position: relative;
+}
+
+.category-container {
+  justify-content: left;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  text-align: center;
+}
+
+.cardText {
+  color: white;
+  padding: 10px;
+}

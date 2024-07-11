@@ -18,32 +18,31 @@ const categories = [
 
 function MainScreen() {
   return (
-
     <div className="main-screen">
       <Grid container spacing={{ xs: 2, md: 3 }} className="category-container">
         {categories.map((category, index) => (
           <Grid xs={6} key={index}>
-              <Card sx={{ maxWidth: 345 }} className='card'>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={category.image}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" className='cardText'>
+            <Card sx={{ maxWidth: 400 }} className='card'>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="130"
+                  image={category.image}
+                  alt="category image"
+                />
+                <CardContent className='cardContent'>
+                  <div className="overlay">
+                    <Typography variant="h6" className='cardText'>
                       {category.label}
                     </Typography>
-
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           </Grid>
         ))}
       </Grid>
     </div>
   );
 }
-
 export default MainScreen;
