@@ -45,6 +45,58 @@ function MainScreen() {
           </Grid>
         ))}
       </Grid>
+      <Typography fontSize={20} fontWeight={550} className="category-title">
+        По цвету
+      </Typography>
+      <Grid container spacing={0.5} className="category-container">
+        {categories.map((category, index) => (
+          <Grid  item xs={4} sm={4} md={4} key={index}>
+            <Card className='card'>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="130"
+                  image={category.image}
+                  alt="category image"
+                />
+                <CardContent className='cardContent'>
+                  <div className="overlay">
+                    <Typography fontSize={15} className='cardText'>
+                      {category.label}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <Typography fontSize={20} fontWeight={550} className="category-title">
+        По цвету
+      </Typography>
+      <Grid container spacing={0.5} className="category-container">
+        {categories.map((category, index) => (
+          <Grid  item xs={4} sm={4} md={4} key={index}>
+            <Card className='card'>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="130"
+                  image={category.image}
+                  alt="category image"
+                />
+                <CardContent className='cardContent'>
+                  <div className="overlay">
+                    <Typography fontSize={15} className='cardText'>
+                      {category.label}
+                    </Typography>
+                  </div>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }
