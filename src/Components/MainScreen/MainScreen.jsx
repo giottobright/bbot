@@ -29,7 +29,7 @@ function MainScreen() {
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  height="150"
+                  height="130"
                   image={category.image}
                   alt="category image"
                 />
