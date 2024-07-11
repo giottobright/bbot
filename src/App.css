@@ -6,7 +6,7 @@
 
 /* Set the background and text color */
 body {
-  background: white;
+  background: rgb(240, 238, 238);
   color: black;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   margin: 0;

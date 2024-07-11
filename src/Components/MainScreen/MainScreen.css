@@ -19,42 +19,14 @@
   padding-left: 1%;
 }
 
-.category-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
 
-.promotion-header {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding-left: 16px;
-}
 
-.promotion-container {
-  margin-bottom: 20px;
-  padding-left: 16px;
-}
-
-.promotion-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
 
 .card {
   margin: 10px;
   height: 130px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .card .cardContent {

@@ -4,7 +4,7 @@ import './MainScreen.css';
 import { Card } from '@telegram-apps/telegram-ui';
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell'; 
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
-import { Grid, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
+import { Grid, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
 
 
 import { Title } from '@telegram-apps/telegram-ui';
@@ -19,6 +19,9 @@ const categories = [
 function MainScreen() {
   return (
     <div className="main-screen">
+        <Typography variant="h5" className="category-title">
+        По цвету
+      </Typography>
       <Grid container spacing={{ xs: 2, md: 3 }} className="category-container">
         {categories.map((category, index) => (
           <Grid xs={6} key={index}>
