@@ -4,7 +4,9 @@ import './MainScreen.css';
 import { Card } from '@telegram-apps/telegram-ui';
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell'; 
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
-import { Grid } from '@mui/material';
+import { Grid, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
+
+
 import { Title } from '@telegram-apps/telegram-ui';
 
 
@@ -16,38 +18,27 @@ const categories = [
 
 function MainScreen() {
   return (
+
     <div className="main-screen">
-
-      <Title
-    level="1"
-    weight="1"
-    className="main-heading"
-  >
-    По цвету
-  </Title>
-      <Grid Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} className="category-container">
+      <Grid container spacing={{ xs: 2, md: 3 }} className="category-container">
         {categories.map((category, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <Card type="ambient" className="category-card">
-            <React.Fragment key=".0">
+          <Grid xs={6} key={index}>
+              <Card sx={{ maxWidth: 345 }} className='card'>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={category.image}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {category.label}
+                    </Typography>
 
-    <img
-      alt="Dog"
-      src={category.image}
-      style={{
-        display: 'block',
-        height: 308,
-        objectFit: 'cover',
-        width: 254
-      }}
-    />
-    <CardCell
-      readOnly
-    >
-      {category.label}
-    </CardCell>
-  </React.Fragment>
-            </Card>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
           </Grid>
         ))}
       </Grid>
