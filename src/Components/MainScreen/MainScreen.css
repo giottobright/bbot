@@ -10,12 +10,14 @@
 .category-container {
   margin-bottom: 20px;
   padding: 0px;
+  justify-content: left;
 }
 
 .card {
   height: 97%;
   display: flex;
   flex-direction: column;
+  background-color: rgba(224, 221, 221, 0.723);
 }
 
 .card .cardContent {
