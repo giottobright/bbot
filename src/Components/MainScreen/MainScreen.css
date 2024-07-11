@@ -90,3 +90,7 @@
   .card {
     margin: 10px;
   }
+
+  .card .cardText {
+    color: black;
+  }

@@ -16,27 +16,27 @@ const Header = (props) => {
             <TextField                sx={{
                     '& .MuiOutlinedInput-root': {
                         '& fieldset': {
-                            borderColor: 'var(--tg-theme-text-color)',
+                            borderColor: 'black',
                         },
                         '&:hover fieldset': {
-                            borderColor: 'var(--tg-theme-text-color)',
+                            borderColor: 'black',
                         },
                         '&.Mui-focused fieldset': {
-                            borderColor: 'var(--tg-theme-text-color)',
+                            borderColor: 'black',
                         },
                         height: '30px', // Set height of the input field
                     },
                     '& .MuiInputBase-input': {
                         height: '30px', // Set height of the input element
                         padding: '0 14px', // Adjust padding
-                        color: 'var(--tg-theme-text-color)',
+                        color: 'black',
                     },
                     '& .MuiInputLabel-root': {
-                        color: 'var(--tg-theme-text-color)',
+                        color: 'black',
                         transition: 'transform 0.2s ease-out, font-size 0.2s ease-out',
                         transformOrigin: 'top',
                         '&.Mui-focused': {
-                            color: 'var(--tg-theme-text-color)',
+                            color: 'black',
                             transform: 'translate(0, -0.1em) scale(0.8)', // Change the label color to white when focused
                         },
                     },
