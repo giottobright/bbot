@@ -9,6 +9,13 @@ import bitter from './img/11-removebg-preview.png'
 import weizen from './img/12-removebg-preview.png'
 import mild from './img/13-removebg-preview.png'
 import barleyWine from './img/14-removebg-preview.png'
+import white from './img/1-removebg-preview.png'
+import dark from './img/2-removebg-preview.png'
+import cider from './img/3-removebg-preview (1).png'
+import ireland from './img/6-removebg-preview.png'
+import cz from './img/4-removebg-preview.png'
+import usa from './img/5-removebg-preview.png'
+
 import { Card } from '@telegram-apps/telegram-ui';
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell'; 
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
@@ -19,9 +26,9 @@ import { Title } from '@telegram-apps/telegram-ui';
 
 
 const categories = [
-  { label: 'Светлое', image: 'https://www.homebrewhappyhour.com/wp-content/uploads/2022/01/carbonation-artwork-1536x864.png' },
-  { label: 'Темное', image: 'https://media.gettyimages.com/id/1298643776/video/dark-beer-bubbles.jpg?s=640x640&k=20&c=BrEnvc0SQaE2PwZlKx34YvEXLpLZoKYKNpE_FiZxF2A=' },
-  { label: 'Сидр', image: 'https://media.cntraveler.com/photos/598088a3b7a86962e8e27c11/16:9/w_1280,c_limit/cider-GettyImages-573622633.jpg' },
+  { label: 'Светлое', image: white },
+  { label: 'Темное', image: dark },
+  { label: 'Сидр', image: cider },
 ];
 
 const types = [
@@ -36,9 +43,9 @@ const types = [
 ]
 
 const countries = [
-  { label: 'Светлое', image: 'https://www.homebrewhappyhour.com/wp-content/uploads/2022/01/carbonation-artwork-1536x864.png' },
-  { label: 'Темное', image: 'https://media.gettyimages.com/id/1298643776/video/dark-beer-bubbles.jpg?s=640x640&k=20&c=BrEnvc0SQaE2PwZlKx34YvEXLpLZoKYKNpE_FiZxF2A=' },
-  { label: 'Сидр', image: 'https://media.cntraveler.com/photos/598088a3b7a86962e8e27c11/16:9/w_1280,c_limit/cider-GettyImages-573622633.jpg' },
+  { label: 'usa', image: usa },
+  { label: 'cz', image: cz },
+  { label: 'ireland', image: ireland },
 ]
 
 function MainScreen() {
@@ -59,11 +66,6 @@ function MainScreen() {
                   alt="category image"
                 />
                 <CardContent className='cardContent'>
-                  <div className="overlay">
-                    <Typography fontSize={15} className='cardText'>
-                      {category.label}
-                    </Typography>
-                  </div>
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -90,26 +92,19 @@ function MainScreen() {
         ))}
       </Grid>
       <Typography fontSize={20} fontWeight={550} className="category-title">
-        По цвету
+        По стране
       </Typography>
       <Grid container spacing={0.5} className="category-container">
-        {categories.map((category, index) => (
+        {countries.map((country, index) => (
           <Grid  item xs={4} sm={4} md={4} key={index}>
             <Card className='card'>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="130"
-                  image={category.image}
+                  image={country.image}
                   alt="category image"
                 />
-                <CardContent className='cardContent'>
-                  <div className="overlay">
-                    <Typography fontSize={15} className='cardText'>
-                      {category.label}
-                    </Typography>
-                  </div>
-                </CardContent>
               </CardActionArea>
             </Card>
           </Grid>
