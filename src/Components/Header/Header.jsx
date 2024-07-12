@@ -20,23 +20,23 @@ const Header = (props) => {
                 sx={{
                     '& .MuiOutlinedInput-root': {
                         '& fieldset': {
-                            borderColor: '#F5DECB',
+                            borderColor: '#F6F5EB',
                         },
                         '&:hover fieldset': {
-                            borderColor: '#F5DECB',
+                            borderColor: '#F6F5EB',
                         },
                         '&.Mui-focused fieldset': {
-                            borderColor: '#F5DECB',
+                            borderColor: '#F6F5EB',
                         },
                     },
                     '& .MuiInputLabel-root': {
-                        color: '#F5DECB',
+                        color: '#F6F5EB',
                     },
                     '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#F5DECB',
+                        color: '#F6F5EB',
                     },
                     '& .MuiOutlinedInput-input': {
-                        color: '#F5DECB',
+                        color: '#F6F5EB',
                     },
                 }}
             />
