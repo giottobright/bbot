@@ -58,7 +58,7 @@ function MainScreen() {
         {categories.map((category, index) => (
           <Grid  item xs={4} sm={4} md={4} key={index} className='gridcard'>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F6F5EB' }}>
+              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }}>
                 <CardMedia
                   component="img"
                   height="130"
@@ -79,7 +79,7 @@ function MainScreen() {
         {types.map((type, index) => (
           <Grid  item xs={4} sm={4} md={4} key={index}>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F6F5EB' }}>
+              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }}>
                 <CardMedia
                   component="img"
                   height="130"
@@ -98,7 +98,7 @@ function MainScreen() {
         {countries.map((country, index) => (
           <Grid  item xs={4} sm={4} md={4} key={index}>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F6F5EB' }}>
+              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }}>
                 <CardMedia
                   component="img"
                   height="130"
