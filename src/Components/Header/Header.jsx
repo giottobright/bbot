@@ -22,6 +22,7 @@ const Header = (props) => {
                         '& fieldset': {
                             borderColor: '#F2DDCF',
                             borderRadius: '20px',
+                            borderWidth: '2px',
                         },
                         '&:hover fieldset': {
                             borderColor: '#F2DDCF',
