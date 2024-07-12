@@ -12,7 +12,7 @@
 
 /* Set the background and text color */
 body {
-  background: rgb(240, 238, 238);
+  background: #362A23;
   color: black;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   margin: 0;

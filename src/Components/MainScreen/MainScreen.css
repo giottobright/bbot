@@ -3,10 +3,12 @@
 }
 
 .main-screen .category-title {
-  color: black;
+  color: #F5DECB;
   margin-bottom: 20px;
   font-family: 'Anton SC',  sans-serif;
 }
+
+
 
 .category-container {
   margin-bottom: 20px;
@@ -18,7 +20,6 @@
   height: 97%;
   display: flex;
   flex-direction: column;
-  background-color: rgba(224, 221, 221, 0.723);
 }
 
 .card .cardContent {
@@ -26,14 +27,6 @@
   position: relative;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  text-align: center;
-}
 
 .cardText {
   color: white;

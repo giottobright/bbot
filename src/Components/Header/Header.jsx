@@ -8,13 +8,38 @@ import { Container, Grid, Card, CardContent, Typography, IconButton, InputAdornm
 import SearchIcon from '@mui/icons-material/Search';
 import { Input } from '@telegram-apps/telegram-ui';
 
-const Header = (props) => {
-    const { user, onClose } = useTelegram();
 
+const Header = (props) => {
     return (
         <div className="header">
-        <TextField fullWidth id="outlined-search" label="Найти" type="search" />
-            {/* <Button onClick={onClose}>Закрыть</Button> */}
+            <TextField
+                fullWidth
+                id="outlined-search"
+                label="Найти..."
+                type="search"
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#F5DECB',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#F5DECB',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#F5DECB',
+                        },
+                    },
+                    '& .MuiInputLabel-root': {
+                        color: '#F5DECB',
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                        color: '#F5DECB',
+                    },
+                    '& .MuiOutlinedInput-input': {
+                        color: '#F5DECB',
+                    },
+                }}
+            />
         </div>
     );
 };
