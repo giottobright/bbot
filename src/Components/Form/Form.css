@@ -1,47 +1,89 @@
 .main-screen {
     padding: 10px;
-  }
+}
   
-  .main-screen .category-title {
+.main-screen .category-title {
     color: #F2DDCF;
     margin-bottom: 20px;
-    font-family: 'Anton SC', sans-serif;
-  }
+    font-family: 'Comfortaa', sans-serif;
+}
   
-  .category-container {
+.category-container {
     margin-bottom: 20px;
     padding: 0px;
     justify-content: left;
-  }
+}
   
-  .card {
+.card {
     height: 100%;
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
+}
   
-  .cardContent {
+.cardContent {
     display: flex;
-    align-items: center;
+    align-items: center; /* Выравнивание по центру по вертикали */
     padding: 10px;
-  }
+}
   
-  .cardImage {
-    width: 130px;
-    height: auto;
-  }
-  
-  .cardTextContent {
+.cardImageContainer {
+    flex: 0 0 100px; /* фиксированная ширина для контейнера изображения */
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cardImage.round {
+    border-radius: 50%;
+}
+
+.cardImage.square {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cardTextContent {
+    flex: 1;
     padding-left: 10px;
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Выравнивание по центру по вертикали */
+    min-width: 0; /* Позволяет тексту сжиматься при необходимости */
+}
   
-  .cardTitle {
+.cardTitle {
     color: #3D1A17;
-    padding-bottom: 10px;
-  }
+    padding-bottom: 1px;
+    font-family: 'Comfortaa';
+}
+
+.cardTitleInfo {
+    margin-bottom: 2px;
+}
   
-  .cardDescription {
+.cardDescriptionContainer {
+    background-color: #f3eeea;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    width: 100%; /* Гарантирует, что контейнер описания занимает всю доступную ширину */
+}
+  
+.cardDescription {
     color: #3D1A17;
-  }
-  
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 11px;
+    word-wrap: break-word; /* Позволяет длинным словам переноситься */
+    overflow-wrap: break-word;
+}

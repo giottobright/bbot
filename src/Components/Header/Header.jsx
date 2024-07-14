@@ -17,6 +17,7 @@ const Header = (props) => {
                 id="outlined-search"
                 label="Найти..."
                 type="search"
+                fontFamily={'Comfortaa'}
                 sx={{
                     '& .MuiOutlinedInput-root': {
                         '& fieldset': {
@@ -33,12 +34,15 @@ const Header = (props) => {
                     },
                     '& .MuiInputLabel-root': {
                         color: '#F2DDCF',
+                        fontFamily: 'Comfortaa',
                     },
                     '& .MuiInputLabel-root.Mui-focused': {
                         color: '#F2DDCF',
+                        fontFamily: 'Comfortaa',
                     },
                     '& .MuiOutlinedInput-input': {
                         color: '#F2DDCF',
+                        fontFamily: 'Comfortaa',
                     },
                 }}
             />
