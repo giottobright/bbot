@@ -21,6 +21,7 @@ import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
 import { Grid, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
 
 import { Title } from '@telegram-apps/telegram-ui';
 
@@ -48,7 +49,16 @@ const countries = [
   { label: 'ireland', image: ireland },
 ]
 
+
+
 function MainScreen() {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/form');
+  };
+
+
   return (
     <div className="main-screen">
       <Typography fontSize={20} fontWeight={550} className="category-title">
@@ -58,7 +68,7 @@ function MainScreen() {
         {categories.map((category, index) => (
           <Grid  item xs={4} sm={4} md={4} key={index} className='gridcard'>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }}>
+              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }} onClick={handleCardClick}>
                 <CardMedia
                   component="img"
                   height="130"

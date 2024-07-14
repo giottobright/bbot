@@ -1,17 +1,47 @@
-.form {
+.main-screen {
+    padding: 10px;
+  }
+  
+  .main-screen .category-title {
+    color: #F2DDCF;
+    margin-bottom: 20px;
+    font-family: 'Anton SC', sans-serif;
+  }
+  
+  .category-container {
+    margin-bottom: 20px;
+    padding: 0px;
+    justify-content: left;
+  }
+  
+  .card {
+    height: 100%;
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px;
-}
-
-.input {
-    width: 100%;
+  }
+  
+  .cardContent {
+    display: flex;
+    align-items: center;
     padding: 10px;
-    margin-top: 15px;
-}
-
-.select {
-    padding: 10px;
-    margin-top: 15px;
-}
+  }
+  
+  .cardImage {
+    width: 130px;
+    height: auto;
+  }
+  
+  .cardTextContent {
+    padding-left: 10px;
+  }
+  
+  .cardTitle {
+    color: #3D1A17;
+    padding-bottom: 10px;
+  }
+  
+  .cardDescription {
+    color: #3D1A17;
+  }
+  

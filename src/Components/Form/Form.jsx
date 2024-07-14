@@ -1,78 +1,58 @@
-import React, { useCallback, useEffect, useState } from "react";
-import "./Form.css";
-import { useTelegram } from "../../hooks/useTelegram";
+import React from 'react';
+import './Form.css';
+import white from './img/1-removebg-preview.png';
+import dark from './img/2-removebg-preview.png';
+import cider from './img/3-removebg-preview (1).png';
 
-const Form = () => {
-    const [country, setCountry] = useState();
-    const [street, setStreet] = useState();
-    const [subject, setSubject] = useState('physical');
-    const {tg} = useTelegram();
+import { Card, Grid, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-    const onSendData = useCallback(() => {
-        const data = {
-            country,
-            street,
-            subject
-        }
-        tg.onSendData(JSON.stringify(data))
-    }, [country, street, subject])
+const categories = [
+  { label: 'Светлое', image: white, description: 'Описание для Светлое' },
+  { label: 'Темное', image: dark, description: 'Описание для Темное' },
+  { label: 'Сидр', image: cider, description: 'Описание для Сидр' },
+];
 
-    useEffect(()  =>  {
-        tg.onEvent('mainButtonClicked', onSendData)
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData])
+function Form() {
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        tg.MainButton.setParams({
-            text: 'Отправить данные'
-        })
-    }, [])
+  const handleCardClick = () => {
+    navigate('/form');
+  };
 
-    useEffect(()  =>  {
-        if(!street || !country){
-            tg.MainButton.hide()
-        } else {
-            tg.MainButton.show()
-        }
-    }, [country, street])
-
-    const onChangeCountry = (e) => {
-        setCountry(e.target.value);
-    }
-
-    const onChangeStreet = (e) => {
-        setStreet(e.target.value);
-    }
-
-    const onChangeSubject = (e) => {
-        setSubject(e.target.value);
-    }
-
-    return (
-        <div className={'form'}>
-            <h3>Введите ваши данные</h3>
-            <input 
-                className={'input'} 
-                type="text" 
-                placeholder={'Страна'} 
-                value={country}
-                onChange={onChangeCountry}
-            />
-            <input 
-                className={'input'} 
-                type="text" 
-                placeholder={'Улица'} 
-                value={street}
-                onChange={onChangeStreet}
-            />
-            <select value={subject} onChange={onChangeSubject} className={'select'}>
-                <option value={'physical'}>Физ. лицо</option>
-                <option value={'legal'}>Юр. лицо</option>
-            </select>
-        </div>
-    )
+  return (
+    <div className="main-screen">
+      <Typography fontSize={20} fontWeight={550} className="category-title">
+        По цвету
+      </Typography>
+      <Grid container spacing={0.5} className="category-container">
+        {categories.map((category, index) => (
+          <Grid item xs={12} sm={12} md={12} key={index} className="gridcard">
+            <Card className="card" sx={{ borderRadius: '16px' }}>
+              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }} onClick={handleCardClick}>
+                <Box className="cardContent">
+                  <CardMedia
+                    component="img"
+                    className="cardImage"
+                    image={category.image}
+                    alt="category image"
+                  />
+                  <Box className="cardTextContent">
+                    <Typography variant="h6" className="cardTitle">
+                      {category.label}
+                    </Typography>
+                    <Typography variant="body2" className="cardDescription">
+                      {category.description}
+                    </Typography>
+                  </Box>
+                </Box>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
 }
 
 export default Form;
