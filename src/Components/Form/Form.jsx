@@ -104,11 +104,11 @@ function BeerMapComponent() {
           transform: 'translate(-50%, -50%)',
           width: '90%',
           height: '80%',
-          bgcolor: 'background.paper',
+          bgcolor: '#3D1A17',
           boxShadow: 24,
           p: 4,
         }}>
-          <Typography id="map-modal-title" variant="h6" component="h2" gutterBottom>
+          <Typography id="map-modal-title" variant="h6" component="h2" gutterBottom className='maptitle'>
             Где найти: {selectedBeer}
           </Typography>
           {relevantBars.length > 0 ? (
@@ -116,7 +116,7 @@ function BeerMapComponent() {
               <Map 
                 defaultState={{ 
                   center: [relevantBars[0].lat, relevantBars[0].lng], 
-                  zoom: 10 
+                  zoom: 10
                 }} 
                 width="100%" 
                 height="90%"

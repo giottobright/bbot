@@ -87,3 +87,7 @@
     word-wrap: break-word; /* Позволяет длинным словам переноситься */
     overflow-wrap: break-word;
 }
+
+.maptitle {
+    color: #F2DDCF;
+}
