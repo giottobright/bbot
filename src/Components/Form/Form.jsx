@@ -22,7 +22,7 @@ const categories = [
 
 const bars = [
   { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 2, name: "Бар у Васи", lat: 55.758468, lng: 37.601088, beers: ["King JJJuliusss", "Сидр"] },
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["King JJJuliusss","Gorkovskaya Brewery", "Сидр"] },
   { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["Атомная Прачечная XX", "Sovngarde"] },
 ];
 
