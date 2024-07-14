@@ -106,6 +106,7 @@ function BeerMapComponent() {
           height: '80%',
           bgcolor: '#3D1A17',
           boxShadow: 24,
+          borderRadius: 8,
           p: 4,
         }}>
           <Typography id="map-modal-title" variant="h6" component="h2" gutterBottom className='maptitle'>
