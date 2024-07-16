@@ -1,0 +1,21 @@
+.beer-map-page {
+    padding: 10px;
+  }
+  
+  .bars-list {
+    margin-top: 20px;
+  }
+  
+  .bar-card {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #F2DDCF;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .bar-card.selected {
+    background-color: #3D1A17;
+    color: #F2DDCF;
+  }
+  

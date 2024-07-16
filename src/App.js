@@ -17,6 +17,7 @@ import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import { amber, deepOrange, grey } from '@mui/material/colors';
 import MainScreen from './Components/MainScreen/MainScreen'
 import '@telegram-apps/telegram-ui/dist/styles.css';
+import MapPage from './Components/MapPage/MapPage';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route index element={<MainScreen />}/>
         <Route path={'productlist'} element={<ProductList />}/>
         <Route path={'form'} element={<Form />}/>
+        <Route path={'mappage'} element={<MapPage />}/>
       </Routes>
     </div>
   );

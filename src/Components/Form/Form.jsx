@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Modal, Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
-import { YMaps, Map, Placemark, Circle } from '@pbe/react-yandex-maps';
+import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import './Form.css';
 
 // Импорты изображений
@@ -22,7 +22,7 @@ const categories = [
 
 const bars = [
   { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["King JJJuliusss","Gorkovskaya Brewery", "Сидр"] },
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
   { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["Атомная Прачечная XX", "Sovngarde"] },
 ];
 
@@ -33,11 +33,11 @@ const distanceFilters = [
   { value: 15000, label: '30 мин 🚖' },
 ];
 
-function BeerMapComponent() {
+function Form() {
   const [selectedBeer, setSelectedBeer] = useState(null);
-  const [isMapOpen, setIsMapOpen] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -46,7 +46,6 @@ function BeerMapComponent() {
       webApp.expand();
     }
 
-    // Получаем геолокацию пользователя
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -68,12 +67,8 @@ function BeerMapComponent() {
 
   const handleBeerSelect = (beerName) => {
     setSelectedBeer(beerName);
-    setIsMapOpen(true);
-  };
-
-  const handleCloseMap = () => {
-    setIsMapOpen(false);
-    setSelectedBeer(null);
+    const relevantBars = bars.filter(bar => bar.beers.includes(beerName));
+    navigate('/mappage', { state: { beerName, bars: relevantBars } });
   };
 
   const handleDistanceChange = (value) => {
@@ -105,8 +100,6 @@ function BeerMapComponent() {
     : bars; // Если геолокация не доступна, показываем все бары
 
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
-
-  const relevantBars = filteredBars.filter(bar => bar.beers.includes(selectedBeer));
 
   return (
     <div className="main-screen">
@@ -163,66 +156,8 @@ function BeerMapComponent() {
           </Grid>
         ))}
       </Grid>
-      <Modal
-        open={isMapOpen}
-        onClose={handleCloseMap}
-        aria-labelledby="map-modal-title"
-        aria-describedby="map-modal-description"
-      >
-        <Box sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '90%',
-          height: '80%',
-          bgcolor: '#3D1A17',
-          boxShadow: 24,
-          borderRadius: 9,
-          p: 4,
-        }}>
-          <Typography id="map-modal-title" variant="h6" component="h2" gutterBottom className='maptitle'>
-            Где найти: {selectedBeer}
-          </Typography>
-          {userLocation && (
-            <YMaps>
-              <Map 
-                defaultState={{ 
-                  center: [userLocation.lat, userLocation.lng], 
-                  zoom: 13
-                }} 
-                width="100%" 
-                height="90%"
-              >
-                <Placemark
-                  geometry={[userLocation.lat, userLocation.lng]}
-                  properties={{
-                    balloonContentBody: "Вы здесь",
-                  }}
-                  options={{
-                    preset: 'islands#blueCircleDotIcon',
-                  }}
-                />
-                {relevantBars.map((bar) => (
-                  <Placemark
-                    key={bar.id}
-                    geometry={[bar.lat, bar.lng]}
-                    properties={{
-                      balloonContentHeader: bar.name,
-                      balloonContentBody: `Здесь можно найти: ${selectedBeer}`,
-                    }}
-                  />
-                ))}
-              </Map>
-            </YMaps>
-          )}
-          {!userLocation && (
-            <Typography>Загрузка карты...</Typography>
-          )}
-        </Box>
-      </Modal>
     </div>
   );
 }
 
-export default BeerMapComponent;
+export default Form;
