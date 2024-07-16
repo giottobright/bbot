@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Modal, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Modal, Select, MenuItem, FormControl, InputLabel, Button } from '@mui/material';
 import { YMaps, Map, Placemark, Circle } from '@pbe/react-yandex-maps';
 import './Form.css';
 
@@ -27,10 +27,10 @@ const bars = [
 ];
 
 const distanceFilters = [
-  { value: null, label: 'Без фильтра' },
-  { value: 1000, label: '10 мин пешком (3 мин на машине)' },
-  { value: 3000, label: '30 мин пешком (10 мин на машине)' },
-  { value: 15000, label: '30 мин на авто' },
+  { value: null, label: 'Все' },
+  { value: 1000, label: '10 мин 🚶 - 3 мин 🚖' },
+  { value: 3000, label: '30 мин 🚶 - 10 мин 🚖' },
+  { value: 15000, label: '30 мин 🚖' },
 ];
 
 function BeerMapComponent() {
@@ -76,8 +76,8 @@ function BeerMapComponent() {
     setSelectedBeer(null);
   };
 
-  const handleDistanceChange = (event) => {
-    setSelectedDistance(event.target.value);
+  const handleDistanceChange = (value) => {
+    setSelectedDistance(value);
   };
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -110,22 +110,17 @@ function BeerMapComponent() {
 
   return (
     <div className="main-screen">
-      <FormControl fullWidth className="distance-filter">
-        <InputLabel id="distance-select-label">Расстояние</InputLabel>
-        <Select
-          labelId="distance-select-label"
-          id="distance-select"
-          value={selectedDistance}
-          label="Расстояние"
-          onChange={handleDistanceChange}
-        >
-          {distanceFilters.map((filter) => (
-            <MenuItem key={filter.value || 'no-filter'} value={filter.value}>
-              {filter.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Box className="distance-filter-buttons">
+        {distanceFilters.map((filter) => (
+          <Button
+            key={filter.value || 'no-filter'}
+            onClick={() => handleDistanceChange(filter.value)}
+            className={`filter-button ${selectedDistance === filter.value ? 'active' : ''}`}
+          >
+            {filter.label}
+          </Button>
+        ))}
+      </Box>
 
       <Typography fontSize={20} fontWeight={550} className="category-title">
         Double IPA

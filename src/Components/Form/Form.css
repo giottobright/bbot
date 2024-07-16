@@ -92,24 +92,34 @@
     color: #F2DDCF;
 }
 
-.distance-filter {
-    margin-bottom: 20px !important;
+.distance-filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
   
-  .distance-filter .MuiInputLabel-root,
-  .distance-filter .MuiSelect-select {
+  .filter-button {
+    flex: 1;
+    margin: 0 5px !important;
+    padding: 10px 5px !important;
+    font-size: 12px !important;
+    font-family: 'Comfortaa', sans-serif !important;
+    text-transform: none !important;
     color: #F2DDCF !important;
-    font-family: 'Comfortaa', sans-serif;
+    border: 1px solid #F2DDCF !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease !important;
   }
   
-  .distance-filter .MuiOutlinedInput-notchedOutline {
-    border-color: #F2DDCF !important;
+  .filter-button:first-child {
+    margin-left: 0 !important;
   }
   
-  .distance-filter .MuiSelect-icon {
-    color: #F2DDCF !important;
+  .filter-button:last-child {
+    margin-right: 0 !important;
   }
   
-  .distance-filter .MuiMenuItem-root {
-    font-family: 'Comfortaa', sans-serif;
+  .filter-button.active {
+    background-color: #F2DDCF !important;
+    color: #3D1A17 !important;
   }
