@@ -54,7 +54,7 @@ function MapPage() {
             <CardActionArea>
               <Box p={2}>
                 <Typography variant="h6">{bar.name}</Typography>
-                <Typography variant="body2">Доступные напитки: {bar.beers.join(', ')}</Typography>
+                <Typography variant="body2"></Typography>
               </Box>
             </CardActionArea>
           </Card>
