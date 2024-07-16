@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Modal } from '@mui/material';
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import { YMaps, Map, Placemark, Circle } from '@pbe/react-yandex-maps';
 import './Form.css';
 
 // Импорты изображений
@@ -29,12 +29,34 @@ const bars = [
 function BeerMapComponent() {
   const [selectedBeer, setSelectedBeer] = useState(null);
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       const webApp = window.Telegram.WebApp;
       webApp.ready();
       webApp.expand();
+    }
+
+    // Получаем геолокацию пользователя
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Ошибка получения геолокации:", error);
+          // Если геолокация недоступна, используем центр Москвы как точку по умолчанию
+          setUserLocation({ lat: 55.7558, lng: 37.6173 });
+        }
+      );
+    } else {
+      console.log("Геолокация не поддерживается браузером");
+      // Если геолокация не поддерживается, используем центр Москвы как точку по умолчанию
+      setUserLocation({ lat: 55.7558, lng: 37.6173 });
     }
   }, []);
 
@@ -112,16 +134,25 @@ function BeerMapComponent() {
           <Typography id="map-modal-title" variant="h6" component="h2" gutterBottom className='maptitle'>
             Где найти: {selectedBeer}
           </Typography>
-          {relevantBars.length > 0 ? (
+          {userLocation && (
             <YMaps>
               <Map 
                 defaultState={{ 
-                  center: [relevantBars[0].lat, relevantBars[0].lng], 
-                  zoom: 10
+                  center: [userLocation.lat, userLocation.lng], 
+                  zoom: 13
                 }} 
                 width="100%" 
                 height="90%"
               >
+                <Placemark
+                  geometry={[userLocation.lat, userLocation.lng]}
+                  properties={{
+                    balloonContentBody: "Вы здесь",
+                  }}
+                  options={{
+                    preset: 'islands#blueCircleDotIcon',
+                  }}
+                />
                 {relevantBars.map((bar) => (
                   <Placemark
                     key={bar.id}
@@ -134,8 +165,9 @@ function BeerMapComponent() {
                 ))}
               </Map>
             </YMaps>
-          ) : (
-            <Typography>Нет баров, где можно найти это пиво.</Typography>
+          )}
+          {!userLocation && (
+            <Typography>Загрузка карты...</Typography>
           )}
         </Box>
       </Modal>
