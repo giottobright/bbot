@@ -91,3 +91,25 @@
 .maptitle {
     color: #F2DDCF;
 }
+
+.distance-filter {
+    margin-bottom: 20px !important;
+  }
+  
+  .distance-filter .MuiInputLabel-root,
+  .distance-filter .MuiSelect-select {
+    color: #F2DDCF !important;
+    font-family: 'Comfortaa', sans-serif;
+  }
+  
+  .distance-filter .MuiOutlinedInput-notchedOutline {
+    border-color: #F2DDCF !important;
+  }
+  
+  .distance-filter .MuiSelect-icon {
+    color: #F2DDCF !important;
+  }
+  
+  .distance-filter .MuiMenuItem-root {
+    font-family: 'Comfortaa', sans-serif;
+  }

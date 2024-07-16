@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Modal } from '@mui/material';
+import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Modal, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { YMaps, Map, Placemark, Circle } from '@pbe/react-yandex-maps';
 import './Form.css';
 
@@ -26,10 +26,18 @@ const bars = [
   { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["Атомная Прачечная XX", "Sovngarde"] },
 ];
 
+const distanceFilters = [
+  { value: null, label: 'Без фильтра' },
+  { value: 1000, label: '10 мин пешком (3 мин на машине)' },
+  { value: 3000, label: '30 мин пешком (10 мин на машине)' },
+  { value: 15000, label: '30 мин на авто' },
+];
+
 function BeerMapComponent() {
   const [selectedBeer, setSelectedBeer] = useState(null);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
+  const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -49,13 +57,11 @@ function BeerMapComponent() {
         },
         (error) => {
           console.error("Ошибка получения геолокации:", error);
-          // Если геолокация недоступна, используем центр Москвы как точку по умолчанию
           setUserLocation({ lat: 55.7558, lng: 37.6173 });
         }
       );
     } else {
       console.log("Геолокация не поддерживается браузером");
-      // Если геолокация не поддерживается, используем центр Москвы как точку по умолчанию
       setUserLocation({ lat: 55.7558, lng: 37.6173 });
     }
   }, []);
@@ -70,22 +76,71 @@ function BeerMapComponent() {
     setSelectedBeer(null);
   };
 
-  const relevantBars = bars.filter(bar => bar.beers.includes(selectedBeer));
+  const handleDistanceChange = (event) => {
+    setSelectedDistance(event.target.value);
+  };
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Радиус Земли в км
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const d = R * c; // Расстояние в км
+    return d * 1000; // Переводим в метры
+  };
+
+  const filteredBars = userLocation
+    ? bars.filter(bar => {
+        if (selectedDistance === null) return true; // Показываем все бары, если выбран "Без фильтра"
+        const distance = calculateDistance(
+          userLocation.lat, userLocation.lng,
+          bar.lat, bar.lng
+        );
+        return distance <= selectedDistance;
+      })
+    : bars; // Если геолокация не доступна, показываем все бары
+
+  const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
+
+  const relevantBars = filteredBars.filter(bar => bar.beers.includes(selectedBeer));
 
   return (
     <div className="main-screen">
+      <FormControl fullWidth className="distance-filter">
+        <InputLabel id="distance-select-label">Расстояние</InputLabel>
+        <Select
+          labelId="distance-select-label"
+          id="distance-select"
+          value={selectedDistance}
+          label="Расстояние"
+          onChange={handleDistanceChange}
+        >
+          {distanceFilters.map((filter) => (
+            <MenuItem key={filter.value || 'no-filter'} value={filter.value}>
+              {filter.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
       <Typography fontSize={20} fontWeight={550} className="category-title">
         Double IPA
       </Typography>
       <Grid container spacing={0.5} className="category-container">
-        {categories.map((category, index) => (
+        {categories
+          .filter(category => availableBeers.includes(category.label))
+          .map((category, index) => (
           <Grid item xs={12} sm={12} md={12} key={index} className="gridcard">
             <Card className="card" sx={{ borderRadius: '12px' }}>
               <CardActionArea 
                 sx={{ backgroundColor: '#F2DDCF', borderRadius: '16px' }} 
                 onClick={() => handleBeerSelect(category.label)}
               >
-                <Box className="cardContent">
+               <Box className="cardContent">
                   <Box className="cardImageContainer">
                     <CardMedia
                       component="img"
@@ -107,7 +162,7 @@ function BeerMapComponent() {
                       </Typography>
                     </Box>
                   </Box>
-                </Box>
+                </Box>   
               </CardActionArea>
             </Card>
           </Grid>
