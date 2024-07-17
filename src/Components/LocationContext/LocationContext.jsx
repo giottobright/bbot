@@ -4,9 +4,11 @@ const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
   const [userLocation, setUserLocation] = useState(null);
+  const [isLocationRequested, setIsLocationRequested] = useState(false);
 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
+  const requestLocation = () => {
+    if (!isLocationRequested && "geolocation" in navigator) {
+      setIsLocationRequested(true);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setUserLocation({
@@ -19,14 +21,14 @@ export const LocationProvider = ({ children }) => {
           setUserLocation({ lat: 55.7558, lng: 37.6173 }); // Дефолтная локация (Москва)
         }
       );
-    } else {
+    } else if (!("geolocation" in navigator)) {
       console.log("Геолокация не поддерживается браузером");
       setUserLocation({ lat: 55.7558, lng: 37.6173 }); // Дефолтная локация (Москва)
     }
-  }, []);
+  };
 
   return (
-    <LocationContext.Provider value={{ userLocation, setUserLocation }}>
+    <LocationContext.Provider value={{ userLocation, requestLocation }}>
       {children}
     </LocationContext.Provider>
   );
