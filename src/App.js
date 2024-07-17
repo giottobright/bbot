@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useTelegram } from './hooks/useTelegram';
 import Header from './Components/Header/Header';
 import ProductList from './Components/ProductList/ProductList';
@@ -12,16 +12,11 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@telegram-apps/telegram-ui/dist/styles.css';
-import { LocationProvider, useLocation } from './Components/LocationContext/LocationContext';
 
 function App() {
   const { tg } = useTelegram();
   const navigate = useNavigate();
-  const { requestLocation } = useLocation();
-
-  useEffect(() => {
-    requestLocation();
-  }, []);
+  const location = useLocation();
 
   useEffect(() => {
     tg.ready();

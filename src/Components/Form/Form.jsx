@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './Form.css';
-import { useLocation } from '../LocationContext/LocationContext';
-const { userLocation, setUserLocation } = useLocation();
 
 // Импорты изображений
 import diGoroh from './img/diGoroh.png';
@@ -24,13 +22,8 @@ const categories = [
 
 const bars = [
   { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 2, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
   { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["Атомная Прачечная XX", "Sovngarde"] },
-  { id: 4, name: "Jawsspor", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 5, name: "Harats", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 6, name: "Камчатка", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 7, name: "Бамбл Би", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 8, name: "Secret", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
 ];
 
 const distanceFilters = [
@@ -42,7 +35,7 @@ const distanceFilters = [
 
 function Form() {
   const [selectedBeer, setSelectedBeer] = useState(null);
-  const { userLocation } = useLocation(); // Используем контекст для получения местоположения
+  const [userLocation, setUserLocation] = useState(null);
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
   const navigate = useNavigate();
 
@@ -97,14 +90,14 @@ function Form() {
 
   const filteredBars = userLocation
     ? bars.filter(bar => {
-        if (selectedDistance === null) return true;
+        if (selectedDistance === null) return true; // Показываем все бары, если выбран "Без фильтра"
         const distance = calculateDistance(
           userLocation.lat, userLocation.lng,
           bar.lat, bar.lng
         );
         return distance <= selectedDistance;
       })
-    : bars;
+    : bars; // Если геолокация не доступна, показываем все бары
 
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
 
