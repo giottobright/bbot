@@ -9,14 +9,14 @@
   .bar-card {
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #F2DDCF;
+    background-color: #F2DDCF !important;
     border-radius: 12px;
     transition: background-color 0.3s ease;
   }
   
   .bar-card.selected {
     background-color: #3D1A17;
-    color: #F2DDCF;
+    color: white;
   }
   
   .card-content {
@@ -30,8 +30,8 @@
   }
   
   .card-button {
-    background-color: #3D1A17;
-    color: #F2DDCF;
+    background-color: #f3eeea !important;
+    color: #F2DDCF !important;
   }
   
   .card-button:hover {

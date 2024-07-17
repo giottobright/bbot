@@ -9,9 +9,11 @@ function MapPage() {
   const location = useLocation();
   const [selectedBar, setSelectedBar] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
-  const { beerName, bars } = location.state || { beerName: '', bars: [] };
+  const { beerName, bars: initialBars } = location.state || { beerName: '', bars: [] };
+  const [bars, setBars] = useState(initialBars);
 
   const mapRef = useRef(null);
+  const mapContainerRef = useRef(null);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -45,12 +47,24 @@ function MapPage() {
     }
   }, [selectedBar]);
 
-  const handlePlacemarkClick = (bar) => {
+  const handleBarSelect = (bar) => {
     setSelectedBar(bar);
-    const element = document.getElementById(`bar-${bar.id}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // Перемещаем выбранный бар в начало списка
+    const newBars = [bar, ...bars.filter(b => b.id !== bar.id)];
+    setBars(newBars);
+    
+    // Прокрутка к карте
+    if (mapContainerRef.current) {
+      mapContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+    
+    // Прокрутка к выбранному бару в списке (после небольшой задержки)
+    setTimeout(() => {
+      const element = document.getElementById(`bar-${bar.id}`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 500); // Задержка в 500 мс
   };
 
   const openYandexMaps = (bar) => {
@@ -60,43 +74,45 @@ function MapPage() {
 
   return (
     <div className="beer-map-page">
-      {userLocation && (
-        <YMaps>
-          <Map
-            defaultState={{
-              center: [userLocation.lat, userLocation.lng],
-              zoom: 13
-            }}
-            width="100%"
-            height="400px"
-            instanceRef={mapRef}
-          >
-            {bars.map((bar) => (
-              <Placemark
-                key={bar.id}
-                geometry={[bar.lat, bar.lng]}
-                onClick={() => handlePlacemarkClick(bar)}
-              />
-            ))}
-          </Map>
-        </YMaps>
-      )}
+      <div ref={mapContainerRef}>
+        {userLocation && (
+          <YMaps>
+            <Map
+              defaultState={{
+                center: [userLocation.lat, userLocation.lng],
+                zoom: 13
+              }}
+              width="100%"
+              height="400px"
+              instanceRef={mapRef}
+            >
+              {bars.map((bar) => (
+                <Placemark
+                  key={bar.id}
+                  geometry={[bar.lat, bar.lng]}
+                  onClick={() => handleBarSelect(bar)}
+                />
+              ))}
+            </Map>
+          </YMaps>
+        )}
+      </div>
       <div className="bars-list">
         {bars.map((bar) => (
           <Card
             key={bar.id}
             id={`bar-${bar.id}`}
             className={`bar-card ${selectedBar?.id === bar.id ? 'selected' : ''}`}
-            onClick={() => setSelectedBar(bar)}
+            onClick={() => handleBarSelect(bar)}
           >
             <CardActionArea>
               <Box p={2} className="card-content">
                 <div className="text-content">
                   <Typography variant="h6">{bar.name}</Typography>
-                  <Typography variant="body2"></Typography>
+                  <Typography variant="body2">{beerName}</Typography>
                 </div>
                 <Button 
-                  variant="contained" 
+                  variant="contained"
                   className="card-button"
                   onClick={(e) => {
                     e.stopPropagation();
