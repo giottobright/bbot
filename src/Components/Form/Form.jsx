@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './Form.css';
+import { useLocation } from '../LocationContext/LocationContext';
 
 // Импорты изображений
 import diGoroh from './img/diGoroh.png';
@@ -40,7 +41,7 @@ const distanceFilters = [
 
 function Form() {
   const [selectedBeer, setSelectedBeer] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
+  const { userLocation } = useLocation(); // Используем контекст для получения местоположения
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
   const navigate = useNavigate();
 
@@ -95,14 +96,14 @@ function Form() {
 
   const filteredBars = userLocation
     ? bars.filter(bar => {
-        if (selectedDistance === null) return true; // Показываем все бары, если выбран "Без фильтра"
+        if (selectedDistance === null) return true;
         const distance = calculateDistance(
           userLocation.lat, userLocation.lng,
           bar.lat, bar.lng
         );
         return distance <= selectedDistance;
       })
-    : bars; // Если геолокация не доступна, показываем все бары
+    : bars;
 
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
 

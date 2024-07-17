@@ -8,11 +8,12 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@telegram-apps/telegram-ui/dist/styles.css';
 import { AppRoot } from '@telegram-apps/telegram-ui';
+import { LocationProvider } from './Components/LocationContext/LocationContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
+  <LocationProvider>
   <React.StrictMode>
       <BrowserRouter>
         <AppRoot>
@@ -20,5 +21,6 @@ root.render(
         </AppRoot>
       </BrowserRouter>
   </React.StrictMode>
+  </LocationProvider>
 );
 

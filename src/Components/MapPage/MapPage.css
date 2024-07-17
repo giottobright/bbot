@@ -8,21 +8,20 @@
   
   .bar-card {
     margin-bottom: 10px;
-    padding: 10px;
     background-color: #F2DDCF !important;
-    border-radius: 12px;
+    border-radius: 12px !important;
     transition: background-color 0.3s ease;
   }
   
   .bar-card.selected {
-    background-color: #3D1A17;
-    color: white;
+    background-color: #3D1A17 !important;
+    color: white !important;
   }
   
   .card-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
   
   .text-content {
@@ -32,17 +31,16 @@
   .card-button {
     background-color: #f3eeea !important;
     color: #3D1A17 !important;
-    border-radius: 50% !important; /* Makes the button circular */
-    width: 40px !important; /* Set a fixed width */
-    height: 40px !important; /* Set a fixed height (same as width for a perfect circle) */
-    min-width: 40px !important; /* Ensures the button doesn't shrink */
-    padding: 0 !important; /* Removes padding */
-    display: flex !important; /* Centers the content */
-    justify-content: center !important; /* Centers horizontally */
-    align-items: center !important; /* Centers vertically */
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   
   .card-button:hover {
     background-color: #5A2B23 !important;
   }
-  
