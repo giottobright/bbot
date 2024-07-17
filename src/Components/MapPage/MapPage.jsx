@@ -90,7 +90,7 @@ function MapPage() {
                   <Typography variant="h6">{bar.name}</Typography>
                   <Typography variant="body2"></Typography>
                 </div>
-                <Button variant="contained" className="card-button">🚖</Button>
+                <Button variant="contained" className="card-button">🗺️</Button>
               </Box>
             </CardActionArea>
           </Card>
