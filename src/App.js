@@ -20,14 +20,25 @@ import '@telegram-apps/telegram-ui/dist/styles.css';
 import MapPage from './Components/MapPage/MapPage';
 
 
+
 function App() {
-
-  const {onToggleButton, tg} = useTelegram();
-
+  const { onToggleButton, tg } = useTelegram();
+  const navigate = useNavigate();
 
   useEffect(() => {
     tg.ready();
-  }, [])
+    
+    const handleBackButton = (e) => {
+      e.preventDefault();
+      navigate(-1);
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, [navigate, tg]);
 
 
 
