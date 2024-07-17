@@ -91,7 +91,6 @@ function MapPage() {
                   <Typography variant="body2"></Typography>
                 </div>
                 <Button variant="contained" className="card-button">🚖</Button>
-                <Button variant="contained" className="card-button">🚶</Button>
               </Box>
             </CardActionArea>
           </Card>
