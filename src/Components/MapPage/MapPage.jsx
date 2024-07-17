@@ -53,6 +53,11 @@ function MapPage() {
     }
   };
 
+  const openYandexMaps = (bar) => {
+    const url = `https://yandex.ru/maps/?rtext=${userLocation.lat},${userLocation.lng}~${bar.lat},${bar.lng}&rtt=auto`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="beer-map-page">
       {userLocation && (
@@ -90,7 +95,14 @@ function MapPage() {
                   <Typography variant="h6">{bar.name}</Typography>
                   <Typography variant="body2"></Typography>
                 </div>
-                <Button variant="contained" className="card-button">🗺️</Button>
+                <Button 
+                  variant="contained" 
+                  className="card-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openYandexMaps(bar);
+                  }}
+                >🗺️</Button>
               </Box>
             </CardActionArea>
           </Card>
