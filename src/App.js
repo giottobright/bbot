@@ -1,55 +1,57 @@
-import { useEffect } from 'react';
-import './App.css';
-import {useTelegram} from './hooks/useTelegram';
+import React, { useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useTelegram } from './hooks/useTelegram';
 import Header from './Components/Header/Header';
-const {user, onClose} = useTelegram();
-const tg = window.Telegram.WebApp;
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import ProductList from './Components/ProductList/ProductList';
 import Form from './Components/Form/Form';
+import MainScreen from './Components/MainScreen/MainScreen';
+import MapPage from './Components/MapPage/MapPage';
+import './App.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import themeDesign from './themeDesign';
-import Box from '@mui/material/Box';
-import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
-import { amber, deepOrange, grey } from '@mui/material/colors';
-import MainScreen from './Components/MainScreen/MainScreen'
 import '@telegram-apps/telegram-ui/dist/styles.css';
-import MapPage from './Components/MapPage/MapPage';
-
-
 
 function App() {
-  const { onToggleButton, tg } = useTelegram();
+  const { tg } = useTelegram();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     tg.ready();
-    
-    const handleBackButton = (e) => {
-      e.preventDefault();
-      navigate(-1);
+
+    const handleBackButton = () => {
+      if (location.pathname !== '/') {
+        navigate(-1);
+      } else {
+        tg.close();
+      }
     };
 
-    window.addEventListener('popstate', handleBackButton);
+    tg.BackButton.onClick(handleBackButton);
 
     return () => {
-      window.removeEventListener('popstate', handleBackButton);
+      tg.BackButton.offClick(handleBackButton);
     };
-  }, [navigate, tg]);
+  }, [tg, navigate, location]);
 
-
+  useEffect(() => {
+    if (location.pathname === '/') {
+      tg.BackButton.hide();
+    } else {
+      tg.BackButton.show();
+    }
+  }, [location.pathname, tg.BackButton]);
 
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <Routes>
-        <Route index element={<MainScreen />}/>
-        <Route path={'productlist'} element={<ProductList />}/>
-        <Route path={'form'} element={<Form />}/>
-        <Route path={'mappage'} element={<MapPage />}/>
+        <Route index element={<MainScreen />} />
+        <Route path="productlist" element={<ProductList />} />
+        <Route path="form" element={<Form />} />
+        <Route path="mappage" element={<MapPage />} />
       </Routes>
     </div>
   );
