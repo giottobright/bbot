@@ -3,6 +3,7 @@ import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button } from '
 import { useNavigate } from 'react-router-dom';
 import './Form.css';
 import { useLocation } from '../LocationContext/LocationContext';
+const { userLocation, setUserLocation } = useLocation();
 
 // Импорты изображений
 import diGoroh from './img/diGoroh.png';
