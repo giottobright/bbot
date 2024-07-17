@@ -31,10 +31,18 @@
   
   .card-button {
     background-color: #f3eeea !important;
-    color: #F2DDCF !important;
+    color: #3D1A17 !important;
+    border-radius: 50% !important; /* Makes the button circular */
+    width: 40px !important; /* Set a fixed width */
+    height: 40px !important; /* Set a fixed height (same as width for a perfect circle) */
+    min-width: 40px !important; /* Ensures the button doesn't shrink */
+    padding: 0 !important; /* Removes padding */
+    display: flex !important; /* Centers the content */
+    justify-content: center !important; /* Centers horizontally */
+    align-items: center !important; /* Centers vertically */
   }
   
   .card-button:hover {
-    background-color: #5A2B23;
+    background-color: #5A2B23 !important;
   }
   

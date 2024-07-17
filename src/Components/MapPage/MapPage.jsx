@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { Box, Typography, Card, CardActionArea, Button } from '@mui/material';
 import './MapPage.css';
 import { useNavigate } from 'react-router-dom';
+import RouteIcon from '@mui/icons-material/Route';
+import ForkRightIcon from '@mui/icons-material/ForkRight';
 
 function MapPage() {
   const location = useLocation();
@@ -112,13 +114,15 @@ function MapPage() {
                   <Typography variant="body2">{beerName}</Typography>
                 </div>
                 <Button 
-                  variant="contained"
-                  className="card-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openYandexMaps(bar);
-                  }}
-                >🗺️</Button>
+  variant="contained"
+  className="card-button"
+  onClick={(e) => {
+    e.stopPropagation();
+    openYandexMaps(bar);
+  }}
+>
+<ForkRightIcon/>
+</Button>
               </Box>
             </CardActionArea>
           </Card>
