@@ -53,18 +53,9 @@ function MapPage() {
     }
   };
 
-  const openMaps = (bar) => {
-    if (!userLocation) {
-      alert("Местоположение пользователя не определено");
-      return;
-    }
-  
-    // Создаем URL для открытия карт
-    const label = encodeURIComponent(bar.name);
-    const url = `geo:0,0?q=${bar.lat},${bar.lng}(${label})`;
-  
-    // Открываем URL
-    window.location.href = url;
+  const openYandexMaps = (bar) => {
+    const url = `https://yandex.ru/maps/?rtext=${userLocation.lat},${userLocation.lng}~${bar.lat},${bar.lng}&rtt=auto`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -109,7 +100,7 @@ function MapPage() {
                   className="card-button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    openMaps(bar);
+                    openYandexMaps(bar);
                   }}
                 >🗺️</Button>
               </Box>
