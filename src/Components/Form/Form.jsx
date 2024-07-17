@@ -24,11 +24,11 @@ const bars = [
   { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["Gorkovskaya Brewery", "Темное"] },
   { id: 2, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
   { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["Атомная Прачечная XX", "Sovngarde"] },
-  { id: 4, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 5, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 6, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 7, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 8, name: "Бар у Васи", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
+  { id: 4, name: "Jawsspor", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
+  { id: 5, name: "Harats", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
+  { id: 6, name: "Камчатка", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
+  { id: 7, name: "Бамбл Би", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
+  { id: 8, name: "Secret", lat: 55.695011, lng: 37.662614, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
 ];
 
 const distanceFilters = [
