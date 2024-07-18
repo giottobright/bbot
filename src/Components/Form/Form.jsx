@@ -33,6 +33,7 @@ const bars = [
   { id: 10, name: "Choose", lat: 55.790370, lng: 37.523576, beers: ["Gorkovskaya Brewery", "Темное"] },
 ];
 
+
 const distanceFilters = [
   { value: null, label: 'Все' },
   { value: 1000, label: '10 мин 🚶 - 3 мин 🚖' },

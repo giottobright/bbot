@@ -16,11 +16,7 @@ function MapPage() {
   const mapContainerRef = useRef(null);
 
   useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const webApp = window.Telegram.WebApp;
-      webApp.ready();
-      webApp.expand();
-    }
+
 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
