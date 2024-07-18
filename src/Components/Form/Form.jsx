@@ -34,6 +34,7 @@ const bars = [
 ];
 
 
+
 const distanceFilters = [
   { value: null, label: 'Все' },
   { value: 1000, label: '10 мин 🚶 - 3 мин 🚖' },

@@ -4,7 +4,7 @@ import './MainScreen.css';
 import stout from './img/7-removebg-preview (1).png'
 import porter from './img/8-removebg-preview.png'
 import brownAle from './img/9-removebg-preview.png'
-import paleAle from './img/10-removebg-preview.png'
+import paleAle from './img/8-removebg-preview (1).png'
 import bitter from './img/11-removebg-preview.png'
 import weizen from './img/12-removebg-preview.png'
 import mild from './img/13-removebg-preview.png'
@@ -15,6 +15,15 @@ import cider from './img/3-removebg-preview (1).png'
 import ireland from './img/6-removebg-preview.png'
 import cz from './img/4-removebg-preview.png'
 import usa from './img/5-removebg-preview.png'
+import pilsner from './img/10-removebg-preview (1).png'
+import darklager from './img/11-removebg-preview (1).png'
+import draft from './img/12-removebg-preview (1).png'
+import bock from './img/13-removebg-preview (1).png'
+import raunch from './img/14-removebg-preview (1).png'
+import weizenbier from './img/15-removebg-preview.png'
+import lambic from './img/16-removebg-preview.png'
+import lightlager from './img/9-removebg-preview (1).png'
+
 
 import { Card } from '@telegram-apps/telegram-ui';
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell'; 
@@ -40,7 +49,15 @@ const types = [
   { label: 'Stout', image: bitter },
   { label: 'Stout', image: weizen },
   { label: 'Stout', image: mild },
-  { label: 'Stout', image: barleyWine }
+  { label: 'Stout', image: barleyWine },
+  { label: 'Stout', image: lightlager },
+  { label: 'Stout', image: draft },
+  { label: 'Stout', image: raunch },
+  { label: 'Stout', image: weizenbier },
+  { label: 'Stout', image: lambic },
+  { label: 'Stout', image: pilsner },
+  { label: 'Stout', image: darklager },
+  { label: 'Stout', image: bock }
 ]
 
 const countries = [
