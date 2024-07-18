@@ -36,29 +36,29 @@ import { Title } from '@telegram-apps/telegram-ui';
 
 
 const categories = [
-  { label: 'Светлое', image: white },
-  { label: 'Темное', image: dark },
-  { label: 'Сидр', image: cider },
+  { label: 'Светлое', image: white, id: 'light' },
+  { label: 'Темное', image: dark, id: 'dark' },
+  { label: 'Сидр', image: cider, id: 'cider' },
 ];
 
 const types = [
-  { label: 'Stout', image: stout },
-  { label: 'Stout', image: porter },
-  { label: 'Stout', image: brownAle },
-  { label: 'Stout', image: paleAle },
-  { label: 'Stout', image: bitter },
-  { label: 'Stout', image: weizen },
-  { label: 'Stout', image: mild },
-  { label: 'Stout', image: barleyWine },
-  { label: 'Stout', image: lightlager },
-  { label: 'Stout', image: draft },
-  { label: 'Stout', image: raunch },
-  { label: 'Stout', image: weizenbier },
-  { label: 'Stout', image: lambic },
-  { label: 'Stout', image: pilsner },
-  { label: 'Stout', image: darklager },
-  { label: 'Stout', image: bock }
-]
+  { label: 'Stout', image: stout, id: 'stout' },
+  { label: 'Porter', image: porter, id: 'porter' },
+  { label: 'Brown Ale', image: brownAle, id: 'brown ale' },
+  { label: 'Pale Ale', image: paleAle, id: 'pale ale' },
+  { label: 'Bitter', image: bitter, id: 'bitter' },
+  { label: 'Weizen', image: weizen, id: 'weizen' },
+  { label: 'Mild', image: mild, id: 'mild' },
+  { label: 'Barley Wine', image: barleyWine, id: 'barley Wine' },
+  { label: 'Light Lager', image: lightlager, id: 'light Lager' },
+  { label: 'Draft', image: draft, id: 'draft' },
+  { label: 'Rauchbier', image: raunch, id: 'rauchbier' },
+  { label: 'Weizenbier', image: weizenbier, id: 'weizenbier' },
+  { label: 'Lambic', image: lambic, id: 'lambic' },
+  { label: 'Pilsner', image: pilsner, id: 'pilsner' },
+  { label: 'Dark Lager', image: darklager, id: 'dark lager' },
+  { label: 'Bock', image: bock, id: 'bock' }
+];
 
 const countries = [
   { label: 'usa', image: usa },
@@ -71,10 +71,9 @@ const countries = [
 function MainScreen() {
   const navigate = useNavigate();
 
-  const handleCardClick = () => {
-    navigate('/form');
+  const handleCategoryClick = (categoryId) => {
+    navigate('/form', { state: { selectedCategory: categoryId } });
   };
-
 
   return (
     <div className="main-screen">
@@ -83,35 +82,40 @@ function MainScreen() {
       </Typography>
       <Grid container spacing={0.5} className="category-container">
         {categories.map((category, index) => (
-          <Grid  item xs={4} sm={4} md={4} key={index} className='gridcard'>
+          <Grid item xs={4} sm={4} md={4} key={index} className='gridcard'>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }} onClick={handleCardClick}>
+              <CardActionArea 
+                sx={{ backgroundColor: '#F2DDCF' }} 
+                onClick={() => handleCategoryClick(category.id)}
+              >
                 <CardMedia
                   component="img"
                   height="130"
                   image={category.image}
                   alt="category image"
                 />
-                <CardContent className='cardContent'>
-                </CardContent>
               </CardActionArea>
             </Card>
           </Grid>
         ))}
       </Grid>
+      
       <Typography fontSize={20} fontWeight={550} className="category-title">
         По типу
       </Typography>
       <Grid container spacing={0.5} className="category-container">
         {types.map((type, index) => (
-          <Grid  item xs={4} sm={4} md={4} key={index}>
+          <Grid item xs={4} sm={4} md={4} key={index} className='gridcard'>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }}>
+              <CardActionArea 
+                sx={{ backgroundColor: '#F2DDCF' }} 
+                onClick={() => handleCategoryClick(type.id)}
+              >
                 <CardMedia
                   component="img"
                   height="130"
                   image={type.image}
-                  alt="category image"
+                  alt="type image"
                 />
               </CardActionArea>
             </Card>
@@ -125,7 +129,7 @@ function MainScreen() {
         {countries.map((country, index) => (
           <Grid  item xs={4} sm={4} md={4} key={index}>
             <Card className='card'>
-              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }}>
+              <CardActionArea sx={{ backgroundColor: '#F2DDCF' }} onClick={() => handleCategoryClick(category.id)}>
                 <CardMedia
                   component="img"
                   height="130"
