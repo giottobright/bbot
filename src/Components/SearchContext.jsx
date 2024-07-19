@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 
 const SearchContext = createContext();
 
@@ -7,7 +7,11 @@ export const useSearch = () => {
 };
 
 export const SearchProvider = ({ children }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQueryState] = useState('');
+
+  const setSearchQuery = useCallback((query) => {
+    setSearchQueryState(query);
+  }, []);
 
   return (
     <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
