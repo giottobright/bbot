@@ -51,9 +51,6 @@ function MapPage() {
     return <CircularProgress />;
   }
 
-  if (error) {
-    return <Typography color="error">{error}</Typography>;
-  }
 
   return (
     <div className="beer-map-page">
