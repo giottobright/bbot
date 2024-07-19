@@ -1,10 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button, CircularProgress } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Form.css';
 import { useGeolocation } from '../geolocationContext';
 import { categories, types, beerTypes, bars, distanceFilters } from '../data';
 import { useSearch } from '../SearchContext';
+import Fuse from 'fuse.js';
+
+function russianStemmer(word) {
+  const suffixes = ['ый', 'ая', 'ое', 'ые', 'ому', 'ему', 'ыми', 'ими', 'ого', 'его', 'ыми', 'ими'];
+  for (let suffix of suffixes) {
+    if (word.endsWith(suffix) && word.length > suffix.length + 3) {
+      return word.slice(0, -suffix.length);
+    }
+  }
+  return word;
+}
+
+function transliterate(text) {
+  const russianToLatin = {
+    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
+    'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+    'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts',
+    'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
+    'я': 'ya'
+  };
+
+  const latinToRussian = Object.fromEntries(
+    Object.entries(russianToLatin).map(([key, value]) => [value, key])
+  );
+
+  return text.toLowerCase().split('').map(char => {
+    if (russianToLatin[char]) return russianToLatin[char];
+    if (latinToRussian[char]) return latinToRussian[char];
+    return char;
+  }).join('');
+}
 
 function Form() {
   const location = useLocation();
@@ -14,6 +45,17 @@ function Form() {
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const { searchQuery, setSearchQuery } = useSearch();
+  const [isSearching, setIsSearching] = useState(false);
+
+  const processedBeerTypes = useMemo(() => {
+    return beerTypes.map(beer => ({
+      ...beer,
+      processedLabel: beer.label.toLowerCase().split(' ').map(russianStemmer).join(' '),
+      processedDescription: beer.description.toLowerCase().split(' ').map(russianStemmer).join(' '),
+      transliteratedLabel: transliterate(beer.label),
+      transliteratedDescription: transliterate(beer.description)
+    }));
+  }, [beerTypes]);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -32,15 +74,23 @@ function Form() {
     }
   }, [location.state, setSearchQuery]);
 
+  useEffect(() => {
+    console.log(beerTypes)
+  })
+
+  useEffect(() => {
+    setIsSearching(searchQuery.length > 0);
+  }, [searchQuery]);
+
   const handleBeerSelect = (beerName) => {
     setSelectedBeer(beerName);
     const relevantBars = bars.filter(bar => bar.beers.includes(beerName));
     navigate('/mappage', { state: { beerName, bars: relevantBars } });
   };
 
-  const handleDistanceChange = (value) => {
+  const handleDistanceChange = useCallback((value) => {
     setSelectedDistance(value);
-  };
+  }, []);
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371; // Радиус Земли в км
@@ -59,29 +109,78 @@ function Form() {
     || types.find(type => type.id === selectedCategoryId) 
     || categories[0];
   
-  const filteredBeerTypes = selectedCategoryId
-    ? beerTypes.filter(beer => 
-        Array.isArray(beer.categories) 
-          ? beer.categories.includes(selectedCategoryId)
-          : beer.categories === selectedCategoryId)
-    : beerTypes;
+    const filteredBeerTypes = useMemo(() => {
+      return selectedCategoryId
+        ? beerTypes.filter(beer => 
+            Array.isArray(beer.categories) 
+              ? beer.categories.includes(selectedCategoryId)
+              : beer.categories === selectedCategoryId)
+        : beerTypes;
+    }, [selectedCategoryId, beerTypes]);
 
-  const filteredBars = userLocation
-    ? bars.filter(bar => {
+    const filteredBars = useMemo(() => {
+      if (!userLocation) return bars;
+      return bars.filter(bar => {
         if (selectedDistance === null) return true;
         const distance = calculateDistance(
           userLocation.lat, userLocation.lng,
           bar.lat, bar.lng
         );
         return distance <= selectedDistance;
-      })
-    : bars;
+      });
+    }, [userLocation, selectedDistance, bars]);
 
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
 
-  const searchFilteredBeerTypes = searchQuery
-  ? filteredBeerTypes.filter(beer => beer.label.toLowerCase().includes(searchQuery.toLowerCase()))
-  : filteredBeerTypes;
+
+  const fuse = useMemo(() => {
+    const options = {
+      keys: [
+        { name: 'processedLabel', weight: 2 },
+        { name: 'processedDescription', weight: 1.5 },
+        { name: 'transliteratedLabel', weight: 2 },
+        { name: 'transliteratedDescription', weight: 1.5 },
+        { name: 'categories', weight: 1 },
+        { name: 'country', weight: 1 }
+      ],
+      threshold: 0.2,
+      minMatchCharLength: 1,
+      tokenize: true,
+      matchAllTokens: false,
+      findAllMatches: true,
+      includeScore: true,
+      useExtendedSearch: true,
+      ignoreLocation: true,
+    };
+    return new Fuse(processedBeerTypes, options);
+  }, [processedBeerTypes]);
+
+  // Функция для умного поиска
+  const smartSearch = (query) => {
+    if (!query) return processedBeerTypes;
+    
+    const processedQuery = query.toLowerCase().split(' ').map(russianStemmer).join(' ');
+    const transliteratedQuery = transliterate(query);
+    
+    const results = fuse.search({
+      $or: [
+        { processedLabel: processedQuery },
+        { processedDescription: processedQuery },
+        { transliteratedLabel: transliteratedQuery },
+        { transliteratedDescription: transliteratedQuery },
+        { categories: processedQuery },
+        { country: processedQuery }
+      ]
+    });
+    console.log('Fuse search results:', results);
+    return results.map(result => result.item);
+  };
+
+  const searchFilteredBeerTypes = useMemo(() => {
+    const results = smartSearch(searchQuery);
+    console.log('Filtered results:', results);
+    return results;
+  }, [searchQuery, smartSearch]);
 
 
   if (loading) {
@@ -91,7 +190,7 @@ function Form() {
 
   return (
     <div className="main-screen">
-      <Box className="category-description">
+      {!isSearching && <Box className="category-description">
         <Typography variant="h6" className="category-title">
           {selectedCategory.label}
         </Typography>
@@ -99,7 +198,7 @@ function Form() {
           {selectedCategory.description}
         </Typography>
       </Box>
-
+      }
       <Box className="distance-filter-buttons">
         {distanceFilters.map((filter) => (
           <Button
