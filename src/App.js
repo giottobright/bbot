@@ -7,6 +7,7 @@ import Form from './Components/Form/Form';
 import MainScreen from './Components/MainScreen/MainScreen';
 import MapPage from './Components/MapPage/MapPage';
 import { GeolocationProvider } from './Components/geolocationContext';
+import { SearchProvider, useSearch } from './Components/SearchContext';
 import './App.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -14,16 +15,18 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import '@telegram-apps/telegram-ui/dist/styles.css';
 
-function App() {
+function AppContent() {
   const { tg } = useTelegram();
   const navigate = useNavigate();
   const location = useLocation();
+  const { setSearchQuery } = useSearch();
 
   useEffect(() => {
     tg.ready();
 
     const handleBackButton = () => {
       if (location.pathname !== '/') {
+        setSearchQuery('');
         navigate(-1);
       } else {
         tg.close();
@@ -35,7 +38,7 @@ function App() {
     return () => {
       tg.BackButton.offClick(handleBackButton);
     };
-  }, [tg, navigate, location]);
+  }, [tg, navigate, location, setSearchQuery]);
 
   useEffect(() => {
     if (location.pathname === '/') {
@@ -46,16 +49,24 @@ function App() {
   }, [location.pathname, tg.BackButton]);
 
   return (
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route index element={<MainScreen />} />
+        <Route path="productlist" element={<ProductList />} />
+        <Route path="form" element={<Form />} />
+        <Route path="mappage" element={<MapPage />} />
+      </Routes>
+    </div>
+  );
+}
+
+function App() {
+  return (
     <GeolocationProvider>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route index element={<MainScreen />} />
-          <Route path="productlist" element={<ProductList />} />
-          <Route path="form" element={<Form />} />
-          <Route path="mappage" element={<MapPage />} />
-        </Routes>
-      </div>
+      <SearchProvider>
+        <AppContent />
+      </SearchProvider>
     </GeolocationProvider>
   );
 }

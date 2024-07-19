@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button, CircularProgress } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Form.css';
-import { useLocation } from 'react-router-dom';
 import { useGeolocation } from '../geolocationContext';
 import { categories, types, beerTypes, bars, distanceFilters } from '../data';
-
-
-// Импорты изображений
-
+import { useSearch } from '../SearchContext';
 
 function Form() {
   const location = useLocation();
@@ -17,7 +13,7 @@ function Form() {
   const { location: userLocation, loading, error } = useGeolocation();
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-
+  const { searchQuery, setSearchQuery } = useSearch();
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -26,10 +22,15 @@ function Form() {
       webApp.expand();
     }
 
-    if (location.state && location.state.selectedCategory) {
-      setSelectedCategoryId(location.state.selectedCategory);
+    if (location.state) {
+      if (location.state.selectedCategory) {
+        setSelectedCategoryId(location.state.selectedCategory);
+      }
+      if (location.state.searchQuery) {
+        setSearchQuery(location.state.searchQuery);
+      }
     }
-  }, [location]);
+  }, [location, setSearchQuery]);
 
   const handleBeerSelect = (beerName) => {
     setSelectedBeer(beerName);
@@ -78,6 +79,11 @@ function Form() {
 
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
 
+  const searchFilteredBeerTypes = searchQuery
+  ? filteredBeerTypes.filter(beer => beer.label.toLowerCase().includes(searchQuery.toLowerCase()))
+  : filteredBeerTypes;
+
+
   if (loading) {
     return <CircularProgress />;
   }
@@ -107,7 +113,7 @@ function Form() {
       </Box>
 
       <Grid container spacing={0.5} className="category-container">
-        {filteredBeerTypes
+        {searchFilteredBeerTypes
           .filter(beer => availableBeers.includes(beer.label))
           .map((beer, index) => (
           <Grid item xs={12} sm={12} md={12} key={index} className="gridcard">
