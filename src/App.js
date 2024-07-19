@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useTelegram } from './hooks/useTelegram';
 import Header from './Components/Header/Header';
@@ -21,24 +21,23 @@ function AppContent() {
   const location = useLocation();
   const { setSearchQuery } = useSearch();
 
+  const handleBackButton = useCallback(() => {
+    if (location.pathname !== '/') {
+      setSearchQuery('');  // Очищаем поисковой запрос
+      navigate(-1);  // Переходим на предыдущую страницу
+    } else {
+      tg.close();
+    }
+  }, [location.pathname, navigate, setSearchQuery, tg]);
+
   useEffect(() => {
     tg.ready();
-
-    const handleBackButton = () => {
-      if (location.pathname !== '/') {
-        setSearchQuery('');
-        navigate(-1);
-      } else {
-        tg.close();
-      }
-    };
-
     tg.BackButton.onClick(handleBackButton);
 
     return () => {
       tg.BackButton.offClick(handleBackButton);
     };
-  }, [tg, navigate, location, setSearchQuery]);
+  }, [tg, handleBackButton]);
 
   useEffect(() => {
     if (location.pathname === '/') {

@@ -26,11 +26,11 @@ function Form() {
       if (location.state.selectedCategory) {
         setSelectedCategoryId(location.state.selectedCategory);
       }
-      if (location.state.searchQuery) {
+      if (location.state?.searchQuery) {
         setSearchQuery(location.state.searchQuery);
       }
     }
-  }, [location, setSearchQuery]);
+  }, [location.state, setSearchQuery]);
 
   const handleBeerSelect = (beerName) => {
     setSelectedBeer(beerName);

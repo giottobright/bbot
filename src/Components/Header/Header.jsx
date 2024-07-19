@@ -1,17 +1,27 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import './Header.css';
 import { useSearch } from '../SearchContext';
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { searchQuery, setSearchQuery } = useSearch();
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-    navigate('/form', { state: { searchQuery: event.target.value } });
+    const newQuery = event.target.value;
+    setSearchQuery(newQuery);
+    if (location.pathname !== '/form') {
+        navigate('/form', {state: {searchQuery: newQuery}});
+    }
   };
+
+  useEffect(() => {
+    if (location.pathname !== '/form') {
+        setSearchQuery('');
+    }
+  }, [location.pathname, setSearchQuery])
 
   return (
     <div className="header">
