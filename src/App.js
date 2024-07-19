@@ -6,6 +6,7 @@ import ProductList from './Components/ProductList/ProductList';
 import Form from './Components/Form/Form';
 import MainScreen from './Components/MainScreen/MainScreen';
 import MapPage from './Components/MapPage/MapPage';
+import { GeolocationProvider } from './Components/geolocationContext';
 import './App.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -45,15 +46,17 @@ function App() {
   }, [location.pathname, tg.BackButton]);
 
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route index element={<MainScreen />} />
-        <Route path="productlist" element={<ProductList />} />
-        <Route path="form" element={<Form />} />
-        <Route path="mappage" element={<MapPage />} />
-      </Routes>
-    </div>
+    <GeolocationProvider>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route index element={<MainScreen />} />
+          <Route path="productlist" element={<ProductList />} />
+          <Route path="form" element={<Form />} />
+          <Route path="mappage" element={<MapPage />} />
+        </Routes>
+      </div>
+    </GeolocationProvider>
   );
 }
 

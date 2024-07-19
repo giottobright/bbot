@@ -1,41 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 import { useLocation } from 'react-router-dom';
-import { Box, Typography, Card, CardActionArea, Button } from '@mui/material';
+import { Box, Typography, Card, CardActionArea, Button, CircularProgress } from '@mui/material';
 import './MapPage.css';
 import { useNavigate } from 'react-router-dom';
+import { useGeolocation } from '../geolocationContext';
 
 function MapPage() {
-  const location = useLocation();
-  const [selectedBar, setSelectedBar] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
-  const { beerName, bars: initialBars } = location.state || { beerName: '', bars: [] };
-  const [bars, setBars] = useState(initialBars);
-
-  const mapRef = useRef(null);
-  const mapContainerRef = useRef(null);
-
-  useEffect(() => {
-
-
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("Ошибка получения геолокации:", error);
-          setUserLocation({ lat: 55.7558, lng: 37.6173 });
-        }
-      );
-    } else {
-      console.log("Геолокация не поддерживается браузером");
-      setUserLocation({ lat: 55.7558, lng: 37.6173 });
-    }
-  }, []);
+    const location = useLocation();
+    const [selectedBar, setSelectedBar] = useState(null);
+    const { location: userLocation, loading, error } = useGeolocation();
+    const { beerName, bars: initialBars } = location.state || { beerName: '', bars: [] };
+    const [bars, setBars] = useState(initialBars);
+  
+    const mapRef = useRef(null);
+    const mapContainerRef = useRef(null);
 
   useEffect(() => {
     if (selectedBar && mapRef.current) {
@@ -67,6 +46,14 @@ function MapPage() {
     const url = `https://yandex.ru/maps/?rtext=${userLocation.lat},${userLocation.lng}~${bar.lat},${bar.lng}&rtt=auto`;
     window.open(url, '_blank');
   };
+
+  if (loading) {
+    return <CircularProgress />;
+  }
+
+  if (error) {
+    return <Typography color="error">{error}</Typography>;
+  }
 
   return (
     <div className="beer-map-page">

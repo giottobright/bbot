@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button } from '@mui/material';
+import { Card, Grid, CardActionArea, CardMedia, Typography, Box, Button, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './Form.css';
 import { useLocation } from 'react-router-dom';
+import { useGeolocation } from '../geolocationContext';
 
 // Импорты изображений
 import diGoroh from './img/diGoroh.png';
@@ -138,7 +139,7 @@ function Form() {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedBeer, setSelectedBeer] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
+  const { location: userLocation, loading, error } = useGeolocation();
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
@@ -152,24 +153,6 @@ function Form() {
 
     if (location.state && location.state.selectedCategory) {
       setSelectedCategoryId(location.state.selectedCategory);
-    }
-
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("Ошибка получения геолокации:", error);
-          setUserLocation({ lat: 55.7558, lng: 37.6173 });
-        }
-      );
-    } else {
-      console.log("Геолокация не поддерживается браузером");
-      setUserLocation({ lat: 55.7558, lng: 37.6173 });
     }
   }, [location]);
 
@@ -219,6 +202,14 @@ function Form() {
     : bars;
 
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
+
+  if (loading) {
+    return <CircularProgress />;
+  }
+
+  if (error) {
+    return <Typography color="error">{error}</Typography>;
+  }
 
   return (
     <div className="main-screen">
