@@ -15,27 +15,27 @@ function MapPage() {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
 
-//   useEffect(() => {
+  useEffect(() => {
 
 
-//     if ("geolocation" in navigator) {
-//       navigator.geolocation.getCurrentPosition(
-//         (position) => {
-//           setUserLocation({
-//             lat: position.coords.latitude,
-//             lng: position.coords.longitude,
-//           });
-//         },
-//         (error) => {
-//           console.error("Ошибка получения геолокации:", error);
-//           setUserLocation({ lat: 55.7558, lng: 37.6173 });
-//         }
-//       );
-//     } else {
-//       console.log("Геолокация не поддерживается браузером");
-//       setUserLocation({ lat: 55.7558, lng: 37.6173 });
-//     }
-//   }, []);
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Ошибка получения геолокации:", error);
+          setUserLocation({ lat: 55.7558, lng: 37.6173 });
+        }
+      );
+    } else {
+      console.log("Геолокация не поддерживается браузером");
+      setUserLocation({ lat: 55.7558, lng: 37.6173 });
+    }
+  }, []);
 
   useEffect(() => {
     if (selectedBar && mapRef.current) {

@@ -171,7 +171,7 @@ function Form() {
       console.log("Геолокация не поддерживается браузером");
       setUserLocation({ lat: 55.7558, lng: 37.6173 });
     }
-  }, [userLocation]);
+  }, [location]);
 
   const handleBeerSelect = (beerName) => {
     setSelectedBeer(beerName);
