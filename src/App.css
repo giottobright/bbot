@@ -25,7 +25,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw; /* Ensure body width doesn't exceed the viewport width */
-  font-family: "Comfortaa", sans-serif;
+  font-family: "Comfortaa";
 }
 
 html {
