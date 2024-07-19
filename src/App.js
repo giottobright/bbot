@@ -76,7 +76,7 @@ function AppContent() {
         <Route path="mappage" element={<MapPage />} />
       </Routes>
       <Box sx={{ width: '100%' }}>
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, borderRadius: '12px' }} elevation={3}>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, borderRadius: '12px' }}  elevation={3}>
           <BottomNavigation
             value={value}
             onChange={handleChange}
@@ -100,7 +100,7 @@ function AppContent() {
               label="Бары" 
               icon={<StorefrontIcon />} 
               sx={{ 
-                color: value === 0 ? '#FFFFFF' : '#F2DDCF',
+                color: value === 0 ? '#F2DDCF' : '#F2DDCF',
                 '&.Mui-selected': {
                   color: '#FFFFFF'
                 },
