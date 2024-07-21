@@ -1,27 +1,32 @@
+// Header.jsx
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import './Header.css';
 import { useSearch } from '../SearchContext';
+import { useSmartSearch } from '../useSmartSearch';
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { searchQuery, setSearchQuery } = useSearch();
+  const { searchQuery, setSearchQuery, setSearchResults } = useSearch();
+  const smartSearch = useSmartSearch();
 
   const handleSearchChange = (event) => {
     const newQuery = event.target.value;
     setSearchQuery(newQuery);
+    const results = smartSearch(newQuery);
+    setSearchResults(results);
     if (location.pathname !== '/form') {
-        navigate('/form', {state: {searchQuery: newQuery}});
+      navigate('/form', { state: { searchQuery: newQuery } });
     }
   };
 
   useEffect(() => {
     if (location.pathname !== '/form') {
-        setSearchQuery('');
+      setSearchQuery('');
     }
-  }, [location.pathname, setSearchQuery])
+  }, [location.pathname, setSearchQuery]);
 
   return (
     <div className="header">
@@ -32,7 +37,6 @@ const Header = () => {
         type="search"
         value={searchQuery}
         onChange={handleSearchChange}
-        fontFamily={'Comfortaa'}
         sx={{
           '& .MuiOutlinedInput-root': {
             '& fieldset': {

@@ -7,35 +7,6 @@ import { categories, types, beerTypes, bars, distanceFilters } from '../data';
 import { useSearch } from '../SearchContext';
 import Fuse from 'fuse.js';
 
-function russianStemmer(word) {
-  const suffixes = ['ый', 'ая', 'ое', 'ые', 'ому', 'ему', 'ыми', 'ими', 'ого', 'его', 'ыми', 'ими'];
-  for (let suffix of suffixes) {
-    if (word.endsWith(suffix) && word.length > suffix.length + 3) {
-      return word.slice(0, -suffix.length);
-    }
-  }
-  return word;
-}
-
-function transliterate(text) {
-  const russianToLatin = {
-    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
-    'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
-    'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts',
-    'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
-    'я': 'ya'
-  };
-
-  const latinToRussian = Object.fromEntries(
-    Object.entries(russianToLatin).map(([key, value]) => [value, key])
-  );
-
-  return text.toLowerCase().split('').map(char => {
-    if (russianToLatin[char]) return russianToLatin[char];
-    if (latinToRussian[char]) return latinToRussian[char];
-    return char;
-  }).join('');
-}
 
 function Form() {
   const location = useLocation();
@@ -44,18 +15,10 @@ function Form() {
   const { location: userLocation, loading, error } = useGeolocation();
   const [selectedDistance, setSelectedDistance] = useState(distanceFilters[0].value);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  const { searchQuery, setSearchQuery } = useSearch();
   const [isSearching, setIsSearching] = useState(false);
+  const { searchQuery, searchResults } = useSearch();
 
-  const processedBeerTypes = useMemo(() => {
-    return beerTypes.map(beer => ({
-      ...beer,
-      processedLabel: beer.label.toLowerCase().split(' ').map(russianStemmer).join(' '),
-      processedDescription: beer.description.toLowerCase().split(' ').map(russianStemmer).join(' '),
-      transliteratedLabel: transliterate(beer.label),
-      transliteratedDescription: transliterate(beer.description)
-    }));
-  }, [beerTypes]);
+
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -68,11 +31,8 @@ function Form() {
       if (location.state.selectedCategory) {
         setSelectedCategoryId(location.state.selectedCategory);
       }
-      if (location.state?.searchQuery) {
-        setSearchQuery(location.state.searchQuery);
-      }
     }
-  }, [location.state, setSearchQuery]);
+  }, [location.state]);
 
   useEffect(() => {
     console.log(beerTypes)
@@ -110,13 +70,15 @@ function Form() {
     || categories[0];
   
     const filteredBeerTypes = useMemo(() => {
-      return selectedCategoryId
-        ? beerTypes.filter(beer => 
-            Array.isArray(beer.categories) 
-              ? beer.categories.includes(selectedCategoryId)
-              : beer.categories === selectedCategoryId)
-        : beerTypes;
-    }, [selectedCategoryId, beerTypes]);
+      let beersToFilter = searchQuery ? searchResults : beerTypes;
+  
+      return beersToFilter.filter(beer => 
+        !selectedCategoryId || 
+        (Array.isArray(beer.categories) 
+          ? beer.categories.includes(selectedCategoryId)
+          : beer.categories === selectedCategoryId)
+      );
+    }, [selectedCategoryId, searchQuery, searchResults, beerTypes]);
 
     const filteredBars = useMemo(() => {
       if (!userLocation) return bars;
@@ -133,54 +95,10 @@ function Form() {
   const availableBeers = [...new Set(filteredBars.flatMap(bar => bar.beers))];
 
 
-  const fuse = useMemo(() => {
-    const options = {
-      keys: [
-        { name: 'processedLabel', weight: 2 },
-        { name: 'processedDescription', weight: 1.5 },
-        { name: 'transliteratedLabel', weight: 2 },
-        { name: 'transliteratedDescription', weight: 1.5 },
-        { name: 'categories', weight: 1 },
-        { name: 'country', weight: 1 }
-      ],
-      threshold: 0.2,
-      minMatchCharLength: 1,
-      tokenize: true,
-      matchAllTokens: false,
-      findAllMatches: true,
-      includeScore: true,
-      useExtendedSearch: true,
-      ignoreLocation: true,
-    };
-    return new Fuse(processedBeerTypes, options);
-  }, [processedBeerTypes]);
 
   // Функция для умного поиска
-  const smartSearch = (query) => {
-    if (!query) return processedBeerTypes;
-    
-    const processedQuery = query.toLowerCase().split(' ').map(russianStemmer).join(' ');
-    const transliteratedQuery = transliterate(query);
-    
-    const results = fuse.search({
-      $or: [
-        { processedLabel: processedQuery },
-        { processedDescription: processedQuery },
-        { transliteratedLabel: transliteratedQuery },
-        { transliteratedDescription: transliteratedQuery },
-        { categories: processedQuery },
-        { country: processedQuery }
-      ]
-    });
-    console.log('Fuse search results:', results);
-    return results.map(result => result.item);
-  };
 
-  const searchFilteredBeerTypes = useMemo(() => {
-    const results = smartSearch(searchQuery);
-    console.log('Filtered results:', results);
-    return results;
-  }, [searchQuery, smartSearch]);
+
 
 
   if (loading) {
@@ -212,7 +130,7 @@ function Form() {
       </Box>
 
       <Grid container spacing={0.5} className="category-container">
-        {searchFilteredBeerTypes
+        {filteredBeerTypes
           .filter(beer => availableBeers.includes(beer.label))
           .map((beer, index) => (
           <Grid item xs={12} sm={12} md={12} key={index} className="gridcard">
