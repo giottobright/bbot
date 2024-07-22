@@ -59,25 +59,25 @@ export const countries = [
 ];
 
 export const beerTypes = [
-  { label: 'Gorkovskaya Brewery', labelinfo: '7.5%  75 IBU', image: diGoroh, imageType: 'round', description: 'Характерная для стиля горечь, вкус и аромат достигнуты благодаря использованию сортов хмеля CITRA и NORTHERN BREWER', categories: ['light', 'ipa'] },
-  { label: 'King JJJuliusss', labelinfo: '8.4%  N/A IBU', image: kingJ, imageType: 'square', description: 'Манго, апельсин и сладкий грейпфрут преобладают в аромате с намеками на ананас и смешанный сок тропических фруктов. Вкус повторяет аромат с сочным ощущением во рту и правильной горечью.', categories: 'light' },
-  { label: 'Атомная Прачечная XX', labelinfo: '9%  130 IBU', image: atomPrach, imageType: 'square', description: 'Не двойная прачка. Это «Атомная Прачечная», сваренная в стиле Double IPA: еще больше хмеля, еще мощне солодовая база и карамельный акцент, еще плотнее вкус', categories: 'light' },
-  { label: 'Sovngarde', labelinfo: '8%  65 IBU', image: sovngarde, imageType: 'square', description: 'Насыщенный цветочно-цитрусовый аромат грейпфрута и апельсина и крепкий солодовый вкус с нежными тропическими нотками.', categories: 'dark' },
-  { label: 'Темное', labelinfo: '7.5%  75 IBU', image: dark, imageType: 'square', description: 'Описание для Темное', category: 'dark' },
-  { label: 'Сидр', labelinfo: '7.5%  75 IBU', image: cider, imageType: 'square', description: 'Описание для Сидр', category: 'cider' },
+  { id: 'gorkovskaya', label: 'Gorkovskaya Brewery', labelinfo: '7.5%  75 IBU', image: diGoroh, imageType: 'round', description: 'Характерная для стиля горечь, вкус и аромат достигнуты благодаря использованию сортов хмеля CITRA и NORTHERN BREWER', categories: ['light', 'ipa'] },
+  { id: 'kingjjj', label: 'King JJJuliusss', labelinfo: '8.4%  N/A IBU', image: kingJ, imageType: 'square', description: 'Манго, апельсин и сладкий грейпфрут преобладают в аромате с намеками на ананас и смешанный сок тропических фруктов. Вкус повторяет аромат с сочным ощущением во рту и правильной горечью.', categories: ['light'] },
+  { id: 'atomnaya', label: 'Атомная Прачечная XX', labelinfo: '9%  130 IBU', image: atomPrach, imageType: 'square', description: 'Не двойная прачка. Это «Атомная Прачечная», сваренная в стиле Double IPA: еще больше хмеля, еще мощне солодовая база и карамельный акцент, еще плотнее вкус', categories: ['light'] },
+  { id: 'sovngarde', label: 'Sovngarde', labelinfo: '8%  65 IBU', image: sovngarde, imageType: 'square', description: 'Насыщенный цветочно-цитрусовый аромат грейпфрута и апельсина и крепкий солодовый вкус с нежными тропическими нотками.', categories: ['dark'] },
+  { id: 'temnoe', label: 'Темное', labelinfo: '7.5%  75 IBU', image: dark, imageType: 'square', description: 'Описание для Темное', categories: ['dark'] },
+  { id: 'cider', label: 'Сидр', labelinfo: '7.5%  75 IBU', image: cider, imageType: 'square', description: 'Описание для Сидр', categories: ['cider'] },
 ];
 
 export const bars = [
-  { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["King JJJuliusss", "Gorkovskaya Brewery", "Сидр"] },
-  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["Атомная Прачечная XX", "Sovngarde"] },
-  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["Gorkovskaya Brewery", "Темное"] },
-  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["Gorkovskaya Brewery", "Темное"] },
+  { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["sovngarde", "temnoe"] },
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["kingjjj", "atomnaya"] },
+  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["kingjjj", "atomnaya"] },
+  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["sovngarde", "sovngarde"] },
+  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["atomnaya", "temnoe"] },
+  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["cider", "temnoe"] },
+  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["sovngarde", "gorkovskaya"] },
+  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["sovngarde", "temnoe"] },
+  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["sovngarde", "temnoe"] },
+  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["sovngarde", "atomnaya"] },
 ];
 
 export const distanceFilters = [
