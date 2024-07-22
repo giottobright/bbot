@@ -12,7 +12,7 @@ function BarsPage() {
   const [selectedBarIndex, setSelectedBarIndex] = useState(0);
   const { location: userLocation, loading, error } = useGeolocation();
   const mapRef = useRef(null);
-  const selectedBarRef = useRef(null);
+  const barsListRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,16 +28,17 @@ function BarsPage() {
 
   useEffect(() => {
     if (mapRef.current && sortedBars.length > 0) {
-      const selectedBar = sortedBars[selectedBarIndex];
+      const selectedBar = sortedBars[selectedBarIndex % sortedBars.length];
       mapRef.current.setCenter([selectedBar.lat, selectedBar.lng], 15);
     }
   }, [selectedBarIndex, sortedBars]);
 
   useEffect(() => {
-    if (selectedBarRef.current) {
-      selectedBarRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (barsListRef.current && sortedBars.length > 0) {
+      const itemHeight = barsListRef.current.scrollHeight / (sortedBars.length * 3);
+      barsListRef.current.scrollTop = itemHeight * sortedBars.length + (selectedBarIndex * itemHeight);
     }
-  }, [selectedBarIndex]);
+  }, [sortedBars]);
 
   const calculateDistance = (point1, point2) => {
     const R = 6371; // Earth's radius in km
@@ -53,10 +54,20 @@ function BarsPage() {
   const handleScroll = (event) => {
     const container = event.target;
     const scrollPosition = container.scrollTop;
-    const itemHeight = container.scrollHeight / sortedBars.length;
-    const newIndex = Math.round(scrollPosition / itemHeight);
-    if (newIndex !== selectedBarIndex && newIndex >= 0 && newIndex < sortedBars.length) {
+    const itemHeight = container.scrollHeight / (sortedBars.length * 3);
+    const middleOffset = container.clientHeight / 2;
+    
+    let newIndex = Math.round((scrollPosition + middleOffset) / itemHeight) % sortedBars.length;
+    
+    if (newIndex !== selectedBarIndex) {
       setSelectedBarIndex(newIndex);
+    }
+
+    // Implement infinite scroll
+    if (scrollPosition < itemHeight * sortedBars.length) {
+      container.scrollTop += itemHeight * sortedBars.length;
+    } else if (scrollPosition >= itemHeight * sortedBars.length * 2) {
+      container.scrollTop -= itemHeight * sortedBars.length;
     }
   };
 
@@ -67,6 +78,35 @@ function BarsPage() {
   if (loading) {
     return <CircularProgress />;
   }
+
+  const renderBarCards = () => {
+    const cards = sortedBars.map((bar, index) => (
+      <Card
+        key={`${bar.id}-${index}`}
+        className={`bar-card ${index === selectedBarIndex % sortedBars.length ? 'selected' : ''}`}
+        onClick={() => openBarDetails(bar)}
+      >
+        <CardActionArea>
+          <Box p={2} className="card-content">
+            <div>
+              <Typography variant="h6">{bar.name}</Typography>
+              <Typography variant="body2">{bar.distance.toFixed(2)} km away</Typography>
+            </div>
+            <Button 
+              variant="contained"
+              className="card-button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedBarIndex(index);
+              }}
+            >🗺</Button>
+          </Box>
+        </CardActionArea>
+      </Card>
+    ));
+
+    return [...cards, ...cards, ...cards];
+  };
 
   return (
     <div className="bars-page">
@@ -87,7 +127,7 @@ function BarsPage() {
                   key={bar.id}
                   geometry={[bar.lat, bar.lng]}
                   options={{
-                    iconColor: bar === sortedBars[selectedBarIndex] ? '#FF0000' : '#000000',
+                    iconColor: bar === sortedBars[selectedBarIndex % sortedBars.length] ? '#FF0000' : '#000000',
                   }}
                 />
               ))}
@@ -100,32 +140,8 @@ function BarsPage() {
           <ArrowDownwardIcon />
           <Typography variant="caption">Scroll</Typography>
         </div>
-        <div className="bars-list" onScroll={handleScroll}>
-          {sortedBars.map((bar, index) => (
-            <Card
-              key={bar.id}
-              ref={index === selectedBarIndex ? selectedBarRef : null}
-              className={`bar-card ${index === selectedBarIndex ? 'selected' : ''}`}
-              onClick={() => openBarDetails(bar)}
-            >
-              <CardActionArea>
-                <Box p={2} className="card-content">
-                  <div>
-                    <Typography variant="h6">{bar.name}</Typography>
-                    <Typography variant="body2">{bar.distance.toFixed(2)} km away</Typography>
-                  </div>
-                  <Button 
-                    variant="contained"
-                    className="card-button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedBarIndex(index);
-                    }}
-                  >🗺</Button>
-                </Box>
-              </CardActionArea>
-            </Card>
-          ))}
+        <div className="bars-list" ref={barsListRef} onScroll={handleScroll}>
+          {renderBarCards()}
         </div>
       </div>
     </div>
@@ -133,3 +149,7 @@ function BarsPage() {
 }
 
 export default BarsPage;
+
+
+
+
