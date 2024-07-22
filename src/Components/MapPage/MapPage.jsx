@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Typography, Card, CardActionArea, Button, CircularProgress } from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import './MapPage.css';
-import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../geolocationContext';
 
 function MapPage() {
     const location = useLocation();
     const [selectedBarIndex, setSelectedBarIndex] = useState(0);
     const { location: userLocation, loading, error } = useGeolocation();
-    const { beerName, bars: initialBars } = location.state || { beerName: '', bars: [] };
-    const [bars, setBars] = useState(initialBars);
+    const { bars: initialBars } = location.state || { bars: [] };
+    const [sortedBars, setSortedBars] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -21,10 +20,8 @@ function MapPage() {
 
     useEffect(() => {
         if (location.state) {
-            const { beerName, bars: initialBars } = location.state;
-            console.log('Received beer name:', beerName);
+            const { bars: initialBars } = location.state;
             console.log('Received bars:', initialBars);
-            setBars(initialBars || []);
             setIsLoading(false);
         } else {
             console.error('No state received in MapPage');
@@ -33,11 +30,22 @@ function MapPage() {
     }, [location.state]);
 
     useEffect(() => {
-        if (mapRef.current && bars.length > 0) {
-            const selectedBar = bars[selectedBarIndex];
+        if (userLocation && initialBars.length > 0) {
+            const barsWithDistance = initialBars.map(bar => ({
+                ...bar,
+                distance: calculateDistance(userLocation, { lat: bar.lat, lng: bar.lng })
+            }));
+            const sorted = barsWithDistance.sort((a, b) => a.distance - b.distance);
+            setSortedBars(sorted);
+        }
+    }, [userLocation, initialBars]);
+
+    useEffect(() => {
+        if (mapRef.current && sortedBars.length > 0) {
+            const selectedBar = sortedBars[selectedBarIndex];
             mapRef.current.setCenter([selectedBar.lat, selectedBar.lng], 15);
         }
-    }, [selectedBarIndex, bars]);
+    }, [selectedBarIndex, sortedBars]);
 
     useEffect(() => {
         if (selectedBarRef.current) {
@@ -45,30 +53,40 @@ function MapPage() {
         }
     }, [selectedBarIndex]);
 
+    const calculateDistance = (point1, point2) => {
+        const R = 6371; // Earth's radius in km
+        const dLat = (point2.lat - point1.lat) * Math.PI / 180;
+        const dLon = (point2.lng - point1.lng) * Math.PI / 180;
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                  Math.cos(point1.lat * Math.PI / 180) * Math.cos(point2.lat * Math.PI / 180) * 
+                  Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    };
+
     const handleScroll = (event) => {
         const container = event.target;
         const scrollPosition = container.scrollTop;
-        const itemHeight = container.scrollHeight / bars.length;
+        const itemHeight = container.scrollHeight / sortedBars.length;
         const newIndex = Math.round(scrollPosition / itemHeight);
-        if (newIndex !== selectedBarIndex && newIndex >= 0 && newIndex < bars.length) {
+        if (newIndex !== selectedBarIndex && newIndex >= 0 && newIndex < sortedBars.length) {
             setSelectedBarIndex(newIndex);
         }
     };
 
-    const openYandexMaps = (bar) => {
-        const url = `https://yandex.ru/maps/?rtext=${userLocation.lat},${userLocation.lng}~${bar.lat},${bar.lng}&rtt=auto`;
-        window.open(url, '_blank');
+    const openBarDetails = (bar) => {
+        navigate(`/bar/${bar.id}`, { state: { bar } });
     };
 
     if (loading || isLoading) {
         return <CircularProgress />;
     }
 
-    if (bars.length === 0) {
+    if (sortedBars.length === 0) {
         return (
             <div className="beer-map-page">
                 <Typography variant="h6" align="center" style={{ marginTop: '20px' }}>
-                    No bars found serving this beer.
+                    No bars found in this area.
                 </Typography>
             </div>
         );
@@ -85,10 +103,10 @@ function MapPage() {
                                 zoom: 13
                             }}
                             width="100%"
-                            height="300px"
+                            height="400px"
                             instanceRef={mapRef}
                         >
-                            {bars.map((bar, index) => (
+                            {sortedBars.map((bar, index) => (
                                 <Placemark
                                     key={bar.id}
                                     geometry={[bar.lat, bar.lng]}
@@ -107,24 +125,25 @@ function MapPage() {
                     <Typography variant="caption">Scroll</Typography>
                 </div>
                 <div className="bars-list" onScroll={handleScroll}>
-                    {bars.map((bar, index) => (
+                    {sortedBars.map((bar, index) => (
                         <Card
                             key={bar.id}
                             ref={index === selectedBarIndex ? selectedBarRef : null}
                             className={`bar-card ${index === selectedBarIndex ? 'selected' : ''}`}
+                            onClick={() => openBarDetails(bar)}
                         >
                             <CardActionArea>
                                 <Box p={2} className="card-content">
                                     <div className="text-content">
                                         <Typography variant="h6">{bar.name}</Typography>
-                                        <Typography variant="body2">{beerName}</Typography>
+                                        <Typography variant="body2">{bar.distance.toFixed(2)} km away</Typography>
                                     </div>
                                     <Button 
                                         variant="contained"
                                         className="card-button"
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            openYandexMaps(bar);
+                                            setSelectedBarIndex(index);
                                         }}
                                     >🗺</Button>
                                 </Box>
