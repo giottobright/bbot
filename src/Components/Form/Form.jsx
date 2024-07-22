@@ -18,6 +18,7 @@ function Form() {
   const [isLoading, setIsLoading] = useState(true);
   const [categoryDescription, setCategoryDescription] = useState('');
   const [categoryLabel, setCategoryLabel] = useState('');
+  const [selectedBeer, setSelectedBeer] = useState(null);
 
   useEffect(() => {
     if (location.state) {
@@ -50,6 +51,18 @@ function Form() {
   useEffect(() => {
     setIsSearching(searchQuery.length > 0);
   }, [searchQuery]);
+
+  const handleBeerSelect = (beerName) => {
+    setSelectedBeer(beerName);
+    const selectedBeerType = beerTypes.find(beer => beer.label === beerName);
+    if (!selectedBeerType) {
+      console.error('Selected beer not found:', beerName);
+      return;
+    }
+    const relevantBars = bars.filter(bar => bar.beers.includes(selectedBeerType.id));
+    console.log('Relevant bars:', relevantBars);
+    navigate('/mappage', { state: { beerName, bars: relevantBars } });
+  };
 
   const handleDistanceChange = useCallback((value) => {
     setSelectedDistance(value);

@@ -12,6 +12,7 @@ function MapPage() {
     const { location: userLocation, loading, error } = useGeolocation();
     const { beerName, bars: initialBars } = location.state || { beerName: '', bars: [] };
     const [bars, setBars] = useState(initialBars);
+    const [isLoading, setIsLoading] = useState(true);
   
     const mapRef = useRef(null);
     const mapContainerRef = useRef(null);
@@ -21,6 +22,19 @@ function MapPage() {
       mapRef.current.setCenter([selectedBar.lat, selectedBar.lng], 15);
     }
   }, [selectedBar]);
+
+  useEffect(() => {
+    if (location.state) {
+      const { beerName, bars: initialBars } = location.state;
+      console.log('Received beer name:', beerName);
+      console.log('Received bars:', initialBars);
+      setBars(initialBars || []);
+      setIsLoading(false);
+    } else {
+      console.error('No state received in MapPage');
+      setIsLoading(false);
+    }
+  }, [location.state]);
 
   const handleBarSelect = (bar) => {
     setSelectedBar(bar);
