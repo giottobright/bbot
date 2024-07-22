@@ -14,6 +14,7 @@ function BarsPage() {
   const mapRef = useRef(null);
   const selectedBarRef = useRef(null);
   const navigate = useNavigate();
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     if (userLocation) {
@@ -53,10 +54,20 @@ function BarsPage() {
   const handleScroll = (event) => {
     const container = event.target;
     const scrollPosition = container.scrollTop;
-    const itemHeight = container.scrollHeight / sortedBars.length;
+    const scrollHeight = container.scrollHeight;
+    const clientHeight = container.clientHeight;
+    const itemHeight = scrollHeight / sortedBars.length;
     const newIndex = Math.round(scrollPosition / itemHeight);
+
     if (newIndex !== selectedBarIndex && newIndex >= 0 && newIndex < sortedBars.length) {
       setSelectedBarIndex(newIndex);
+    }
+
+    // Check if we're at the bottom of the list
+    if (scrollHeight - scrollPosition <= clientHeight + 1) {
+      setIsAtBottom(true);
+    } else {
+      setIsAtBottom(false);
     }
   };
 
@@ -126,6 +137,7 @@ function BarsPage() {
               </CardActionArea>
             </Card>
           ))}
+          <div className="bottom-padding"></div>
         </div>
       </div>
     </div>
