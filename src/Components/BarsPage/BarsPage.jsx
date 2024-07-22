@@ -79,7 +79,7 @@ function BarsPage() {
                 zoom: 13
               }}
               width="100%"
-              height="400px"
+              height="300px"
               instanceRef={mapRef}
             >
               {sortedBars.map((bar) => (
