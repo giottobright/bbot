@@ -13,12 +13,12 @@ function BarDetailPage() {
   return (
     <div className="main-screen">
       <Typography variant="h4" className="bar-name">{bar.name}</Typography>
-      <Typography variant="h6" className="beers-heading"> Beers:</Typography>
-      <Grid container spacing={2} className="category-container">
+      <Typography variant="h6" className="beers-heading"></Typography>
+      <Grid container spacing={0.5} className="category-container">
         {bar.beers.map((beerId) => {
           const beer = getBeerDetails(beerId);
           return (
-            <Grid item xs={12} sm={6} md={4} key={beer.id} className="gridcard">
+            <Grid item xs={12} sm={12} md={12} key={beer.id} className="gridcard">
               <Card className="card" sx={{ borderRadius: '12px' }}>
                 <CardActionArea 
                   sx={{ backgroundColor: '#F2DDCF', borderRadius: '16px' }}
@@ -57,3 +57,5 @@ function BarDetailPage() {
 }
 
 export default BarDetailPage;
+
+

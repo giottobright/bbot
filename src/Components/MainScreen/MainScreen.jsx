@@ -18,8 +18,8 @@ import { Title } from '@telegram-apps/telegram-ui';
 function MainScreen() {
   const navigate = useNavigate();
 
-  const handleCategoryClick = (categoryId) => {
-    navigate('/form', { state: { selectedCategory: categoryId } });
+  const handleCategoryClick = (id, isType = false) => {
+    navigate('/form', { state: { selectedId: id, isType: isType } });
   };
 
   return (
@@ -56,7 +56,7 @@ function MainScreen() {
             <Card className='card'>
               <CardActionArea 
                 sx={{ backgroundColor: '#F2DDCF' }} 
-                onClick={() => handleCategoryClick(type.id)}
+                onClick={() => handleCategoryClick(type.id, true)}
               >
                 <CardMedia
                   component="img"
