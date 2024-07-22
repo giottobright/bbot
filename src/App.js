@@ -24,6 +24,9 @@ import Paper from '@mui/material/Paper';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import StorefrontIcon from '@mui/icons-material/Storefront';
+import BarsPage from '../src/Components/BarsPage/BarsPage';
+import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
+
 function AppContent() {
   const { tg } = useTelegram();
   const navigate = useNavigate();
@@ -62,7 +65,7 @@ function AppContent() {
     if (newValue === 0) {
       navigate('/');
     } else if (newValue === 1) {
-      navigate('/mappage');
+      navigate('/bars');
     }
   };
 
@@ -74,6 +77,8 @@ function AppContent() {
         <Route path="productlist" element={<ProductList />} />
         <Route path="form" element={<Form />} />
         <Route path="mappage" element={<MapPage />} />
+        <Route path="bars" element={<BarsPage />} />
+        <Route path="bar/:id" element={<BarDetailPage />} />
       </Routes>
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, borderRadius: '12px' }}  elevation={3}>

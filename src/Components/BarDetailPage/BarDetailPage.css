@@ -1,0 +1,20 @@
+.bar-detail-page {
+    padding: 20px;
+    background-color: #3D1A17;
+    min-height: 100vh;
+    color: #F2DDCF;
+  }
+  
+  .bar-name {
+    margin-bottom: 20px !important;
+    color: #F2DDCF !important;
+  }
+  
+  .beers-heading {
+    margin-bottom: 10px !important;
+    color: #F2DDCF !important;
+  }
+  
+  .MuiListItemText-primary {
+    color: #F2DDCF !important;
+  }
