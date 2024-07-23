@@ -5,8 +5,10 @@ import TextField from '@mui/material/TextField';
 import './Header.css';
 import { useSearch } from '../SearchContext';
 import { useSmartSearch } from '../useSmartSearch';
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
 
-const Header = () => {
+const Header = ({variant = 'default'}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { searchQuery, setSearchQuery, setSearchResults } = useSearch();
@@ -29,14 +31,21 @@ const Header = () => {
   }, [location.pathname, setSearchQuery]);
 
   return (
-    <div className="header">
+    <div className={`header ${variant === 'base' ? 'header-base' : ''}`}>
       <TextField
         fullWidth
         id="outlined-search"
-        label="Найти..."
         type="search"
+        placeholder="Найти..."
         value={searchQuery}
         onChange={handleSearchChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon sx={{ color: '#F2DDCF' }} />
+            </InputAdornment>
+          ),
+        }}
         sx={{
           '& .MuiOutlinedInput-root': {
             '& fieldset': {

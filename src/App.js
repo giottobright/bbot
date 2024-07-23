@@ -26,6 +26,7 @@ import SportsBarIcon from '@mui/icons-material/SportsBar';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import BarsPage from '../src/Components/BarsPage/BarsPage';
 import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
+import BasePage from './Components/BasePage/BasePage';
 
 function AppContent() {
   const { tg } = useTelegram();
@@ -71,9 +72,9 @@ function AppContent() {
 
   return (
     <div className="App">
-      <Header />
       <Routes>
-        <Route index element={<MainScreen />} />
+        <Route index element={<BasePage />} />
+        <Route path="mainscreen" element={<MainScreen />} />
         <Route path="productlist" element={<ProductList />} />
         <Route path="form" element={<Form />} />
         <Route path="mappage" element={<MapPage />} />

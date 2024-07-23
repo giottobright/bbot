@@ -5,23 +5,25 @@
     align-items: center;
     padding-top: 0;
     padding-left: 1%;
-    background-color: inherit; /* Используйте цвет фона всей страницы */
+    background-color: inherit;
+}
+
+.header-base {
+    width: 95%; /* Adjust this value as needed for the desired width on the base page */
+    margin: 0 auto;
 }
 
 .searchbar {
-    width: 90vw;
+    width: 100%;
 }
 
 .searchbar .MuiOutlinedInput-input {
     padding: 0 14px;
     height: 30px;
-    background-color: inherit; /* Используйте цвет фона всей страницы */
+    background-color: inherit;
 }
 
 .searchbar .MuiInputLabel-root {
     top: -12px;
-    background-color: inherit; /* Используйте цвет фона всей страницы */
+    background-color: inherit;
 }
-
-
-

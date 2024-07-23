@@ -1,0 +1,40 @@
+.base-screen {
+    padding: 5px;
+  }
+  
+  .base-screen .category-title {
+    color: #F2DDCF;
+    font-family: 'Comfortaa',  sans-serif;
+  }
+  
+  
+  .base-category-container {
+    margin-bottom: 20px;
+    padding: 0px;
+    justify-content: left;
+  }
+  
+  .base-card {
+    height: 97%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .base-up {
+    display: flex;
+    align-items: center; /* Выравнивание по центру по вертикали */
+}
+
+.base-up-image {
+    flex: 0 0 60px; /* фиксированная ширина для контейнера изображения */
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+  
+  
