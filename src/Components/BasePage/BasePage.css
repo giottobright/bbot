@@ -4,7 +4,24 @@
   
   .base-screen .base-title {
     color: #F2DDCF;
-    font-family: 'Comfortaa',  sans-serif;
+    font-family: 'Poppins';
+    font-weight: 300;
+  }
+
+  .base-screen .base-title-2 {
+    color: #F2DDCF;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 10;
+  }
+
+  .base-screen .base-title-3 {
+    color: #F2DDCF;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 10;
   }
   
   

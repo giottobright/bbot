@@ -36,19 +36,19 @@ function BasePage() {
                                 />
             </Box>
             <Box className='base-up-text'>
-                <Typography fontSize={16} fontWeight={550} className="base-title">
+                <Typography fontSize={15} fontWeight={300} className="base-title">
                     Добро пожаловать в GeoBeer!
                 </Typography>
             </Box>
         </Box>
         <Box className='base-title-box'>
-            <Typography fontSize={20} fontWeight={550} className="base-title">
+            <Typography fontSize={25} fontWeight={700} className="base-title-2">
                 Выбирай пиво, находи бар!
             </Typography>
         </Box>
       <Header variant="base" className='base-search'/>
       <Box className='base-beer-day'>
-            <Typography fontSize={20} fontWeight={550} className="base-title">
+            <Typography fontSize={20} fontWeight={550} className="base-title-3">
                 Пиво дня
             </Typography>
         </Box>

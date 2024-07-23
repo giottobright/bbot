@@ -28,6 +28,7 @@ import BarsPage from '../src/Components/BarsPage/BarsPage';
 import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
 import BasePage from './Components/BasePage/BasePage';
 
+
 function AppContent() {
   const { tg } = useTelegram();
   const navigate = useNavigate();
