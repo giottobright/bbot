@@ -44,7 +44,7 @@
 }
 
 .base-up-image {
-    flex: 0 0 60px; /* фиксированная ширина для контейнера изображения */
+    flex: 0 0 45px; /* фиксированная ширина для контейнера изображения */
     width: 100px;
     height: 100px;
     margin: 4px;
@@ -60,7 +60,11 @@
 }
 
 .base-beer-day {
-    margin: 10px 0;
+    margin: 25px 0;
+}
+
+.base-up-text {
+    margin-left: 10px;
 }
 
 
