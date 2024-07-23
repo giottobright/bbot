@@ -22,8 +22,7 @@ body {
   background: #0E1621;
   color: black;
   overflow-x: hidden; /* Prevent horizontal scrolling */
-  margin: 0;
-  padding: 0;
+  padding: 5px;
   width: 100vw; /* Ensure body width doesn't exceed the viewport width */
   font-family: "Comfortaa";
 }

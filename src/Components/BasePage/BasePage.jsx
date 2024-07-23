@@ -36,16 +36,22 @@ function BasePage() {
                                 />
             </Box>
             <Box className='base-up-text'>
-                <Typography fontSize={16} fontWeight={550} className="category-title">
+                <Typography fontSize={16} fontWeight={550} className="base-title">
                     Добро пожаловать в GeoBeer!
                 </Typography>
             </Box>
         </Box>
-        
-      <Typography fontSize={20} fontWeight={550} className="category-title">
-        Выбирай пиво, находи бар!
-      </Typography>
+        <Box className='base-title-box'>
+            <Typography fontSize={20} fontWeight={550} className="base-title">
+                Выбирай пиво, находи бар!
+            </Typography>
+        </Box>
       <Header variant="base" className='base-search'/>
+      <Box className='base-beer-day'>
+            <Typography fontSize={20} fontWeight={550} className="base-title">
+                Пиво дня
+            </Typography>
+        </Box>
       <Grid container spacing={0.5} className="base-category-container">
         {categories.map((category, index) => (
           <Grid item xs={4} sm={4} md={4} key={index} className='base-gridcard'>
