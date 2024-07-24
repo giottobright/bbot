@@ -90,7 +90,7 @@ function AppContent() {
   showLabels
   sx={{ 
     borderRadius: '12px', 
-    backgroundColor: 'rgba(37, 43, 51, 0.9)', // Light gray background
+    backgroundColor: 'rgba(37, 43, 51, 0.97)', // Light gray background
     backdropFilter: 'blur(10px)'
   }}
 >

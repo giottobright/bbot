@@ -19,9 +19,9 @@ import { Title } from '@telegram-apps/telegram-ui';
 
 
 function BasePage() {
-  const [currentBeerIndex, setCurrentBeerIndex] = useState(0);
-  const beersOfTheDay = beerTypes.slice(0, 5);
-  const navigate = useNavigate();
+    const [currentBeerIndex, setCurrentBeerIndex] = useState(0);
+    const beersOfTheDay = beerTypes.slice(0, 2);
+    const navigate = useNavigate();
 
   const handleCategoryClick = (id, isType = false) => {
     navigate('/form', { state: { selectedId: id, isType: isType } });
@@ -79,32 +79,61 @@ function BasePage() {
         </Box>
         <Box className="beers-of-day-wrapper">
         <Box className="beers-of-day-container" {...handlers}>
-        {visibleBeers.map((beer, index) => (
-          <Card key={index} className="beer-of-day-card">
-            <CardActionArea sx={{ height: '100%', display: 'flex', backgroundColor: 'rgba(37, 43, 51, 0.9)', borderRadius: '12px' }}>
-              <Box className="cardContent">
-                <Box className="daycardImageContainer">
-                  <CardMedia
-                    component="img"
-                    className={`cardImage ${beer.imageType}`}
-                    image={beer.image}
-                    alt="beer image"
-                  />
-                </Box>
-                <Box className="daycardTextContent">
-                  <Typography className="cardTitle">
-                    {beer.label}
-                  </Typography>
-                  <Typography className="cardTitleInfo">
-                    {beer.labelinfo}
-                  </Typography>
-                </Box>
-              </Box>   
-            </CardActionArea>
-          </Card>
-        ))}
-      </Box>
-      <Box className="dot-indicators">
+          {beersOfTheDay.map((beer, index) => (
+            <Card 
+                key={index} 
+                className="beer-of-day-card"
+                style={{
+                    transform: `translateX(${(index - currentBeerIndex) * 100}%)`,
+                    transition: 'transform 0.3s ease',
+                    height: '120px', // Added to match the new container height
+                }}
+            >
+              <CardActionArea 
+                sx={{ 
+                  height: '100%', 
+                  display: 'flex', 
+                  backgroundColor: 'rgba(37, 43, 51, 0.9)', 
+                  borderRadius: '12px',
+                  position: 'relative'
+                }}
+              >
+                <Box className="cardContent">
+                  <Box className="daycardImageContainer">
+                    <div className="imageWrapper">
+                      <CardMedia
+                        component="img"
+                        className="cardImage"
+                        image={beer.image}
+                        alt="beer image"
+                      />
+                    </div>
+                  </Box>
+                  <Box className="daycardTextContent">
+                    <Typography className="cardTitle">
+                      {beer.label}
+                    </Typography>
+                    <Typography className="cardTitleInfo">
+                      {beer.labelinfo}
+                    </Typography>
+                  </Box>
+                  <Button 
+                    variant="contained" 
+                    color="primary" 
+                    className="goButton"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleGoClick(beer.id);
+                    }}
+                  >
+                    Go
+                  </Button>
+                </Box>   
+              </CardActionArea>
+            </Card>
+          ))}
+        </Box>
+        <Box className="dot-indicators">
           {beersOfTheDay.map((_, index) => (
             <span 
               key={index} 
