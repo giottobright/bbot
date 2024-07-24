@@ -11,7 +11,7 @@ import { useSwipeable } from 'react-swipeable';
 import { Card } from '@telegram-apps/telegram-ui';
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell'; 
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
-import { Grid, CardActionArea, CardMedia, CardContent, Typography, Box } from '@mui/material';
+import { Grid, CardActionArea, CardMedia, CardContent, Typography, Box, Button } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -83,7 +83,7 @@ function BasePage() {
           <Card key={index} className="beer-of-day-card">
             <CardActionArea sx={{ height: '100%', display: 'flex', backgroundColor: 'rgba(37, 43, 51, 0.9)', borderRadius: '12px' }}>
               <Box className="cardContent">
-                <Box className="cardImageContainer">
+                <Box className="daycardImageContainer">
                   <CardMedia
                     component="img"
                     className={`cardImage ${beer.imageType}`}
@@ -91,18 +91,13 @@ function BasePage() {
                     alt="beer image"
                   />
                 </Box>
-                <Box className="cardTextContent">
-                  <Typography variant="h6" className="cardTitle">
+                <Box className="daycardTextContent">
+                  <Typography className="cardTitle">
                     {beer.label}
                   </Typography>
-                  <Typography variant="body2" className="cardTitleInfo">
+                  <Typography className="cardTitleInfo">
                     {beer.labelinfo}
                   </Typography>
-                  <Box className="cardDescriptionContainer">
-                    <Typography variant="body2" className="cardDescription">
-                      {beer.description}
-                    </Typography>
-                  </Box>
                 </Box>
               </Box>   
             </CardActionArea>
