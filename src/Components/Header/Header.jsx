@@ -48,9 +48,11 @@ const Header = ({variant = 'default'}) => {
         }}
         sx={{
           '& .MuiOutlinedInput-root': {
+            borderRadius: '20px', // Apply border radius to the root
+            overflow: 'hidden', // Ensure background doesn't overflow
+            backgroundColor: 'rgba(242, 221, 207, 0.1)', // Light gray with a hint of the original color
             '& fieldset': {
               borderColor: '#F2DDCF',
-              borderRadius: '20px',
               borderWidth: '2px',
             },
             '&:hover fieldset': {
@@ -61,16 +63,21 @@ const Header = ({variant = 'default'}) => {
             },
           },
           '& .MuiInputLabel-root': {
-            color: '#F2DDCF',
+            color: 'rgba(242, 221, 207, 0.7)', // Slightly more opaque for better visibility
             fontFamily: 'Comfortaa',
           },
           '& .MuiInputLabel-root.Mui-focused': {
-            color: '#F2DDCF',
+            color: '#F2DDCF', // Keep the focused color the same
             fontFamily: 'Comfortaa',
           },
           '& .MuiOutlinedInput-input': {
-            color: '#F2DDCF',
+            color: '#F2DDCF', // Keep the input text color the same
             fontFamily: 'Comfortaa',
+          },
+          // Add styles for the placeholder (technically the same as label)
+          '& .MuiInputBase-input::placeholder': {
+            color: 'rgba(242, 221, 207, 0.7)',
+            opacity: 1, // Needed for some browsers
           },
         }}
       />

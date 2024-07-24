@@ -63,8 +63,6 @@ export const beerTypes = [
   { id: 'kingjjj', label: 'King JJJuliusss', labelinfo: '8.4%  N/A IBU', image: kingJ, imageType: 'square', description: 'Манго, апельсин и сладкий грейпфрут преобладают в аромате с намеками на ананас и смешанный сок тропических фруктов. Вкус повторяет аромат с сочным ощущением во рту и правильной горечью.', categories: ['light'], types: ['pale ale', 'ipa'] },
   { id: 'atomnaya', label: 'Атомная Прачечная XX', labelinfo: '9%  130 IBU', image: atomPrach, imageType: 'square', description: 'Не двойная прачка. Это «Атомная Прачечная», сваренная в стиле Double IPA: еще больше хмеля, еще мощне солодовая база и карамельный акцент, еще плотнее вкус', categories: ['light'], types: ['pale ale', 'ipa'] },
   { id: 'sovngarde', label: 'Sovngarde', labelinfo: '8%  65 IBU', image: sovngarde, imageType: 'square', description: 'Насыщенный цветочно-цитрусовый аромат грейпфрута и апельсина и крепкий солодовый вкус с нежными тропическими нотками.', categories: ['dark'], types: ['porter'] },
-  { id: 'temnoe', label: 'Темное', labelinfo: '7.5%  75 IBU', image: dark, imageType: 'square', description: 'Описание для Темное', categories: ['dark'], types: ['stout'] },
-  { id: 'cider', label: 'Сидр', labelinfo: '7.5%  75 IBU', image: cider, imageType: 'square', description: 'Описание для Сидр', categories: ['cider'], types: ['cider'] },
 ];
 
 export const bars = [

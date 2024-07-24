@@ -84,39 +84,43 @@ function AppContent() {
       </Routes>
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, borderRadius: '12px' }}  elevation={3}>
-          <BottomNavigation
-            value={value}
-            onChange={handleChange}
-            showLabels
-            sx={{ borderRadius: '12px', backgroundColor: 'rgba(61, 26, 23, 0.8)', backdropFilter: 'blur(10px)' }}
-          >
-          <BottomNavigationAction 
-              label="Пиво" 
-              icon={<SportsBarIcon />} 
-              sx={{ 
-                color: value === 0 ? '#FFFFFF' : '#F2DDCF',
-                '&.Mui-selected': {
-                  color: '#FFFFFF'
-                },
-                '& .MuiBottomNavigationAction-label': {
-                  fontFamily: 'Comfortaa, sans-serif',
-                },
-              }} 
-            />
-            <BottomNavigationAction 
-              label="Бары" 
-              icon={<StorefrontIcon />} 
-              sx={{ 
-                color: value === 0 ? '#F2DDCF' : '#F2DDCF',
-                '&.Mui-selected': {
-                  color: '#FFFFFF'
-                },
-                '& .MuiBottomNavigationAction-label': {
-                  fontFamily: 'Comfortaa, sans-serif',
-                },
-              }} 
-            />
-          </BottomNavigation>
+        <BottomNavigation
+  value={value}
+  onChange={handleChange}
+  showLabels
+  sx={{ 
+    borderRadius: '12px', 
+    backgroundColor: 'rgba(37, 43, 51, 0.9)', // Light gray background
+    backdropFilter: 'blur(10px)'
+  }}
+>
+  <BottomNavigationAction 
+    label="Пиво" 
+    icon={<SportsBarIcon />} 
+    sx={{ 
+      color: value === 0 ? '#FFFFFF' : '#F2DDCF',
+      '&.Mui-selected': {
+        color: '#FFFFFF'
+      },
+      '& .MuiBottomNavigationAction-label': {
+        fontFamily: 'Comfortaa, sans-serif',
+      },
+    }} 
+  />
+  <BottomNavigationAction 
+    label="Бары" 
+    icon={<StorefrontIcon />} 
+    sx={{ 
+      color: value === 1 ? '#FFFFFF' : '#F2DDCF',
+      '&.Mui-selected': {
+        color: '#FFFFFF'
+      },
+      '& .MuiBottomNavigationAction-label': {
+        fontFamily: 'Comfortaa, sans-serif',
+      },
+    }} 
+  />
+</BottomNavigation>
         </Paper>
       </Box>
     </div>
