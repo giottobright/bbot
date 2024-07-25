@@ -72,34 +72,71 @@
 /* ... (previous styles remain the same) */
 
 /* ... (previous styles remain the same) */
+.beers-of-day-wrapper {
+    position: relative;
+    height: auto; /* Changed from fixed height */
+    perspective: 1000px;
+    overflow: visible;
+    padding-bottom: 10px; /* Add padding to accommodate dots */
+  }
 
-  
-.beer-of-day-card {
-    flex: 0 0 100%;
-    max-width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+  .beers-of-day-container {
+    position: relative;
     width: 100%;
+    height: 200px; /* Set a fixed height for the card container */
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    margin-bottom: -50px;
+  }
+  
+  
+  .beer-of-day-card {
+    position: absolute;
+    width: 70%;
+    height: 60%;
+    left: 15%;
+    top: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+
+  .beer-of-day-card.prev,
+  .beer-of-day-card.next {
+    width: 50%;
+    height: 58%;
+    top: 5%;
+    opacity: 0.7;
+  }
+  
+  .beer-of-day-card.prev {
+    left: -20%;
+    transform: translateZ(-100px) rotateY(10deg);
+  }
+  
+  .beer-of-day-card.next {
+    left: 70%;
+    transform: translateZ(-100px) rotateY(-10deg);
+  }
+  
+  .beer-of-day-card.active {
+    z-index: 1;
+    transform: translateZ(0) rotateY(0);
   }
   
 
-.cardContent {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  height: 100%;
-  width: 100%;
-}
+  .cardContent {
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: rgba(37, 43, 51, 0.9);
+  }
   
 
-.daycardImageContainer {
-    flex: 0 0 33%;
+  .daycardImageContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 10px;
   }
   
   .cardImage {
@@ -135,30 +172,28 @@
   }
   
   .daycardTextContent {
-    flex: 1;
+    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 0 10px;
   }
   
 
   .daycardTextContent .cardTitle {
     color: #F2DDCF;
     font-family: 'Poppins';
-    font-weight: 800;
+    font-weight: 600;
     font-style: normal;
-    font-size: 24px;
-    text-align: center;
+    font-size: 19px;
+    text-align: left; /* Changed from center to left */
   }
   
   .daycardTextContent .cardTitleInfo {
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 4px;
-    text-align: center;
+    text-align: left; /* Changed from center to left */
     color: #F2DDCF;
+    font-weight: 500;
   }
   
   .cardDescriptionContainer {
@@ -179,21 +214,11 @@
     color: #0E1621 !important;
   }
 
-  .beers-of-day-wrapper {
-    position: relative;
-    padding-bottom: 30px;
-    overflow: hidden;
-  }
-  
-  .beers-of-day-container {
-    height: 120px; /* Reduced from 150px */
-  }
+
   
   .dot-indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative; /* Changed from absolute */
+    margin-top: 0px; /* Add margin to position below cards */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -207,6 +232,10 @@
     margin: 0 5px;
     opacity: 0.5;
     transition: opacity 0.3s ease;
+  }
+  
+  .dot.active {
+    opacity: 1;
   }
   
   .dot.active {

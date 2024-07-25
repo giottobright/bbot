@@ -26,7 +26,7 @@ body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
   padding: 5px;
   width: 100vw; /* Ensure body width doesn't exceed the viewport width */
-  font-family: "Comfortaa";
+  font-family: "Poppins";
 }
 
 html {
