@@ -8,6 +8,7 @@ import logo from '../img/logoBB.png'
 import { useSwipeable } from 'react-swipeable';
 
 
+
 import { Card } from '@telegram-apps/telegram-ui';
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell'; 
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
@@ -16,6 +17,8 @@ import { Grid, CardActionArea, CardMedia, CardContent, Typography, Box, Button }
 import { useNavigate } from 'react-router-dom';
 
 import { Title } from '@telegram-apps/telegram-ui';
+import BeerOfDayCard from '../BeerOfDayCard/BeerOfDayCard';
+import CategoryMain from '../CategoryMain/CategoryMain';
 
 
 function BasePage() {
@@ -80,93 +83,8 @@ function BasePage() {
             </Typography>
         </Box>
       <Header variant="base" className='base-search'/>
-      <Box className='base-beer-day'>
-            <Typography fontSize={20} fontWeight={550} className="base-title-3">
-                Пиво дня
-            </Typography>
-        </Box>
-        <Box className="beers-of-day-wrapper" {...handlers}>
-        <Box className="beers-of-day-container">
-          {beersOfTheDay.map((beer, index) => {
-            const position = 
-              index === activeIndex ? 'active' : 
-              index === (activeIndex - 1 + beersOfTheDay.length) % beersOfTheDay.length ? 'prev' : 'next';
-
-            return (
-              <Card 
-                key={index} 
-                className={`beer-of-day-card ${position}`}
-              >
-                <CardActionArea sx={{ height: '100%' }}>
-                  <Box className="cardContent">
-                    <Box className="daycardImageContainer">
-                      <div className="imageWrapper">
-                        <CardMedia
-                          component="img"
-                          className="cardImage"
-                          image={beer.image}
-                          alt="beer image"
-                        />
-                      </div>
-                    </Box>
-                    <Box className="daycardTextContent">
-                      <Typography className="cardTitle">
-                        {beer.label}
-                      </Typography>
-                      <Typography className="cardTitleInfo">
-                        {beer.labelinfo}
-                      </Typography>
-                    </Box>
-                  </Box>   
-                </CardActionArea>
-              </Card>
-            );
-          })}
-        </Box>
-        <Box className="dot-indicators">
-          {beersOfTheDay.map((_, index) => (
-            <span 
-              key={index} 
-              className={`dot ${index === activeIndex ? 'active' : ''}`}
-            />
-          ))}
-        </Box>
-      </Box>
-      
-
-
-      
-      <Box className="category-header">
-        <Typography fontSize={20} fontWeight={550} className="category-title">
-          Категории
-        </Typography>
-        <Button 
-          variant="outlined" 
-          className="see-all-button"
-          onClick={handleSeeAllClick}
-        >
-          Все
-        </Button>
-      </Box>
-      <Grid container spacing={0.5} className="category-container">
-        {mainTypes.map((type, index) => (
-          <Grid item xs={3} sm={3} md={3} key={index} className='gridcard'>
-            <Card className='card'>
-              <CardActionArea 
-                sx={{ backgroundColor: 'rgba(37, 43, 51, 0.98)' }} 
-                onClick={() => handleCategoryClick(type.id, true)}
-              >
-                <CardMedia
-                  component="img"
-                  height="100"
-                  image={type.image}
-                  alt="type image"
-                />
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <CategoryMain/>
+      <BeerOfDayCard/>
       <Typography fontSize={20} fontWeight={550} className="category-title">
         По стране
       </Typography>

@@ -27,6 +27,8 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import BarsPage from '../src/Components/BarsPage/BarsPage';
 import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
 import BasePage from './Components/BasePage/BasePage';
+import BeerOfDayCard from './Components/BeerOfDayCard/BeerOfDayCard';
+import CategoryMain from './Components/CategoryMain/CategoryMain';
 
 
 function AppContent() {
