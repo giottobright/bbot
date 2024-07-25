@@ -4,13 +4,13 @@
   
   .base-screen .base-title {
     color: #F2DDCF;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-weight: 300;
   }
 
   .base-screen .base-title-2 {
     color: #F2DDCF;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-weight: 800;
     font-style: normal;
     font-size: 26px;
@@ -18,7 +18,7 @@
 
   .base-screen .base-title-3 {
     color: #F2DDCF;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-weight: 800;
     font-style: normal;
     font-size: 20px;
@@ -183,10 +183,10 @@
 
   .daycardTextContent .cardTitle {
     color: #F2DDCF;
-    font-family: 'Poppins';
+    font-family: 'Roboto';
     font-weight: 600;
     font-style: normal;
-    font-size: 16px;
+    font-size: 17px;
     text-align: left; /* Changed from center to left */
   }
   
@@ -196,7 +196,9 @@
     text-align: left; /* Changed from center to left */
     color: #F2DDCF;
     font-weight: 500;
+    font-family: 'Roboto';
   }
+
   
   .cardDescriptionContainer {
     background-color: white;
@@ -242,4 +244,28 @@
   
   .dot.active {
     opacity: 1;
+  }
+
+  .category-title {
+    color: #F2DDCF;
+    font-family: 'Roboto';
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+  }
+
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0 5px;
+  }
+
+  .see-all-button {
+    color: #F2DDCF !important;
+    border-color: #F2DDCF !important;
+    font-size: 14px !important;
+    padding: 2px 10px !important;
+    min-width: unset !important;
   }

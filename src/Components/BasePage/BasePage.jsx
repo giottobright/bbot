@@ -23,6 +23,7 @@ function BasePage() {
     const beersOfTheDay = beerTypes.slice(0, 3);
     const navigate = useNavigate();
     const [activeIndex, setActiveIndex] = useState(0);
+    const mainTypes = types.slice(0, 4);
 
   const handleCategoryClick = (id, isType = false) => {
     navigate('/form', { state: { selectedId: id, isType: isType } });
@@ -44,6 +45,10 @@ function BasePage() {
     preventDefaultTouchmoveEvent: true,
     trackMouse: true
   });
+
+  const handleSeeAllClick = () => {
+    navigate('/form');
+  };
 
   const visibleBeers = [
     beersOfTheDay[(currentBeerIndex - 1 + beersOfTheDay.length) % beersOfTheDay.length],
@@ -131,20 +136,29 @@ function BasePage() {
 
 
       
-      <Typography fontSize={20} fontWeight={550} className="category-title">
-        По типу
-      </Typography>
+      <Box className="category-header">
+        <Typography fontSize={20} fontWeight={550} className="category-title">
+          Категории
+        </Typography>
+        <Button 
+          variant="outlined" 
+          className="see-all-button"
+          onClick={handleSeeAllClick}
+        >
+          Все
+        </Button>
+      </Box>
       <Grid container spacing={0.5} className="category-container">
-        {types.map((type, index) => (
-          <Grid item xs={4} sm={4} md={4} key={index} className='gridcard'>
+        {mainTypes.map((type, index) => (
+          <Grid item xs={3} sm={3} md={3} key={index} className='gridcard'>
             <Card className='card'>
               <CardActionArea 
-                sx={{ backgroundColor: '#F2DDCF' }} 
+                sx={{ backgroundColor: 'rgba(37, 43, 51, 0.98)' }} 
                 onClick={() => handleCategoryClick(type.id, true)}
               >
                 <CardMedia
                   component="img"
-                  height="130"
+                  height="100"
                   image={type.image}
                   alt="type image"
                 />
