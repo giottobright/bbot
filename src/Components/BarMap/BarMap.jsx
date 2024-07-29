@@ -83,7 +83,6 @@ function BarMap() {
               width="100%"
               height="400px"
               instanceRef={mapRef}
-              className="yandex-map"
             >
               {sortedBars.map((bar) => (
                 <Placemark
