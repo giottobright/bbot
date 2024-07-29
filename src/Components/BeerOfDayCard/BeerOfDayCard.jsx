@@ -27,7 +27,8 @@ const handlers = useSwipeable({
   onSwipedLeft: () => handleSwipe('left'),
   onSwipedRight: () => handleSwipe('right'),
   preventDefaultTouchmoveEvent: true,
-  trackMouse: true
+  trackMouse: true,
+  behavior: 'smooth'
 });
 
 

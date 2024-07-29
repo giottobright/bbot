@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import logo from '../img/logoBB.png'
 import { useSwipeable } from 'react-swipeable';
+import BeerOfDayCardOne from '../BeerOfDayCardOne/BeerOfDayCardOne';
 
 
 
@@ -72,21 +73,21 @@ function BasePage() {
                                 />
             </Box>
             <Box className='base-up-text'>
-                <Typography fontSize={17} fontWeight={300} className="base-title">
+                <Typography fontSize={15} fontWeight={300} className="base-title">
                     Добро пожаловать в GeoBeer!
                 </Typography>
             </Box>
         </Box>
         <Box className='base-title-box'>
-            <Typography fontSize={25} fontWeight={700} className="base-title-2">
+            <Typography fontSize={20} fontWeight={700} className="base-title-2">
                 Выбирай пиво, находи бар!
             </Typography>
         </Box>
       <Header variant="base" className='base-search'/>
+      <BeerOfDayCardOne/>
       <CategoryMain/>
-      <BeerOfDayCard/>
       <Typography fontSize={20} fontWeight={550} className="category-title">
-        По стране
+        Все пиво
       </Typography>
     </div>
   );
