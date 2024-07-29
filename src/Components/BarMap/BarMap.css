@@ -1,0 +1,28 @@
+.bars-map-container {
+    margin-top: 20px;
+    padding: 0 5px;
+  }
+  
+  .yandex-map {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+  
+  .bars-list {
+    background-color: rgba(37, 43, 51, 0.98);
+    border-radius: 12px;
+    padding: 10px !important;
+  }
+  
+  .bar-item {
+    margin-bottom: 10px;
+  }
+  
+  .bar-text {
+    color: #F2DDCF !important;
+  }
+  
+  .bar-text .MuiListItemText-secondary {
+    color: rgba(242, 221, 207, 0.7) !important;
+  }

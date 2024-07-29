@@ -7,8 +7,16 @@ import Button from '@mui/joy/Button'; // Add this import
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import beerofday_maximus from '../img/beerofday_maximus.gif';
 import './BeerOfDayCardOne.css'
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function BeerOfDayCardOne() {
+
+  const navigate = useNavigate();
+
+  const handleMapClick = () => {
+    navigate('/barmap');
+  };
+
     return (
       <div className='cardone'>
         <Card sx={{ height: '200px', margin: '10px 0 0 0', position: 'relative' }} variant="plain" className='cardonee'>
@@ -48,9 +56,7 @@ function BeerOfDayCardOne() {
                   backgroundColor: 'rgba(242, 221, 207, 0.1)',
                 },
               }}
-              onClick={() => {
-                console.log('On the map button clicked');
-              }}
+              onClick={handleMapClick}
             >
               На карте
             </Button>

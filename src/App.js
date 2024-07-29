@@ -29,6 +29,7 @@ import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
 import BasePage from './Components/BasePage/BasePage';
 import BeerOfDayCard from './Components/BeerOfDayCard/BeerOfDayCard';
 import CategoryMain from './Components/CategoryMain/CategoryMain';
+import BarMap from './Components/BarMap/BarMap';
 
 
 function AppContent() {
@@ -82,6 +83,7 @@ function AppContent() {
         <Route path="form" element={<Form />} />
         <Route path="mappage" element={<MapPage />} />
         <Route path="bars" element={<BarsPage />} />
+        <Route path="barmap" element={<BarMap />} />
         <Route path="bar/:id" element={<BarDetailPage />} />
       </Routes>
       <Box sx={{ width: '100%' }}>
