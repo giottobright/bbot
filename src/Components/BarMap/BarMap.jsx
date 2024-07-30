@@ -1,23 +1,22 @@
+// Updated BarMap Component
+
 import React, { useState, useEffect, useRef } from 'react';
-import { YMaps, Map, Marker, Placemark } from '@pbe/react-yandex-maps';
-import { Box, Typography, Card, CardActionArea, Button, List, CircularProgress, ListItem, ListItemText } from '@mui/material';
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import { Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../geolocationContext';
 import { bars } from '../data';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import './BarMap.css';
-import diGoroh from '../img/diGoroh.png'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import './BarMap.css';
 
 function BarMap() {
   const [sortedBars, setSortedBars] = useState([]);
   const [selectedBarIndex, setSelectedBarIndex] = useState(0);
-  const { location: userLocation, loading, error } = useGeolocation();
+  const { location: userLocation, loading } = useGeolocation();
   const mapRef = useRef(null);
-  const selectedBarRef = useRef(null);
   const navigate = useNavigate();
   const [showList, setShowList] = useState(false);
-
 
   useEffect(() => {
     if (userLocation) {
@@ -37,12 +36,6 @@ function BarMap() {
     }
   }, [selectedBarIndex, sortedBars]);
 
-  useEffect(() => {
-    if (selectedBarRef.current) {
-      selectedBarRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, [selectedBarIndex]);
-
   const calculateDistance = (point1, point2) => {
     const R = 6371; // Earth's radius in km
     const dLat = (point2.lat - point1.lat) * Math.PI / 180;
@@ -54,29 +47,17 @@ function BarMap() {
     return R * c;
   };
 
-  const handleScroll = (event) => {
-    const container = event.target;
-    const scrollPosition = container.scrollTop;
-    const itemHeight = container.scrollHeight / sortedBars.length;
-    const newIndex = Math.round(scrollPosition / itemHeight);
-    if (newIndex !== selectedBarIndex && newIndex >= 0 && newIndex < sortedBars.length) {
-      setSelectedBarIndex(newIndex);
-    }
-  };
-
-
-  if (loading) {
-    return <CircularProgress />;
-  }
-
   const toggleListView = () => {
-    setShowList(!showList);
+    setShowList(prevShowList => !prevShowList);
   };
 
   const openBarDetails = (bar) => {
     navigate(`/bar/${bar.id}`, { state: { bar } });
   };
 
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
     <div className="bar-map-container">
@@ -92,7 +73,7 @@ function BarMap() {
                 zoom: 13
               }}
               width="100%"
-              height="100%"
+              height="82%"
               instanceRef={mapRef}
             >
               {sortedBars.map((bar) => (
@@ -114,9 +95,17 @@ function BarMap() {
         )}
         <Button
           className="toggle-list-button"
-          variant="contained"
+          variant="outlined"
           onClick={toggleListView}
-          startIcon={<ArrowUpwardIcon />}
+          startIcon={<ArrowDownwardIcon />}
+          sx={{
+            color: '#F2DDCF',
+            borderColor: '#F2DDCF',
+            '&:hover': {
+              borderColor: '#F2DDCF',
+              backgroundColor: 'rgba(242, 221, 207, 0.1)',
+            },
+          }}
         >
           List View
         </Button>
@@ -126,7 +115,15 @@ function BarMap() {
           className="back-to-map-button"
           variant="contained"
           onClick={toggleListView}
-          startIcon={<ArrowDownwardIcon />}
+          startIcon={<ArrowUpwardIcon />}
+          sx={{
+            color: '#F2DDCF',
+            borderColor: '#F2DDCF',
+            '&:hover': {
+              borderColor: '#F2DDCF',
+              backgroundColor: 'rgba(242, 221, 207, 0.1)',
+            },
+          }}
         >
           Back to Map
         </Button>

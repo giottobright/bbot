@@ -1,3 +1,5 @@
+/* Updated BarMap.css */
+
 .bar-map-container {
   position: fixed;
   top: 0;
@@ -20,14 +22,12 @@
   transform: translateY(-100%);
 }
 
-.list-view {
-  background-color: #252B33;
-  transform: translateY(100%);
-  overflow-y: auto;
-}
-
 .list-view.hidden {
   transform: translateY(100%);
+}
+
+.list-view:not(.hidden) {
+  transform: translateY(0);
 }
 
 .map-title {
@@ -44,9 +44,15 @@
 .toggle-list-button, .back-to-map-button {
   position: absolute;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 5%;
+  transform: translateX(-10%);
+  transform: translateY(80%);
   z-index: 1000;
+  width: 90%;
+}
+
+.toggle-list-button {
+  color: red;
 }
 
 .bars-list {
