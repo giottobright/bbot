@@ -1,28 +1,86 @@
-.bars-map-container {
-    margin-top: 20px;
-    padding: 0 5px;
-  }
-  
-  .yandex-map {
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 15px;
-  }
-  
-  .bars-list {
-    background-color: rgba(37, 43, 51, 0.98);
-    border-radius: 12px;
-    padding: 10px !important;
-  }
-  
-  .bar-item {
-    margin-bottom: 10px;
-  }
-  
-  .bar-text {
-    color: #F2DDCF !important;
-  }
-  
-  .bar-text .MuiListItemText-secondary {
-    color: rgba(242, 221, 207, 0.7) !important;
-  }
+.bar-map-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-view, .list-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.map-view.hidden {
+  transform: translateY(-100%);
+}
+
+.list-view {
+  background-color: #252B33;
+  transform: translateY(100%);
+  overflow-y: auto;
+}
+
+.list-view.hidden {
+  transform: translateY(100%);
+}
+
+.map-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  color: #F2DDCF;
+  background-color: rgba(37, 43, 51, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.toggle-list-button, .back-to-map-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.bars-list {
+  padding: 20px;
+}
+
+.bar-item {
+  background-color: rgba(242, 221, 207, 0.1);
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.bar-item:hover {
+  background-color: rgba(242, 221, 207, 0.2);
+}
+
+.bar-item h6 {
+  color: #F2DDCF;
+  margin-bottom: 5px;
+}
+
+.bar-item p {
+  color: rgba(242, 221, 207, 0.7);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 24px;
+  color: #F2DDCF;
+  background-color: #252B33;
+}

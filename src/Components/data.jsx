@@ -84,3 +84,5 @@ export const distanceFilters = [
   { value: 3000, label: '30 мин 🚶 - 10 мин 🚖' },
   { value: 5000, label: '30 мин 🚖' },
 ];
+
+ 

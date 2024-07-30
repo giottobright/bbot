@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import { YMaps, Map, Marker, Placemark } from '@pbe/react-yandex-maps';
 import { Box, Typography, Card, CardActionArea, Button, List, CircularProgress, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../geolocationContext';
 import { bars } from '../data';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import './BarMap.css';
+import diGoroh from '../img/diGoroh.png'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 function BarMap() {
   const [sortedBars, setSortedBars] = useState([]);
@@ -14,6 +16,8 @@ function BarMap() {
   const mapRef = useRef(null);
   const selectedBarRef = useRef(null);
   const navigate = useNavigate();
+  const [showList, setShowList] = useState(false);
+
 
   useEffect(() => {
     if (userLocation) {
@@ -60,19 +64,26 @@ function BarMap() {
     }
   };
 
-  const openBarDetails = (bar) => {
-    navigate(`/bar/${bar.id}`, { state: { bar } });
-  };
 
   if (loading) {
     return <CircularProgress />;
   }
 
+  const toggleListView = () => {
+    setShowList(!showList);
+  };
+
+  const openBarDetails = (bar) => {
+    navigate(`/bar/${bar.id}`, { state: { bar } });
+  };
+
+
   return (
-    <div className="bars-map-container">
-      <Typography variant="h6" className="base-title-3">
-        Найти бар на карте
-      </Typography>
+    <div className="bar-map-container">
+      <div className={`map-view ${showList ? 'hidden' : ''}`}>
+        <Typography variant="h6" className="map-title">
+          Найти бар на карте
+        </Typography>
         {userLocation && (
           <YMaps>
             <Map
@@ -81,32 +92,53 @@ function BarMap() {
                 zoom: 13
               }}
               width="100%"
-              height="400px"
+              height="100%"
               instanceRef={mapRef}
             >
               {sortedBars.map((bar) => (
                 <Placemark
                   key={bar.id}
                   geometry={[bar.lat, bar.lng]}
-                  options={{
-                    iconColor: bar === sortedBars[selectedBarIndex] ? '#FF0000' : '#000000',
+                  properties={{
+                    balloonContent: bar.name
                   }}
+                  options={{
+                    preset: 'islands#nightCircleDotIcon',
+                    iconCaption: bar.name
+                  }}
+                  onClick={() => openBarDetails(bar)}
                 />
               ))}
             </Map>
           </YMaps>
         )}
-        <List className="bars-list">
-        {sortedBars.map((bar, index) => (
-          <ListItem key={bar.id} className="bar-item">
-            <ListItemText
-              primary={bar.name}
-              secondary={`Пиво: ${bar.beers.join(', ')}`}
-              className="bar-text"
-            />
-          </ListItem>
-        ))}
-      </List>
+        <Button
+          className="toggle-list-button"
+          variant="contained"
+          onClick={toggleListView}
+          startIcon={<ArrowUpwardIcon />}
+        >
+          List View
+        </Button>
+      </div>
+      <div className={`list-view ${showList ? '' : 'hidden'}`}>
+        <Button
+          className="back-to-map-button"
+          variant="contained"
+          onClick={toggleListView}
+          startIcon={<ArrowDownwardIcon />}
+        >
+          Back to Map
+        </Button>
+        <div className="bars-list">
+          {sortedBars.map((bar) => (
+            <div key={bar.id} className="bar-item" onClick={() => openBarDetails(bar)}>
+              <Typography variant="h6">{bar.name}</Typography>
+              <Typography variant="body2">Пиво: {bar.beers.join(', ')}</Typography>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
