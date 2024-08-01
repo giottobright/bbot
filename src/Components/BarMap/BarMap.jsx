@@ -1,22 +1,21 @@
-// Updated BarMap Component
-
 import React, { useState, useEffect, useRef } from 'react';
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import { Typography, Button, Card, CardMedia, CardContent, CardActions } from '@mui/material';
+import { YMaps, Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
+import { Typography, Button, Card, CardMedia, CardContent, Grid, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../geolocationContext';
 import { bars } from '../data';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ListIcon from '@mui/icons-material/List';
+import MapIcon from '@mui/icons-material/Map';
 import './BarMap.css';
 
 function BarMap() {
   const [sortedBars, setSortedBars] = useState([]);
-  const [selectedBarIndex, setSelectedBarIndex] = useState(0);
   const { location: userLocation, loading } = useGeolocation();
   const mapRef = useRef(null);
   const navigate = useNavigate();
-  const [showList, setShowList] = useState(false);
+  const [viewMode, setViewMode] = useState('list');
+  const [clusterBars, setClusterBars] = useState([]);
+  const [isClusterDialogOpen, setIsClusterDialogOpen] = useState(false);
 
   useEffect(() => {
     if (userLocation) {
@@ -29,15 +28,8 @@ function BarMap() {
     }
   }, [userLocation]);
 
-  useEffect(() => {
-    if (mapRef.current && sortedBars.length > 0) {
-      const selectedBar = sortedBars[selectedBarIndex];
-      mapRef.current.setCenter([selectedBar.lat, selectedBar.lng], 15);
-    }
-  }, [selectedBarIndex, sortedBars]);
-
   const calculateDistance = (point1, point2) => {
-    const R = 6371; // Earth's radius in km
+    const R = 6371;
     const dLat = (point2.lat - point1.lat) * Math.PI / 180;
     const dLon = (point2.lng - point1.lng) * Math.PI / 180;
     const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -47,12 +39,15 @@ function BarMap() {
     return R * c;
   };
 
-  const toggleListView = () => {
-    setShowList(prevShowList => !prevShowList);
-  };
-
   const openBarDetails = (bar) => {
     navigate(`/bar/${bar.id}`, { state: { bar } });
+  };
+
+  const handleClusterClick = (e) => {
+    const cluster = e.get('target');
+    const clusterBars = cluster.getGeoObjects().map(geoObject => geoObject.properties.get('bar'));
+    setClusterBars(clusterBars);
+    setIsClusterDialogOpen(true);
   };
 
   if (loading) {
@@ -61,28 +56,118 @@ function BarMap() {
 
   return (
     <div className="bar-map-container">
+      <Grid container spacing={2} className="view-toggle">
+        <Grid item xs={6}>
+          <Button 
+            fullWidth 
+            variant={viewMode === 'list' ? 'contained' : 'outlined'} 
+            onClick={() => setViewMode('list')}
+            startIcon={<ListIcon />}
+          >
+            Списком
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button 
+            fullWidth 
+            variant={viewMode === 'map' ? 'contained' : 'outlined'} 
+            onClick={() => setViewMode('map')}
+            startIcon={<MapIcon />}
+          >
+            На карте
+          </Button>
+        </Grid>
+      </Grid>
+
+      {viewMode === 'list' && (
         <div className="bars-list">
           {sortedBars.map((bar) => (
             <div key={bar.id} className="bar-item" onClick={() => openBarDetails(bar)}>
               <Card sx={{ maxWidth: 345, bgcolor: 'rgba(242, 221, 207, 0.05)' }}>
-                    <CardMedia
-                      sx={{ height: 170 }}
-                      image={bar.image}
-                      title="green iguana"
-                    />
-          <CardContent className='cardcontentbar' sx={{ justifyContent: 'flex-end', position: 'relative' }}>
-            <Typography level="title-lg" textColor="#F2DDCF" className='name'>
-              {bar.name}
-            </Typography>
-            <Typography textColor="#F2DDCF" className='description'>
-              До 23.00 ⚫ м. Павелецкая ⚫ 3 мин на авто
-            </Typography>
-          </CardContent>
+                <CardMedia
+                  sx={{ height: 170 }}
+                  image={bar.image}
+                  title={bar.name}
+                />
+                <CardContent className='cardcontentbar'>
+                  <Typography level="title-lg" textColor="#F2DDCF" className='name'>
+                    {bar.name}
+                  </Typography>
+                  <Typography textColor="#F2DDCF" className='description'>
+                    До 23.00 ⚫️ м. Павелецкая ⚫️ {bar.distance.toFixed(2)} км
+                  </Typography>
+                </CardContent>
               </Card>
             </div>
-            
           ))}
         </div>
+      )}
+
+      {viewMode === 'map' && (
+        <YMaps>
+          <Map
+            defaultState={{ center: [userLocation.lat, userLocation.lng], zoom: 12 }}
+            width="100%"
+            height="calc(100% - 60px)"
+            ref={mapRef}
+          >
+            <Clusterer
+              options={{
+                preset: 'islands#invertedBlueClusterIcons',
+                groupByCoordinates: false,
+                clusterDisableClickZoom: true,
+                clusterHideIconOnBalloonOpen: false,
+                geoObjectHideIconOnBalloonOpen: false
+              }}
+              onClick={handleClusterClick}
+            >
+              {sortedBars.map((bar) => (
+                <Placemark
+                  key={bar.id}
+                  geometry={[bar.lat, bar.lng]}
+                  properties={{
+                    hintContent: bar.name,
+                    balloonContent: bar.name,
+                    bar: bar
+                  }}
+                  options={{
+                    preset: 'islands#blueDotIcon',
+                    iconCaption: bar.name,
+                    iconColor: '#1E88E5',
+                    iconCaptionMaxWidth: '200',
+                  }}
+                  onClick={() => openBarDetails(bar)}
+                />
+              ))}
+            </Clusterer>
+            <Placemark
+              geometry={[userLocation.lat, userLocation.lng]}
+              options={{
+                preset: 'islands#redCircleDotIcon'
+              }}
+              properties={{
+                iconContent: 'Вы здесь'
+              }}
+            />
+          </Map>
+        </YMaps>
+      )}
+
+      <Dialog open={isClusterDialogOpen} onClose={() => setIsClusterDialogOpen(false)}>
+        <DialogTitle>Bars in this area</DialogTitle>
+        <DialogContent>
+          <List>
+            {clusterBars.map((bar) => (
+              <ListItem key={bar.id} button onClick={() => {
+                openBarDetails(bar);
+                setIsClusterDialogOpen(false);
+              }}>
+                <ListItemText primary={bar.name} secondary={`${bar.distance.toFixed(2)} km away`} />
+              </ListItem>
+            ))}
+          </List>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
