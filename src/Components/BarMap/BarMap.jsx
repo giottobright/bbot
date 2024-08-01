@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Card, CardMedia, CardContent, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useGeolocation } from '../geolocationContext';
 import { bars } from '../data';
@@ -61,81 +61,28 @@ function BarMap() {
 
   return (
     <div className="bar-map-container">
-      <div className={`map-view ${showList ? 'hidden' : ''}`}>
-        <Typography variant="h6" className="map-title">
-          Найти бар на карте
-        </Typography>
-        {userLocation && (
-          <YMaps>
-            <Map
-              defaultState={{
-                center: [userLocation.lat, userLocation.lng],
-                zoom: 13
-              }}
-              width="100%"
-              height="82%"
-              instanceRef={mapRef}
-            >
-              {sortedBars.map((bar) => (
-                <Placemark
-                  key={bar.id}
-                  geometry={[bar.lat, bar.lng]}
-                  properties={{
-                    balloonContent: bar.name
-                  }}
-                  options={{
-                    preset: 'islands#nightCircleDotIcon',
-                    iconCaption: bar.name
-                  }}
-                  onClick={() => openBarDetails(bar)}
-                />
-              ))}
-            </Map>
-          </YMaps>
-        )}
-        <Button
-          className="toggle-list-button"
-          variant="outlined"
-          onClick={toggleListView}
-          startIcon={<ArrowDownwardIcon />}
-          sx={{
-            color: '#F2DDCF',
-            borderColor: '#F2DDCF',
-            '&:hover': {
-              borderColor: '#F2DDCF',
-              backgroundColor: 'rgba(242, 221, 207, 0.1)',
-            },
-          }}
-        >
-          List View
-        </Button>
-      </div>
-      <div className={`list-view ${showList ? '' : 'hidden'}`}>
-        <Button
-          className="back-to-map-button"
-          variant="contained"
-          onClick={toggleListView}
-          startIcon={<ArrowUpwardIcon />}
-          sx={{
-            color: '#F2DDCF',
-            borderColor: '#F2DDCF',
-            '&:hover': {
-              borderColor: '#F2DDCF',
-              backgroundColor: 'rgba(242, 221, 207, 0.1)',
-            },
-          }}
-        >
-          Back to Map
-        </Button>
         <div className="bars-list">
           {sortedBars.map((bar) => (
             <div key={bar.id} className="bar-item" onClick={() => openBarDetails(bar)}>
-              <Typography variant="h6">{bar.name}</Typography>
-              <Typography variant="body2">Пиво: {bar.beers.join(', ')}</Typography>
+              <Card sx={{ maxWidth: 345, bgcolor: 'rgba(242, 221, 207, 0.05)' }}>
+                    <CardMedia
+                      sx={{ height: 170 }}
+                      image={bar.image}
+                      title="green iguana"
+                    />
+          <CardContent className='cardcontentbar' sx={{ justifyContent: 'flex-end', position: 'relative' }}>
+            <Typography level="title-lg" textColor="#F2DDCF" className='name'>
+              {bar.name}
+            </Typography>
+            <Typography textColor="#F2DDCF" className='description'>
+              До 23.00 ⚫ м. Павелецкая ⚫ 3 мин на авто
+            </Typography>
+          </CardContent>
+              </Card>
             </div>
+            
           ))}
         </div>
-      </div>
     </div>
   );
 }

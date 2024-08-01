@@ -25,6 +25,17 @@ import diGoroh from './img/diGoroh.png';
 import kingJ from './img/kingJ.jpeg';
 import atomPrach from './img/atomPrach.jpeg';
 import sovngarde from './img/sovngarde.jpeg';
+import bar1 from './img/bar1.jpg'
+import bar2 from './img/bar2.jpg'
+import bar3 from './img/bar3.jpeg'
+import bar4 from './img/bar4.jpg'
+import bar5 from './img/bar5.jpeg'
+import bar6 from './img/bar6.jpeg'
+import bar7 from './img/bar7.jpg'
+import bar8 from './img/bar8.jpg'
+import bar9 from './img/bar9.jpg'
+import bar10 from './img/bar10.jpg'
+
 
 
 export const categories = [
@@ -66,16 +77,16 @@ export const beerTypes = [
 ];
 
 export const bars = [
-  { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["sovngarde", "temnoe"] },
-  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["kingjjj", "atomnaya"] },
-  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["kingjjj", "atomnaya"] },
-  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["sovngarde", "sovngarde"] },
-  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["atomnaya", "temnoe"] },
-  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["cider", "temnoe"] },
-  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["sovngarde", "gorkovskaya"] },
-  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["sovngarde", "temnoe"] },
-  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["sovngarde", "temnoe"] },
-  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["sovngarde", "atomnaya"] },
+  { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["sovngarde", "temnoe"], image: bar1 },
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["kingjjj", "atomnaya"], image: bar2 },
+  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["kingjjj", "atomnaya"], image: bar3 },
+  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["sovngarde", "sovngarde"], image: bar4 },
+  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["atomnaya", "temnoe"], image: bar5 },
+  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["cider", "temnoe"], image: bar6 },
+  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["sovngarde", "gorkovskaya"], image: bar7 },
+  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["sovngarde", "temnoe"], image: bar8 },
+  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["sovngarde", "temnoe"], image: bar9 },
+  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["sovngarde", "atomnaya"], image: bar10 },
 ];
 
 export const distanceFilters = [
