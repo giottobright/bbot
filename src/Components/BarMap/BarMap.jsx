@@ -56,34 +56,42 @@ function BarMap() {
 
   return (
     <div className="bar-map-container">
-      <Grid container spacing={2} className="view-toggle">
-        <Grid item xs={6}>
-          <Button 
-            fullWidth 
-            variant={viewMode === 'list' ? 'contained' : 'outlined'} 
-            onClick={() => setViewMode('list')}
-            startIcon={<ListIcon />}
-          >
-            Списком
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
-          <Button 
-            fullWidth 
-            variant={viewMode === 'map' ? 'contained' : 'outlined'} 
-            onClick={() => setViewMode('map')}
-            startIcon={<MapIcon />}
-          >
-            На карте
-          </Button>
-        </Grid>
-      </Grid>
+           <Grid container spacing={2} className="view-toggle">
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                sx={{
+                  bgcolor: viewMode === 'list' ? '#F2DDCF' : '#0E1621',
+                  color: viewMode === 'list' ? '#0E1621' : '#F2DDCF',
+                  border: viewMode === 'list' ? '2px solid ' : '1px solid #F2DDCF',
+                }}
+                onClick={() => setViewMode('list')}
+                startIcon={<ListIcon />}
+              >
+                Списком
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                sx={{
+                  bgcolor: viewMode === 'map' ? '#F2DDCF' : '#0E1621',
+                  color: viewMode === 'map' ? '#0E1621' : '#F2DDCF',
+                  border: viewMode === 'map' ? '2px solid ' : '1px solid #F2DDCF',
+                }}
+                onClick={() => setViewMode('map')}
+                startIcon={<MapIcon />}
+              >
+                На карте
+              </Button>
+            </Grid>
+          </Grid>
 
       {viewMode === 'list' && (
         <div className="bars-list">
           {sortedBars.map((bar) => (
             <div key={bar.id} className="bar-item" onClick={() => openBarDetails(bar)}>
-              <Card sx={{ maxWidth: 345, bgcolor: 'rgba(242, 221, 207, 0.05)' }}>
+              <Card sx={{ maxWidth: 555, bgcolor: 'rgba(242, 221, 207, 0.05)' }}>
                 <CardMedia
                   sx={{ height: 170 }}
                   image={bar.image}
