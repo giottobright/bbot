@@ -155,7 +155,6 @@
 
 .bar-info-strip {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 5px 20px;
 }
@@ -166,7 +165,8 @@
   background-color: rgba(242, 221, 207, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 1px 10px;
+  padding: 1px 20px;
+  margin: 0px 5px;
   color: #F2DDCF;
 }
 
@@ -174,14 +174,12 @@
   margin-right: 5px;
 }
 
-.info-item#walk {
-  margin-left: -100px;
-}
 
 .info-item span {
   font-family: "Poppins";
   font-size: 12px;
 }
+
 
 .favorite-button {
   color: #F2DDCF;
@@ -194,3 +192,11 @@
   background-color: rgba(242, 221, 207, 0.1);
 }
 
+.bar.icon-button .favorite-bar-button {
+  background-color: rgba(242, 221, 207, 0.2);
+  color: #F2DDCF;
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  padding: 5px;
+  margin-left: auto; /* This pushes the button to the right side */
+}

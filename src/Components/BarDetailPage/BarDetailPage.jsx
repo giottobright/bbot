@@ -46,8 +46,13 @@ function BarDetailPage() {
             <IconButton className="back-button" onClick={() => navigate(-1)}>
               <ArrowBackIcon />
             </IconButton>
-            <Typography variant="h4" className="bar-name">{bar.name}</Typography>
-          </div>
+            <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
+              <Typography variant="h4" className="bar-name">{bar.name}</Typography>
+              <IconButton className="icon-button favorite-bar-button" sx={{ color: '#F2DDCF', bgcolor: 'rgba(242, 221, 207, 0.1)' }}>
+                <FavoriteBorderIcon />
+              </IconButton>
+            </Box>
+        </div>
         </div>
       </div>
       <div className="bar-info-strip">
@@ -59,12 +64,6 @@ function BarDetailPage() {
           <DirectionsWalkIcon />
           <span>30 мин</span>
         </div>
-        <Button
-          variant="outlined"
-          startIcon={<FavoriteBorderIcon />}
-          className="favorite-button"
-        >
-        </Button>
       </div>
 
       <div className="bar-photos-container">
