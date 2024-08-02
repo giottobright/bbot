@@ -22,14 +22,19 @@ function BarDetailPage() {
         <div className="bar-header-overlay">
           <div className="top-buttons">
             <Button startIcon={<MapIcon />}  className="map-button" sx={{
+              color: '#F2DDCF'
             }}>
               На карте
             </Button>
             <div className="right-buttons">
-              <IconButton className="icon-button">
+              <IconButton className="icon-button" sx={{
+              color: '#F2DDCF'
+            }} >
                 <LanguageIcon />
               </IconButton>
-              <IconButton className="icon-button">
+              <IconButton className="icon-button" sx={{
+              color: '#F2DDCF'
+            }}>
                 <PhoneIcon />
               </IconButton>
             </div>
