@@ -8,11 +8,9 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import './BarsPage.css';
 
 function BarsPage() {
-  const [sortedBars, setSortedBars] = useState([]);
-  const [selectedBarIndex, setSelectedBarIndex] = useState(0);
-  const { location: userLocation, loading, error } = useGeolocation();
-  const mapRef = useRef(null);
-  const selectedBarRef = useRef(null);
+  const { id } = useParams();
+  const [bar, setBar] = useState(null);
+  const { location: userLocation } = useGeolocation();
   const navigate = useNavigate();
 
   useEffect(() => {

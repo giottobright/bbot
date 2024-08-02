@@ -77,16 +77,26 @@ export const beerTypes = [
 ];
 
 export const bars = [
-  { id: 1, name: "Пивная №1", lat: 55.790370, lng: 37.523576, beers: ["sovngarde", "temnoe"], image: bar1 },
-  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["kingjjj", "atomnaya"], image: bar2 },
-  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["kingjjj", "atomnaya"], image: bar3 },
-  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["sovngarde", "sovngarde"], image: bar4 },
-  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["atomnaya", "temnoe"], image: bar5 },
-  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["cider", "temnoe"], image: bar6 },
-  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["sovngarde", "gorkovskaya"], image: bar7 },
-  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["sovngarde", "temnoe"], image: bar8 },
-  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["sovngarde", "temnoe"], image: bar9 },
-  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["sovngarde", "atomnaya"], image: bar10 },
+  { 
+    id: 1, 
+    name: "Пивная №1", 
+    lat: 55.790370, 
+    lng: 37.523576, 
+    beers: ["sovngarde", "temnoe"], 
+    image: bar1,
+    photos: [bar1, bar2, bar3, bar4, bar5], // Add more photos as needed
+    website: "https://pivnaya1.com",
+    phone: "+7 (123) 456-7890"
+  },
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["kingjjj", "atomnaya"], image: bar2, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["kingjjj", "atomnaya"], image: bar3, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["sovngarde", "sovngarde"], image: bar4, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["atomnaya", "temnoe"], image: bar5, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["cider", "temnoe"], image: bar6, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["sovngarde", "gorkovskaya"], image: bar7, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["sovngarde", "temnoe"], image: bar8, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["sovngarde", "temnoe"], image: bar9, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["sovngarde", "atomnaya"], image: bar10, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
 ];
 
 export const distanceFilters = [
