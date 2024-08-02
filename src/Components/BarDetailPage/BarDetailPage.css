@@ -93,10 +93,11 @@
 .section-title {
   margin: 20px 0 10px 20px;
   font-weight: bold;
+  padding-left: 10px;
 }
 
 .bar-photos-container {
-  margin-top: 40px;
+
 }
 
 .bar-photos {
@@ -114,11 +115,11 @@
 }
 
 .beers-container {
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .beer-card {
-  background-color: rgba(242, 221, 207, 0.05);
+  background-color: rgba(242, 221, 207, 0.5);
   color: #F2DDCF;
   border-radius: 12px;
 }
@@ -151,3 +152,45 @@
   font-size: 14px;
   margin-top: 8px;
 }
+
+.bar-info-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  background-color: rgba(242, 221, 207, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1px 10px;
+  color: #F2DDCF;
+}
+
+.info-item svg {
+  margin-right: 5px;
+}
+
+.info-item#walk {
+  margin-left: -100px;
+}
+
+.info-item span {
+  font-family: "Poppins";
+  font-size: 12px;
+}
+
+.favorite-button {
+  color: #F2DDCF;
+  border-color: #F2DDCF;
+  border-radius: 20px;
+  text-transform: none;
+}
+
+.favorite-button:hover {
+  background-color: rgba(242, 221, 207, 0.1);
+}
+
