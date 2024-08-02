@@ -58,12 +58,12 @@ function BarMap() {
     <div className="bar-map-container">
            <Grid container spacing={2} className="view-toggle">
             <Grid item xs={6}>
-              <Button
+            <Button
                 fullWidth
                 sx={{
                   bgcolor: viewMode === 'list' ? '#F2DDCF' : '#0E1621',
                   color: viewMode === 'list' ? '#0E1621' : '#F2DDCF',
-                  border: viewMode === 'list' ? '2px solid ' : '1px solid #F2DDCF',
+                  border: viewMode === 'list' ? '3px solid #F2DDCF' : '1px solid #F2DDCF',
                 }}
                 onClick={() => setViewMode('list')}
                 startIcon={<ListIcon />}
@@ -77,7 +77,7 @@ function BarMap() {
                 sx={{
                   bgcolor: viewMode === 'map' ? '#F2DDCF' : '#0E1621',
                   color: viewMode === 'map' ? '#0E1621' : '#F2DDCF',
-                  border: viewMode === 'map' ? '2px solid ' : '1px solid #F2DDCF',
+                  border: viewMode === 'map' ? '3px solid #F2DDCF' : '1px solid #F2DDCF',
                 }}
                 onClick={() => setViewMode('map')}
                 startIcon={<MapIcon />}
