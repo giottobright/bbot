@@ -139,8 +139,8 @@
 }
 
 .beer-title {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 25px !important;
+  font-weight: 700 !important;
 }
 
 .beer-info {
@@ -156,7 +156,6 @@
 .bar-info-strip {
   display: flex;
   align-items: center;
-  padding: 5px 20px;
 }
 
 .info-item {
@@ -166,8 +165,9 @@
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 1px 20px;
-  margin: 0px 5px;
+  margin: 0px 0px;
   color: #F2DDCF;
+  margin-right: 5px;
 }
 
 .info-item svg {

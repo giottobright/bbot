@@ -52,17 +52,17 @@ function BarDetailPage() {
                 <FavoriteBorderIcon />
               </IconButton>
             </Box>
-        </div>
-        </div>
-      </div>
-      <div className="bar-info-strip">
-        <div className="info-item" id='auto'>
-          <DirectionsCarIcon />
-          <span>15 мин</span>
-        </div>
-        <div className="info-item" id='walk'>
-          <DirectionsWalkIcon />
-          <span>30 мин</span>
+            <div className="bar-info-strip">
+                <div className="info-item" id='auto'>
+                  <DirectionsCarIcon />
+                  <span>15 мин</span>
+                </div>
+                <div className="info-item" id='walk'>
+                  <DirectionsWalkIcon />
+                  <span>30 мин</span>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
 
