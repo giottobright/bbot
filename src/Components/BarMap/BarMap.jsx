@@ -56,36 +56,47 @@ function BarMap() {
 
   return (
     <div className="bar-map-container">
-           <Grid container spacing={2} className="view-toggle">
-            <Grid item xs={6}>
-            <Button
-                fullWidth
-                sx={{
-                  bgcolor: viewMode === 'list' ? '#F2DDCF' : '#0E1621',
-                  color: viewMode === 'list' ? '#0E1621' : '#F2DDCF',
-                  border: viewMode === 'list' ? '3px solid #F2DDCF' : '1px solid #F2DDCF',
-                }}
-                onClick={() => setViewMode('list')}
-                startIcon={<ListIcon />}
-              >
-                Списком
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                fullWidth
-                sx={{
-                  bgcolor: viewMode === 'map' ? '#F2DDCF' : '#0E1621',
-                  color: viewMode === 'map' ? '#0E1621' : '#F2DDCF',
-                  border: viewMode === 'map' ? '3px solid #F2DDCF' : '1px solid #F2DDCF',
-                }}
-                onClick={() => setViewMode('map')}
-                startIcon={<MapIcon />}
-              >
-                На карте
-              </Button>
-            </Grid>
-          </Grid>
+      <Grid container spacing={2} className="view-toggle">
+        <Grid item xs={6}>
+          <Button
+            fullWidth
+            sx={{
+              bgcolor: viewMode === 'list' ? '#F2DDCF' : '#0E1621',
+              color: viewMode === 'list' ? '#0E1621' : '#F2DDCF',
+              border: viewMode === 'list' ? '3px solid #0E1621' : '1px solid #F2DDCF',
+              '&:hover': {
+                bgcolor: viewMode === 'list' ? '#E5C8B5' : '#1A2633',
+              },
+              transition: 'all 0.3s ease',
+              fontWeight: 'bold',
+            }}
+            onClick={() => setViewMode('list')}
+            startIcon={<ListIcon />}
+          >
+            Списком
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            fullWidth
+            sx={{
+              bgcolor: viewMode === 'map' ? '#F2DDCF' : '#0E1621',
+              color: viewMode === 'map' ? '#0E1621' : '#F2DDCF',
+              border: viewMode === 'map' ? '3px solid #0E1621' : '1px solid #F2DDCF',
+              '&:hover': {
+                bgcolor: viewMode === 'map' ? '#E5C8B5' : '#1A2633',
+              },
+              transition: 'all 0.3s ease',
+              fontWeight: 'bold',
+            }}
+            onClick={() => setViewMode('map')}
+            startIcon={<MapIcon />}
+          >
+            На карте
+          </Button>
+        </Grid>
+      </Grid>
+
 
       {viewMode === 'list' && (
         <div className="bars-list">
