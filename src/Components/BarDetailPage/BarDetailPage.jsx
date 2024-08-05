@@ -10,6 +10,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import BeerCard from '../BeerCard/BeerCard';
 
 function BarDetailPage() {
   const location = useLocation();
@@ -76,31 +77,11 @@ function BarDetailPage() {
 
       <Typography variant="h6" className="section-title">Доступные сорта пива</Typography>
       <Grid container spacing={2} className="beers-container">
-        {bar.beers.map((beerId) => {
-          const beer = getBeerDetails(beerId);
+        {bar.beers.map((beerItem) => {
+          const beer = getBeerDetails(beerItem.id);
           return (
-            <Grid item xs={12} sm={12} md={12} key={beer.id}>
-              <Card className="beer-card" sx ={{bgcolor: 'rgba(242, 221, 207, 0.1)', color: '#F2DDCF'}}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    className={`beer-image ${beer.imageType}`}
-                    image={beer.image}
-                    alt={beer.label}
-                  />
-                  <CardContent className="beer-content">
-                    <Typography variant="h6" className="beer-title">
-                      {beer.label}
-                    </Typography>
-                    <Typography variant="subtitle2" className="beer-info">
-                      {beer.labelinfo}
-                    </Typography>
-                    <Typography variant="body2" className="beer-description">
-                      {beer.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+            <Grid item xs={12} sm={6} md={4} key={beer.id}>
+              <BeerCard beer={beer} price={beerItem.price} />
             </Grid>
           );
         })}

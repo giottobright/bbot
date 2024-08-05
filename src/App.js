@@ -76,16 +76,18 @@ function AppContent() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route index element={<BasePage />} />
-        <Route path="mainscreen" element={<MainScreen />} />
-        <Route path="productlist" element={<ProductList />} />
-        <Route path="form" element={<Form />} />
-        <Route path="mappage" element={<MapPage />} />
-        <Route path="bars" element={<BarsPage />} />
-        <Route path="barmap" element={<BarMap />} />
-        <Route path="bar/:id" element={<BarDetailPage />} />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route index element={<BasePage />} />
+          <Route path="mainscreen" element={<MainScreen />} />
+          <Route path="productlist" element={<ProductList />} />
+          <Route path="form" element={<Form />} />
+          <Route path="mappage" element={<MapPage />} />
+          <Route path="bars" element={<BarsPage />} />
+          <Route path="barmap" element={<BarMap />} />
+          <Route path="bar/:id" element={<BarDetailPage />} />
+        </Routes>
+      </div>
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, borderRadius: '12px' }}  elevation={3}>
         <BottomNavigation

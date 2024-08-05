@@ -32,3 +32,13 @@ body {
 html {
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+
+.main-content {
+  padding-bottom: 80px; /* Adjust this value based on the height of your BottomNavigation plus extra space */
+}
+
+@media (max-height: 600px) {
+  .main-content {
+    padding-bottom: 60px; /* Smaller padding for shorter screens */
+  }
+}

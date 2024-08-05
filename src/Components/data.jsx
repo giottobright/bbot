@@ -74,6 +74,8 @@ export const beerTypes = [
   { id: 'kingjjj', label: 'King JJJuliusss', labelinfo: '8.4%  N/A IBU', image: kingJ, imageType: 'square', description: 'Манго, апельсин и сладкий грейпфрут преобладают в аромате с намеками на ананас и смешанный сок тропических фруктов. Вкус повторяет аромат с сочным ощущением во рту и правильной горечью.', categories: ['light'], types: ['pale ale', 'ipa'] },
   { id: 'atomnaya', label: 'Атомная Прачечная XX', labelinfo: '9%  130 IBU', image: atomPrach, imageType: 'square', description: 'Не двойная прачка. Это «Атомная Прачечная», сваренная в стиле Double IPA: еще больше хмеля, еще мощне солодовая база и карамельный акцент, еще плотнее вкус', categories: ['light'], types: ['pale ale', 'ipa'] },
   { id: 'sovngarde', label: 'Sovngarde', labelinfo: '8%  65 IBU', image: sovngarde, imageType: 'square', description: 'Насыщенный цветочно-цитрусовый аромат грейпфрута и апельсина и крепкий солодовый вкус с нежными тропическими нотками.', categories: ['dark'], types: ['porter'] },
+  { id: 'temnoe', label: 'Темное', labelinfo: '5%  20 IBU', image: dark, imageType: 'square', description: 'Классическое темное пиво с богатым, слегка сладковатым вкусом и нотками карамели и жареного солода.', categories: ['dark'], types: ['dark lager'] },
+  { id: 'cider', label: 'Яблочный сидр', labelinfo: '4.5%  N/A IBU', image: cider, imageType: 'square', description: 'Освежающий яблочный сидр с идеальным балансом сладости и кислинки. Легкий и игристый напиток для любого случая.', categories: ['cider'], types: ['cider'] },
 ];
 
 export const bars = [
@@ -82,21 +84,24 @@ export const bars = [
     name: "Пивная №1", 
     lat: 55.790370, 
     lng: 37.523576, 
-    beers: ["sovngarde", "temnoe"], 
+    beers: [
+      { id: "sovngarde", price: 350 },
+      { id: "atomnaya", price: 300 }
+    ], 
     image: bar1,
-    photos: [bar1, bar2, bar3, bar4, bar5], // Add more photos as needed
+    photos: [bar1, bar2, bar3, bar4, bar5],
     website: "https://pivnaya1.com",
     phone: "+7 (123) 456-7890"
   },
-  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: ["kingjjj", "atomnaya"], image: bar2, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: ["kingjjj", "atomnaya"], image: bar3, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: ["sovngarde", "sovngarde"], image: bar4, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: ["atomnaya", "temnoe"], image: bar5, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: ["cider", "temnoe"], image: bar6, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: ["sovngarde", "gorkovskaya"], image: bar7, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: ["sovngarde", "temnoe"], image: bar8, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: ["sovngarde", "temnoe"], image: bar9, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
-  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: ["sovngarde", "atomnaya"], image: bar10, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 2, name: "Бар у Васи", lat: 55.863865, lng: 37.607182, beers: [{ id: "kingjjj", price: 400 }, { id: "atomnaya", price: 380 }], image: bar2, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 3, name: "Пивной дом", lat: 55.7622200, lng: 37.6155600, beers: [{ id: "kingjjj", price: 420 }, { id: "atomnaya", price: 400 }], image: bar3, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 4, name: "Jawsspot", lat: 55.790360, lng: 37.524076, beers: [{ id: "sovngarde", price: 370 }, { id: "sovngarde", price: 370 }], image: bar4, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 5, name: "Atom", lat: 55.780370, lng: 37.523580, beers: [{ id: "atomnaya", price: 390 }, { id: "gorkovskaya", price: 320 }], image: bar5, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 6, name: "Harats", lat: 55.760370, lng: 37.520076, beers: [{ id: "gorkovskaya", price: 300 }, { id: "kingjjj", price: 280 }], image: bar6, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 7, name: "Pub now", lat: 55.710330, lng: 37.5223576, beers: [{ id: "sovngarde", price: 360 }, { id: "gorkovskaya", price: 340 }], image: bar7, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 8, name: "Osterio Mario", lat: 55.666370, lng: 37.503576, beers: [{ id: "sovngarde", price: 380 }, { id: "kingjjj", price: 310 }], image: bar8, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 9, name: "Бамбли би", lat: 55.798070, lng: 37.500576, beers: [{ id: "sovngarde", price: 365 }, { id: "atomnaya", price: 305 }], image: bar9, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
+  { id: 10, name: "Choose", lat: 55.711370, lng: 37.500576, beers: [{ id: "sovngarde", price: 355 }, { id: "atomnaya", price: 385 }], image: bar10, photos: [bar1, bar2, bar3, bar4, bar5], website: "https://pivnaya1.com", phone: "+7 (123) 456-7890"},
 ];
 
 export const distanceFilters = [
