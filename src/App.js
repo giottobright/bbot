@@ -89,45 +89,44 @@ function AppContent() {
         </Routes>
       </div>
       <Box sx={{ width: '100%' }}>
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, borderRadius: '12px' }}  elevation={3}>
-        <BottomNavigation
-  value={value}
-  onChange={handleChange}
-  showLabels
-  sx={{ 
-    borderRadius: '12px', 
-    backgroundColor: 'rgba(37, 43, 51, 0.97)', // Light gray background
-    backdropFilter: 'blur(10px)'
-  }}
->
-  <BottomNavigationAction 
-    label="Пиво" 
-    icon={<SportsBarIcon />} 
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 10, borderRadius: '12px' }} elevation={3}>
+  <BottomNavigation
+    value={value}
+    onChange={handleChange}
+    showLabels
     sx={{ 
-      color: value === 0 ? '#FFFFFF' : '#F2DDCF',
-      '&.Mui-selected': {
-        color: '#FFFFFF'
-      },
-      '& .MuiBottomNavigationAction-label': {
-        fontFamily: 'Comfortaa, sans-serif',
-      },
-    }} 
-  />
-  <BottomNavigationAction 
-    label="Бары" 
-    icon={<StorefrontIcon />} 
-    sx={{ 
-      color: value === 1 ? '#FFFFFF' : '#F2DDCF',
-      '&.Mui-selected': {
-        color: '#FFFFFF'
-      },
-      '& .MuiBottomNavigationAction-label': {
-        fontFamily: 'Comfortaa, sans-serif',
-      },
-    }} 
-  />
-</BottomNavigation>
-        </Paper>
+      borderRadius: '12px', 
+      backgroundColor: '#252B33', // Opaque background color
+    }}
+  >
+    <BottomNavigationAction 
+      label="Пиво" 
+      icon={<SportsBarIcon />} 
+      sx={{ 
+        color: value === 0 ? '#FFFFFF' : '#F2DDCF',
+        '&.Mui-selected': {
+          color: '#FFFFFF'
+        },
+        '& .MuiBottomNavigationAction-label': {
+          fontFamily: 'Comfortaa, sans-serif',
+        },
+      }} 
+    />
+    <BottomNavigationAction 
+      label="Бары" 
+      icon={<StorefrontIcon />} 
+      sx={{ 
+        color: value === 1 ? '#FFFFFF' : '#F2DDCF',
+        '&.Mui-selected': {
+          color: '#FFFFFF'
+        },
+        '& .MuiBottomNavigationAction-label': {
+          fontFamily: 'Comfortaa, sans-serif',
+        },
+      }} 
+    />
+  </BottomNavigation>
+</Paper>
       </Box>
     </div>
   );
