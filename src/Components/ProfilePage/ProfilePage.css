@@ -1,0 +1,177 @@
+.profile-page {
+    background-color: #0E1621;
+    min-height: 100vh;
+    color: #F2DDCF;
+    position: relative;
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px; /* Adjust this value to control where the image ends */
+    background-image: url('../img/city.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .profile-content {
+    position: relative;
+    z-index: 1;
+    padding: 5px;
+  }
+  
+  .header-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .action-button {
+    background-color: rgba(242, 221, 207, 0.1) !important;
+    margin-left: 10px !important;
+  }
+  
+  .action-button svg {
+    color: #F2DDCF;
+  }
+  
+  .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+    border: 4px solid #252B33;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .name-location-container {
+    background-color: rgba(14, 22, 33, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(1px); /* Blur effect */
+    border-radius: 16px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .profile-name {
+    text-align: center;
+    font-weight: bold;
+    color: #F2DDCF;
+    margin-bottom: 5px;
+  }
+  
+  .profile-location {
+    text-align: center;
+    color: rgba(242, 221, 207, 0.7);
+  }
+  
+  /* Rest of the CSS remains the same */
+  
+  .profile-details {
+    border-radius: 16px !important;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(242, 221, 207, 0.25) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+  
+  .profile-connections {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .connection-avatar {
+    width: 30px !important;
+    height: 30px !important;
+    margin: 0 -5px;
+    border: 2px solid #252B33;
+  }
+  
+  .profile-stats {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+  }
+  
+  .stat-item {
+    text-align: center;
+    flex: 1;
+    position: relative;
+  }
+
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 70%;
+    width: 1px;
+    background-color: rgba(242, 221, 207, 0.3);
+  }
+  
+  .stat-item h6 {
+    color: #F2DDCF;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .stat-item p {
+    color: rgba(242, 221, 207, 0.7);
+    font-size: 14px;
+  }
+  
+  /* Previous CSS remains the same */
+
+.activities-section {
+    margin-top: 20px;
+  }
+  
+  .section-title {
+    color: #F2DDCF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600 !important;
+    font-style: normal;
+    font-size: 25px !important;
+    margin-bottom: 15px;
+  }
+  
+  .activity-item {
+    background-color: rgba(37, 43, 51, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .MuiListItemAvatar-root .MuiAvatar-root {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+  }
+  
+  .MuiListItemText-primary {
+    color: #F2DDCF;
+    font-weight: bold;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+  }
+  
+  .MuiListItemText-secondary {
+    color: #F2DDCF !important;
+    font-size: 10px !important;
+    font-weight: 200 !important;
+  }
+  
+  /* Adjust the list to remove default padding */
+  .MuiList-root {
+    padding: 0 !important;
+  }
+  
+  /* Remove the Paper component styles if they're no longer needed */

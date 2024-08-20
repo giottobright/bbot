@@ -2,10 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useTelegram } from './hooks/useTelegram';
 import Header from './Components/Header/Header';
-import ProductList from './Components/ProductList/ProductList';
-import Form from './Components/Form/Form';
 import MainScreen from './Components/MainScreen/MainScreen';
-import MapPage from './Components/MapPage/MapPage';
 import { GeolocationProvider } from './Components/geolocationContext';
 import { SearchProvider, useSearch } from './Components/SearchContext';
 import './App.css';
@@ -24,12 +21,11 @@ import Paper from '@mui/material/Paper';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import StorefrontIcon from '@mui/icons-material/Storefront';
-import BarsPage from '../src/Components/BarsPage/BarsPage';
 import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
 import BasePage from './Components/BasePage/BasePage';
-import BeerOfDayCard from './Components/BeerOfDayCard/BeerOfDayCard';
-import CategoryMain from './Components/CategoryMain/CategoryMain';
 import BarMap from './Components/BarMap/BarMap';
+import ProfilePage from './Components/ProfilePage/ProfilePage';
+import PersonIcon from '@mui/icons-material/Person';
 
 
 function AppContent() {
@@ -71,6 +67,8 @@ function AppContent() {
       navigate('/');
     } else if (newValue === 1) {
       navigate('/bars');
+    } else if (newValue === 2) {
+      navigate('/profile');
     }
   };
 
@@ -80,12 +78,9 @@ function AppContent() {
         <Routes>
           <Route index element={<BasePage />} />
           <Route path="mainscreen" element={<MainScreen />} />
-          <Route path="productlist" element={<ProductList />} />
-          <Route path="form" element={<Form />} />
-          <Route path="mappage" element={<MapPage />} />
-          <Route path="bars" element={<BarsPage />} />
           <Route path="barmap" element={<BarMap />} />
           <Route path="bar/:id" element={<BarDetailPage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Routes>
       </div>
       <Box sx={{ width: '100%' }}>
@@ -125,6 +120,19 @@ function AppContent() {
         },
       }} 
     />
+                <BottomNavigationAction 
+              label="Профиль" 
+              icon={<PersonIcon />} 
+              sx={{ 
+                color: value === 2 ? '#FFFFFF' : '#F2DDCF',
+                '&.Mui-selected': {
+                  color: '#FFFFFF'
+                },
+                '& .MuiBottomNavigationAction-label': {
+                  fontFamily: 'Comfortaa, sans-serif',
+                },
+              }} 
+            />
   </BottomNavigation>
 </Paper>
       </Box>

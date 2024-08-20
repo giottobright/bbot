@@ -18,7 +18,6 @@ import { Grid, CardActionArea, CardMedia, CardContent, Typography, Box, Button }
 import { useNavigate } from 'react-router-dom';
 
 import { Title } from '@telegram-apps/telegram-ui';
-import BeerOfDayCard from '../BeerOfDayCard/BeerOfDayCard';
 import CategoryMain from '../CategoryMain/CategoryMain';
 
 

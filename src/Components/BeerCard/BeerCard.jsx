@@ -5,13 +5,20 @@ import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
 import { useNavigate } from 'react-router-dom';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/joy/IconButton';
 
 function BeerCard({ beer, price }) {
     const [showDescription, setShowDescription] = useState(false);
     const navigate = useNavigate();
+    const [isFavorite, setIsFavorite] = useState(false);
 
-    const toggleDescription = () => {
-        setShowDescription(!showDescription);
+
+    const toggleFavorite = (event) => {
+        event.stopPropagation();
+        setIsFavorite(!isFavorite);
+        // Here you would typically update the favorite status in your backend or local storage
       };
 
   return (
@@ -30,6 +37,21 @@ function BeerCard({ beer, price }) {
             'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)',
         }}
       />
+      <IconButton
+        onClick={toggleFavorite}
+        sx={{
+          position: 'absolute',
+          top: '8px',
+          right: '8px',
+          zIndex: 2,
+          backgroundColor: 'rgba(242, 221, 207, 0.35)',
+          '&:hover': {
+            backgroundColor: 'rgba(242, 221, 207, 0.3)',
+          },
+        }}
+      >
+        {isFavorite ? <FavoriteIcon sx={{ color: '#F2DDCF' }} /> : <FavoriteBorderIcon sx={{ color: '#F2DDCF' }} />}
+      </IconButton>
       <CardContent sx={{ justifyContent: 'flex-end', position: 'relative' }}>
       <Typography 
                     fontSize="12px" 
@@ -55,9 +77,10 @@ function BeerCard({ beer, price }) {
             bottom: '8px',
             right: '8px',
             color: '#F2DDCF',
-            backgroundColor: 'rgba(242, 221, 207, 0.1)',
+            backgroundColor: 'rgba(242, 221, 207, 0.35)',
             padding: '4px 8px',
             borderRadius: '4px',
+            marginRight: '-15px',
           }}
         >
           {price} ₽
