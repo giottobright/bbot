@@ -20,8 +20,8 @@ const ProfilePage = () => {
           className="profile-avatar"
         />
         <Box className="name-location-container">
-          <Typography variant="h5" className="profile-name">Christian Slater</Typography>
-          <Typography variant="subtitle1" className="profile-location">San Francisco, CA</Typography>
+          <Typography variant="h5" className="profile-name">Dmitrii Kozlov</Typography>
+          <Typography variant="subtitle1" className="profile-location">Москва, Россия</Typography>
         </Box>
         
         <Paper elevation={3} className="profile-details">
