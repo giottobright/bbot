@@ -1,4 +1,25 @@
 .nearby-beers-section {
-  padding: 16px;
-  margin-top: 16px;
-} 
+    padding: 0 5px;
+  }
+  
+  .nearby-beers-title {
+    color: #F2DDCF !important;
+    font-family: 'Roboto';
+    font-weight: 800;
+    font-style: normal;
+    font-size: 20px;
+  }
+  
+  .nearby-beers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    padding: 0 5px;
+  }
+  
+  .nearby-beers-grid {
+    padding: 0px;
+    justify-content: left;
+  }

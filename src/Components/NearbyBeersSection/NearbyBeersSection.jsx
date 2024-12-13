@@ -84,64 +84,78 @@ function NearbyBeersSection() {
   const handleBarClick = (barId) => {
     navigate(`/bar/${barId}`);
   };
-
-  return (
-    <div className="nearby-beers-section">
-      <Typography level="h5" sx={{ mb: 2, color: '#F2DDCF' }}>
-        Топ пиво рядом
-      </Typography>
-      <Grid container spacing={2}>
-        {nearbyBeers.map((beer) => (
-          <Grid item xs={6} key={`${beer.id}-${beer.barId}`}>
-            <Card sx={{ height: 200 }} variant="plain">
-              <CardCover>
-                <img
-                  src={beer.image}
-                  alt={beer.label}
-                  loading="lazy"
-                />
-              </CardCover>
-              <CardCover
-                sx={{
-                  background:
-                    'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)',
-                }}
-              />
-              <CardContent sx={{ justifyContent: 'flex-end' }}>
-                <Typography level="title-md" textColor="#F2DDCF">
-                  {beer.label}
-                </Typography>
-                <Typography level="body-sm" textColor="#F2DDCF">
-                  {beer.labelinfo}
-                </Typography>
-                <Typography level="body-sm" textColor="#F2DDCF">
-                  {beer.price} ₽ • {beer.barName}
-                </Typography>
-                <Button
-                  variant="outlined"
-                  size="sm"
+  
+    return (
+      <div className="nearby-beers-section">
+        <div className="nearby-beers-header">
+        <Typography fontSize={20} fontWeight={550} className="nearby-beers-title">
+          Топ пиво рядом
+        </Typography>
+        </div>
+        <Grid container spacing={1} className="nearby-beers-grid">
+          {nearbyBeers.map((beer) => (
+            <Grid item xs={6} key={`${beer.id}-${beer.barId}`}>
+              <Card 
+                sx={{ 
+                  height: 200,
+                  bgcolor: 'rgba(242, 221, 207, 0.05)',
+                  borderRadius: '12px'
+                }} 
+                variant="plain"
+              >
+                <CardCover>
+                  <img
+                    src={beer.image}
+                    alt={beer.label}
+                    loading="lazy"
+                    style={{
+                      objectFit: beer.imageType === 'square' ? 'contain' : 'cover',
+                      backgroundColor: beer.imageType === 'square' ? 'rgba(242, 221, 207, 0.05)' : 'transparent'
+                    }}
+                  />
+                </CardCover>
+                <CardCover
                   sx={{
-                    position: 'absolute',
-                    bottom: '8px',
-                    right: '8px',
-                    color: '#F2DDCF',
-                    borderColor: '#F2DDCF',
-                    '&:hover': {
-                      borderColor: '#F2DDCF',
-                      backgroundColor: 'rgba(242, 221, 207, 0.1)',
-                    },
+                    background:
+                      'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0) 200px)',
                   }}
-                  onClick={() => handleBarClick(beer.barId)}
-                >
-                  В баре
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
-  );
-}
+                />
+                <CardContent sx={{ justifyContent: 'flex-end' }}>
+                  <Typography level="title-md" textColor="#F2DDCF">
+                    {beer.label}
+                  </Typography>
+                  <Typography level="body-sm" textColor="#F2DDCF">
+                    {beer.labelinfo}
+                  </Typography>
+                  <Typography level="body-sm" textColor="#F2DDCF">
+                    {beer.price} ₽ • {beer.barName}
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    size="sm"
+                    sx={{
+                      position: 'absolute',
+                      bottom: '8px',
+                      right: '8px',
+                      color: '#F2DDCF',
+                      borderColor: '#F2DDCF',
+                      '&:hover': {
+                        borderColor: '#F2DDCF',
+                        backgroundColor: 'rgba(242, 221, 207, 0.1)',
+                      },
+                    }}
+                    onClick={() => handleBarClick(beer.barId)}
+                  >
+                    В баре
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+    );
+  }
 
 export default NearbyBeersSection;
+
