@@ -97,7 +97,7 @@ function NearbyBeersSection() {
             <Grid item xs={6} key={`${beer.id}-${beer.barId}`}>
               <Card 
                 sx={{ 
-                  height: 200,
+                  height: 140,
                   bgcolor: 'rgba(242, 221, 207, 0.05)',
                   borderRadius: '12px'
                 }} 
@@ -130,24 +130,6 @@ function NearbyBeersSection() {
                   <Typography level="body-sm" textColor="#F2DDCF">
                     {beer.price} ₽ • {beer.barName}
                   </Typography>
-                  <Button
-                    variant="outlined"
-                    size="sm"
-                    sx={{
-                      position: 'absolute',
-                      bottom: '8px',
-                      right: '8px',
-                      color: '#F2DDCF',
-                      borderColor: '#F2DDCF',
-                      '&:hover': {
-                        borderColor: '#F2DDCF',
-                        backgroundColor: 'rgba(242, 221, 207, 0.1)',
-                      },
-                    }}
-                    onClick={() => handleBarClick(beer.barId)}
-                  >
-                    В баре
-                  </Button>
                 </CardContent>
               </Card>
             </Grid>
