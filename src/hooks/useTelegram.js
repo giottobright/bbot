@@ -17,7 +17,27 @@ export function useTelegram() {
         try {
             console.log('Начинаем получение геолокации');
             
-            // Используем браузерную геолокацию, так как locationManager недоступен
+            // Проверяем сохраненное разрешение
+            const locationPermission = localStorage.getItem('locationPermission');
+            
+            if (!locationPermission) {
+                // Если разрешения нет, запрашиваем его
+                const permission = await new Promise((resolve) => {
+                    navigator.geolocation.getCurrentPosition(
+                        () => {
+                            localStorage.setItem('locationPermission', 'granted');
+                            resolve(true);
+                        },
+                        () => resolve(false)
+                    );
+                });
+                
+                if (!permission) {
+                    throw new Error("Доступ к геолокации не предоставлен");
+                }
+            }
+
+            // Получаем геолокацию
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -29,6 +49,7 @@ export function useTelegram() {
                     },
                     (error) => {
                         console.error('Ошибка геолокации:', error);
+                        localStorage.removeItem('locationPermission'); // Удаляем разрешение при ошибке
                         callback(null);
                     },
                     {
@@ -42,6 +63,7 @@ export function useTelegram() {
             }
         } catch (error) {
             console.error('Ошибка при получении геолокации:', error);
+            localStorage.removeItem('locationPermission'); // Удаляем разрешение при ошибке
             callback(null);
         }
     }
