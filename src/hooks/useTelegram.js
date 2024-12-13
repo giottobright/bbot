@@ -14,11 +14,17 @@ export function useTelegram() {
         }
     }
 
+    const initLocationManager = (callback) => {
+        return tg.locationManager.init(callback);
+    }
+
     return  {
         onToggleButton,
         onClose,
         tg,
         user: tg.initDataUnsafe?.user,
         queryId: tg.initDataUnsafe?.query_id,
+        locationManager: tg.locationManager,
+        initLocationManager
     }
 }
