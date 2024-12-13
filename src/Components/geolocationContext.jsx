@@ -7,43 +7,22 @@ export const GeolocationProvider = ({ children }) => {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { locationManager, initLocationManager } = useTelegram();
+  const { getLocation } = useTelegram();
 
   useEffect(() => {
-    const setupLocation = async () => {
-      try {
-        // Инициализация LocationManager
-        await initLocationManager(() => {
-          if (!locationManager.isLocationAvailable) {
-            throw new Error("Геолокация недоступна на устройстве");
-          }
-
-          if (!locationManager.isAccessGranted) {
-            locationManager.openSettings();
-          }
-
-          locationManager.getLocation((locationData) => {
-            if (locationData) {
-              setLocation({
-                lat: locationData.latitude,
-                lng: locationData.longitude
-              });
-            } else {
-              throw new Error("Не удалось получить геолокацию");
-            }
-            setLoading(false);
-          });
+    getLocation((locationData) => {
+      if (locationData) {
+        setLocation({
+          lat: locationData.latitude,
+          lng: locationData.longitude
         });
-      } catch (e) {
-        console.error("Ошибка получения геолокации:", e);
-        setError(e.message);
+      } else {
+        setError("Не удалось получить геолокацию");
         setLocation({ lat: 55.7558, lng: 37.6173 }); // Москва по умолчанию
-        setLoading(false);
       }
-    };
-
-    setupLocation();
-  }, [locationManager, initLocationManager]);
+      setLoading(false);
+    });
+  }, [getLocation]);
 
   return (
     <GeolocationContext.Provider value={{ location, error, loading }}>
