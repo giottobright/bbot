@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import logo from '../img/logoBB.png'
 import { useSwipeable } from 'react-swipeable';
 import BeerOfDayCardOne from '../BeerOfDayCardOne/BeerOfDayCardOne';
+import NearbyBeersSection from '../NearbyBeersSection/NearbyBeersSection';
 
 
 
@@ -83,7 +84,7 @@ function BasePage() {
             </Typography>
         </Box>
       <Header variant="base" className='base-search'/>
-      <BeerOfDayCardOne/>
+      <NearbyBeersSection />
       <CategoryMain/>
       <Typography fontSize={20} fontWeight={550} className="category-title">
         Все пиво

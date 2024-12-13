@@ -131,4 +131,4 @@ function NearbyBeersSection() {
   );
 }
 
-export default NearbyBeersSection; 
+export default NearbyBeersSection;
