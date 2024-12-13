@@ -20,7 +20,7 @@ export function useTelegram() {
                 if (tg.LocationManager) {
                     try {
                         // Запрашиваем геолокацию через LocationManager
-                        const location = await tg.LocationManager.requestLocation({
+                        const location = await tg.LocationManager.getLocation({
                             timeout: 5000 // таймаут 5 секунд
                         });
                         
