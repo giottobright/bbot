@@ -11,51 +11,64 @@ import { useNavigate } from 'react-router-dom';
 import './NearbyBeersSection.css';
 
 function NearbyBeersSection() {
-  const [nearbyBeers, setNearbyBeers] = useState([]);
-  const { location: userLocation } = useGeolocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (userLocation) {
-      // Получаем бары в радиусе 1 км
-      const nearbyBars = bars.filter(bar => {
-        const distance = calculateDistance(
-          userLocation,
-          { lat: bar.lat, lng: bar.lng }
-        );
-        return distance <= 1;
-      });
-
-      // Собираем все доступное пиво из ближайших баров
-      const availableBeers = nearbyBars.flatMap(bar => 
-        bar.beers.map(beer => ({
-          ...beer,
-          barName: bar.name,
-          barId: bar.id
-        }))
-      );
-
-      // Получаем уникальные сорта пива
-      const uniqueBeers = [...new Set(availableBeers.map(beer => beer.id))]
-        .map(beerId => {
-          const beerInfo = beerTypes.find(type => type.id === beerId);
-          const barInfo = availableBeers.find(beer => beer.id === beerId);
-          return {
-            ...beerInfo,
-            barName: barInfo.barName,
-            barId: barInfo.barId,
-            price: barInfo.price
-          };
-        });
-
-      // Случайно выбираем 6 сортов
-      const randomBeers = uniqueBeers
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 6);
-
-      setNearbyBeers(randomBeers);
-    }
-  }, [userLocation]);
+    const [nearbyBeers, setNearbyBeers] = useState([]);
+    const { location: userLocation } = useGeolocation();
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+        if (userLocation && nearbyBeers.length === 0) {
+          let SEARCH_RADIUS = 5; // Начальный радиус
+          let nearbyBars = bars.filter(bar => {
+            const distance = calculateDistance(
+              userLocation,
+              { lat: bar.lat, lng: bar.lng }
+            );
+            return distance <= SEARCH_RADIUS;
+          });
+      
+          // Если в радиусе 5 км нет баров, расширяем до 10 км
+          if (nearbyBars.length === 0) {
+            SEARCH_RADIUS = 10;
+            nearbyBars = bars.filter(bar => {
+              const distance = calculateDistance(
+                userLocation,
+                { lat: bar.lat, lng: bar.lng }
+              );
+              return distance <= SEARCH_RADIUS;
+            });
+            console.log('Радиус поиска расширен до 10 км');
+          }
+      
+          const availableBeers = nearbyBars.flatMap(bar => 
+            bar.beers.map(beer => ({
+              ...beer,
+              barName: bar.name,
+              barId: bar.id,
+              distance: calculateDistance(userLocation, { lat: bar.lat, lng: bar.lng })
+            }))
+          );
+      
+          const uniqueBeers = [...new Set(availableBeers.map(beer => beer.id))]
+            .map(beerId => {
+              const beerInfo = beerTypes.find(type => type.id === beerId);
+              const barInfo = availableBeers.find(beer => beer.id === beerId);
+              return {
+                ...beerInfo,
+                barName: barInfo.barName,
+                barId: barInfo.barId,
+                price: barInfo.price,
+                distance: barInfo.distance.toFixed(1)
+              };
+            });
+      
+          // Случайно перемешиваем массив и берем первые 6 элементов
+          const randomBeers = uniqueBeers
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 6);
+      
+          setNearbyBeers(randomBeers);
+        }
+      }, [userLocation]);
 
   const calculateDistance = (point1, point2) => {
     const R = 6371;
