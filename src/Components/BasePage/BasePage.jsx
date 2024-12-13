@@ -83,7 +83,7 @@ function BasePage() {
             </Typography>
         </Box>
       <Header variant="base" className='base-search'/>
-      <BeerOfDayCardOne/>
+      <NearbyBeersSection />
       <CategoryMain/>
       <Typography fontSize={20} fontWeight={550} className="category-title">
         Все пиво

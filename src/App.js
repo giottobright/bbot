@@ -61,14 +61,6 @@ function AppContent() {
     }
   }, [location.pathname, tg.BackButton]);
 
-  useEffect(() => {
-    tg.ready();
-    // Инициализируем геолокацию при запуске приложения
-    if (tg.initDataUnsafe?.query_id) {
-      tg.expand();
-    }
-  }, [tg]);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 0) {
