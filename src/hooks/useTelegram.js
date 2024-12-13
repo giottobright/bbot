@@ -17,36 +17,33 @@ export function useTelegram() {
         try {
             console.log('Начинаем получение геолокации');
             
-            // Проверяем, инициализирован ли геолокационный менеджер
-            if (!tg.geolocationManager.isInited) {
-                await tg.geolocationManager.init();
+            if (!tg.initDataUnsafe?.query_id) {
+                throw new Error("Telegram WebApp не инициализирован");
             }
 
-            // Проверяем доступность геолокации
-            if (!tg.geolocationManager.isLocationAvailable) {
-                throw new Error("Геолокация недоступна на устройстве");
+            // Используем браузерную геолокацию
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        console.log('Полученная локация:', position);
+                        callback({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        });
+                    },
+                    (error) => {
+                        console.error('Ошибка геолокации:', error);
+                        callback(null);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                throw new Error("Геолокация недоступна в браузере");
             }
-
-            // Если разрешение еще не получено, запрашиваем его
-            if (!tg.geolocationManager.isAccessGranted) {
-                const granted = await tg.geolocationManager.requestPermission();
-                if (!granted) {
-                    throw new Error("Доступ к геолокации не предоставлен");
-                }
-            }
-
-            // Получаем геолокацию через Telegram API
-            tg.geolocationManager.getLocation((location) => {
-                if (location) {
-                    callback({
-                        latitude: location.latitude,
-                        longitude: location.longitude
-                    });
-                } else {
-                    callback(null);
-                }
-            });
-
         } catch (error) {
             console.error('Ошибка при получении геолокации:', error);
             callback(null);
