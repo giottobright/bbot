@@ -27,7 +27,7 @@ const ProfilePage = () => {
         <Paper elevation={3} className="profile-details">
           <Box className="profile-stats">
             <Box className="stat-item">
-              <Typography variant="h6">58</Typography>
+              <Typography variant="h6">66</Typography>
               <Typography variant="body2">Пива</Typography>
             </Box>
             <Box className="stat-item">
