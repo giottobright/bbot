@@ -72,6 +72,14 @@ function AppContent() {
     }
   };
 
+  useEffect(() => {
+    tg.ready();
+    // Инициализируем геолокацию при запуске приложения
+    if (tg.initDataUnsafe?.query_id) {
+      tg.expand();
+    }
+  }, [tg]);
+
   return (
     <div className="App">
       <div className="main-content">
