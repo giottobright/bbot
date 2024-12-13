@@ -13,71 +13,41 @@ export function useTelegram() {
         }
     }
 
-    const getLocation = async () => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                // Проверяем поддержку LocationManager
-                if (tg.LocationManager) {
-                    try {
-                        // Запрашиваем геолокацию через LocationManager
-                        const location = await tg.LocationManager.getLocation({
-                            timeout: 5000 // таймаут 5 секунд
+    const getLocation = async (callback) => {
+        try {
+            console.log('Начинаем получение геолокации');
+            
+            if ("geolocation" in navigator) {
+                // Опции для геолокации
+                const options = {
+                    enableHighAccuracy: true, // Высокая точность
+                    timeout: 5000,           // Таймаут в мс
+                    maximumAge: 0            // Не использовать кэшированную позицию
+                };
+
+                // Получаем текущую позицию
+                navigator.geolocation.watchPosition(
+                    (position) => {
+                        console.log('Обновленная локация:', position);
+                        callback({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            accuracy: position.coords.accuracy,
+                            timestamp: position.timestamp
                         });
-                        
-                        console.log('Получена локация через LocationManager:', location);
-                        return resolve(location);
-                    } catch (error) {
-                        if (error.type === 'location_unavailable') {
-                            console.log('LocationManager недоступен, пробуем браузерную геолокацию');
-                        } else {
-                            console.error('Ошибка LocationManager:', error);
-                        }
-                    }
-                }
-
-                // Fallback на браузерную геолокацию
-                if ("geolocation" in navigator) {
-                    navigator.geolocation.getCurrentPosition(
-                        (position) => {
-                            console.log('Получена браузерная геолокация:', position);
-                            resolve({
-                                latitude: position.coords.latitude,
-                                longitude: position.coords.longitude,
-                                accuracy: position.coords.accuracy,
-                                live_period: 0 // для совместимости с форматом LocationManager
-                            });
-                        },
-                        (error) => {
-                            console.error('Ошибка браузерной геолокации:', error);
-                            reject(error);
-                        },
-                        {
-                            enableHighAccuracy: true,
-                            timeout: 5000,
-                            maximumAge: 0
-                        }
-                    );
-                } else {
-                    reject(new Error("Геолокация недоступна"));
-                }
-            } catch (error) {
-                reject(error);
+                    },
+                    (error) => {
+                        console.error('Ошибка геолокации:', error);
+                        callback(null);
+                    },
+                    options
+                );
+            } else {
+                throw new Error("Геолокация недоступна в браузере");
             }
-        });
-    }
-
-    // Подписка на обновления геолокации
-    const subscribeToLocation = (callback) => {
-        if (tg.LocationManager) {
-            return tg.LocationManager.subscribe(callback);
-        }
-        return null;
-    }
-
-    // Отписка от обновлений геолокации
-    const unsubscribeFromLocation = (subscriptionId) => {
-        if (tg.LocationManager && subscriptionId) {
-            tg.LocationManager.unsubscribe(subscriptionId);
+        } catch (error) {
+            console.error('Ошибка при получении геолокации:', error);
+            callback(null);
         }
     }
 
@@ -87,8 +57,6 @@ export function useTelegram() {
         tg,
         user: tg.initDataUnsafe?.user,
         queryId: tg.initDataUnsafe?.query_id,
-        getLocation,
-        subscribeToLocation,
-        unsubscribeFromLocation
+        getLocation
     }
 }
