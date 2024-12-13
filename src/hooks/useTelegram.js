@@ -17,53 +17,38 @@ export function useTelegram() {
         try {
             console.log('Начинаем получение геолокации');
             
-            // Проверяем сохраненное разрешение
-            const locationPermission = localStorage.getItem('locationPermission');
-            
-            if (!locationPermission) {
-                // Если разрешения нет, запрашиваем его
-                const permission = await new Promise((resolve) => {
-                    navigator.geolocation.getCurrentPosition(
-                        () => {
-                            localStorage.setItem('locationPermission', 'granted');
-                            resolve(true);
-                        },
-                        () => resolve(false)
-                    );
-                });
-                
-                if (!permission) {
+            // Проверяем, инициализирован ли геолокационный менеджер
+            if (!tg.geolocationManager.isInited) {
+                await tg.geolocationManager.init();
+            }
+
+            // Проверяем доступность геолокации
+            if (!tg.geolocationManager.isLocationAvailable) {
+                throw new Error("Геолокация недоступна на устройстве");
+            }
+
+            // Если разрешение еще не получено, запрашиваем его
+            if (!tg.geolocationManager.isAccessGranted) {
+                const granted = await tg.geolocationManager.requestPermission();
+                if (!granted) {
                     throw new Error("Доступ к геолокации не предоставлен");
                 }
             }
 
-            // Получаем геолокацию
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        console.log('Полученная локация:', position);
-                        callback({
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude
-                        });
-                    },
-                    (error) => {
-                        console.error('Ошибка геолокации:', error);
-                        localStorage.removeItem('locationPermission'); // Удаляем разрешение при ошибке
-                        callback(null);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
-                        maximumAge: 0
-                    }
-                );
-            } else {
-                throw new Error("Геолокация недоступна в браузере");
-            }
+            // Получаем геолокацию через Telegram API
+            tg.geolocationManager.getLocation((location) => {
+                if (location) {
+                    callback({
+                        latitude: location.latitude,
+                        longitude: location.longitude
+                    });
+                } else {
+                    callback(null);
+                }
+            });
+
         } catch (error) {
             console.error('Ошибка при получении геолокации:', error);
-            localStorage.removeItem('locationPermission'); // Удаляем разрешение при ошибке
             callback(null);
         }
     }
