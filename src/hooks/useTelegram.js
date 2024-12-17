@@ -1,20 +1,29 @@
 const tg = window.Telegram.WebApp;
 
 const urlParams = new URLSearchParams(window.location.search);
-const initDataFromUrl = urlParams.get('initData');
+const webAppData = urlParams.get('tgWebAppData');
 
-if (initDataFromUrl) {
-  try {
-    const parsedData = JSON.parse(decodeURIComponent(initDataFromUrl));
-    tg.initDataUnsafe = parsedData;
-  } catch (e) {
-    console.error('Error parsing initData from URL:', e);
-  }
+if (webAppData) {
+    try {
+        const parsedData = JSON.parse(decodeURIComponent(webAppData));
+        console.log('Parsed WebApp data:', parsedData);
+        tg.initData = webAppData;
+        tg.initDataUnsafe = parsedData;
+    } catch (e) {
+        console.error('Error parsing tgWebAppData from URL:', e);
+    }
 }
 
 export function useTelegram() {
+    const getUserData = () => {
+        if (tg.initDataUnsafe?.user) {
+            return tg.initDataUnsafe.user;
+        }
+        return null;
+    };
+
     const onClose = () => {
-        tg.close()
+        tg.close();
     }
 
     const onToggleButton = () => {
@@ -30,14 +39,12 @@ export function useTelegram() {
             console.log('Начинаем получение геолокации');
             
             if ("geolocation" in navigator) {
-                // Опции для геолокации
                 const options = {
-                    enableHighAccuracy: true, // Высокая точность
-                    timeout: 5000,           // Таймаут в мс
-                    maximumAge: 0            // Не использовать кэшированную позицию
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
                 };
 
-                // Получаем текущую позицию
                 navigator.geolocation.watchPosition(
                     (position) => {
                         console.log('Обновленная локация:', position);
@@ -64,10 +71,10 @@ export function useTelegram() {
     }
 
     return {
-        onToggleButton,
         onClose,
+        onToggleButton,
         tg,
-        user: tg.initData ? JSON.parse(tg.initData).user : null,
+        user: getUserData(),
         queryId: tg.initDataUnsafe?.query_id,
         getLocation
     }

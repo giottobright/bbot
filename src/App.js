@@ -10,24 +10,18 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import '@telegram-apps/telegram-ui/dist/styles.css';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Paper from '@mui/material/Paper';
-import ArchiveIcon from '@mui/icons-material/Archive';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import StorefrontIcon from '@mui/icons-material/Storefront';
-import BarDetailPage from '../src/Components/BarDetailPage/BarDetailPage';
+import PersonIcon from '@mui/icons-material/Person';
+import Paper from '@mui/material/Paper';
+import BarDetailPage from './Components/BarDetailPage/BarDetailPage';
 import BasePage from './Components/BasePage/BasePage';
 import BarMap from './Components/BarMap/BarMap';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
-import PersonIcon from '@mui/icons-material/Person';
 import { UserProvider } from './context/UserContext';
-
 
 function AppContent() {
   const { tg } = useTelegram();
@@ -38,8 +32,8 @@ function AppContent() {
 
   const handleBackButton = useCallback(() => {
     if (location.pathname !== '/') {
-      setSearchQuery('');  // Очищаем поисковой запрос
-      navigate(-1);  // Переходим на предыдущую страницу
+      setSearchQuery('');
+      navigate(-1);
     } else {
       tg.close();
     }
@@ -75,89 +69,53 @@ function AppContent() {
 
   useEffect(() => {
     tg.ready();
-    // Инициализируем геолокацию при запуске приложения
     if (tg.initDataUnsafe?.query_id) {
       tg.expand();
     }
   }, [tg]);
 
   return (
-    <div className="App">
-      <div className="main-content">
-        <Routes>
-          <Route index element={<BasePage />} />
-          <Route path="mainscreen" element={<MainScreen />} />
-          <Route path="barmap" element={<BarMap />} />
-          <Route path="bar/:id" element={<BarDetailPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-        </Routes>
-      </div>
-      <Box sx={{ width: '100%' }}>
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 10, borderRadius: '12px' }} elevation={3}>
-  <BottomNavigation
-    value={value}
-    onChange={handleChange}
-    showLabels
-    sx={{ 
-      borderRadius: '12px', 
-      backgroundColor: '#252B33', // Opaque background color
-    }}
-  >
-    <BottomNavigationAction 
-      label="Пиво" 
-      icon={<SportsBarIcon />} 
-      sx={{ 
-        color: value === 0 ? '#FFFFFF' : '#F2DDCF',
-        '&.Mui-selected': {
-          color: '#FFFFFF'
-        },
-        '& .MuiBottomNavigationAction-label': {
-          fontFamily: 'Comfortaa, sans-serif',
-        },
-      }} 
-    />
-    <BottomNavigationAction 
-      label="Бары" 
-      icon={<StorefrontIcon />} 
-      sx={{ 
-        color: value === 1 ? '#FFFFFF' : '#F2DDCF',
-        '&.Mui-selected': {
-          color: '#FFFFFF'
-        },
-        '& .MuiBottomNavigationAction-label': {
-          fontFamily: 'Comfortaa, sans-serif',
-        },
-      }} 
-    />
-                <BottomNavigationAction 
-              label="Профиль" 
-              icon={<PersonIcon />} 
-              sx={{ 
-                color: value === 2 ? '#FFFFFF' : '#F2DDCF',
-                '&.Mui-selected': {
-                  color: '#FFFFFF'
-                },
-                '& .MuiBottomNavigationAction-label': {
-                  fontFamily: 'Comfortaa, sans-serif',
-                },
-              }} 
-            />
-  </BottomNavigation>
-</Paper>
-      </Box>
-    </div>
+    <Box sx={{ pb: 7 }}>
+      <Routes>
+        <Route index element={<BasePage />} />
+        <Route path="/bars" element={<MainScreen />} />
+        <Route path="/bar/:id" element={<BarDetailPage />} />
+        <Route path="/map" element={<BarMap />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Routes>
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+          value={value}
+          onChange={handleChange}
+          sx={{
+            width: '100%',
+            backgroundColor: '#1B1B1B',
+            '& .MuiBottomNavigationAction-root': {
+              color: '#F2DDCF',
+            },
+            '& .Mui-selected': {
+              color: '#F2DDCF',
+            },
+          }}
+        >
+          <BottomNavigationAction label="Главная" icon={<SportsBarIcon />} />
+          <BottomNavigationAction label="Бары" icon={<StorefrontIcon />} />
+          <BottomNavigationAction label="Профиль" icon={<PersonIcon />} />
+        </BottomNavigation>
+      </Paper>
+    </Box>
   );
 }
 
 function App() {
   return (
-      <UserProvider>
-        <GeolocationProvider>
-          <SearchProvider>
-            <AppContent />
-          </SearchProvider>
-        </GeolocationProvider>
-      </UserProvider>
+    <UserProvider>
+      <GeolocationProvider>
+        <SearchProvider>
+          <AppContent />
+        </SearchProvider>
+      </GeolocationProvider>
+    </UserProvider>
   );
 }
 
