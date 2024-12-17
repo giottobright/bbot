@@ -9,8 +9,8 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     console.log('Telegram object:', tg);
-    console.log('InitData:', window.Telegram.WebApp.initData);
-    console.log('InitDataUnsafe:', window.Telegram.WebApp.initDataUnsafe);
+    console.log('InitData:', tg.initData);
+    console.log('InitDataUnsafe:', tg.initDataUnsafe);
     
     // Пробуем получить ID разными способами
     const telegramUser = window.Telegram.WebApp.initDataUnsafe?.user || tg.initDataUnsafe?.user;
@@ -31,11 +31,11 @@ export function UserProvider({ children }) {
 
       if (tg.initDataUnsafe?.user?.id) {
         const id = tg.initDataUnsafe.user.id.toString();
-        console.log('Found user ID from initDataUnsafe:', id);
+        console.log('Found user ID:', id);
         setUserId(id);
-      } else {
+    } else {
         console.log('User ID not found in any source');
-      }
+    }
     }, [tg]);
     
 

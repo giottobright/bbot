@@ -1,16 +1,18 @@
 const tg = window.Telegram.WebApp;
 
 const urlParams = new URLSearchParams(window.location.search);
-const initDataFromUrl = urlParams.get('initData');
+const initDataFromUrl = urlParams.get('tgWebAppData');
 
-if (initDataFromUrl) {
-  try {
-    const parsedData = JSON.parse(decodeURIComponent(initDataFromUrl));
-    tg.initDataUnsafe = parsedData;
-  } catch (e) {
-    console.error('Error parsing initData from URL:', e);
+if (webAppData) {
+    try {
+      const parsedData = JSON.parse(decodeURIComponent(webAppData));
+      tg.initData = webAppData;
+      tg.initDataUnsafe = parsedData;
+      console.log('Parsed WebApp data:', parsedData);
+    } catch (e) {
+      console.error('Error parsing tgWebAppData from URL:', e);
+    }
   }
-}
 
 export function useTelegram() {
     const onClose = () => {
