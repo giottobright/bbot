@@ -27,6 +27,7 @@ import BarMap from './Components/BarMap/BarMap';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
 import PersonIcon from '@mui/icons-material/Person';
 import { UserProvider } from './context/UserContext';
+import { Logger } from './Components/Logger'
 
 
 function AppContent() {
@@ -155,6 +156,7 @@ function App() {
         <GeolocationProvider>
           <SearchProvider>
             <AppContent />
+            {process.env.NODE_ENV === 'development' && <Logger />}
           </SearchProvider>
         </GeolocationProvider>
       </UserProvider>
