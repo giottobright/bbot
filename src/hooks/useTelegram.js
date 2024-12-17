@@ -1,5 +1,17 @@
 const tg = window.Telegram.WebApp;
 
+const urlParams = new URLSearchParams(window.location.search);
+const initDataFromUrl = urlParams.get('initData');
+
+if (initDataFromUrl) {
+  try {
+    const parsedData = JSON.parse(decodeURIComponent(initDataFromUrl));
+    tg.initDataUnsafe = parsedData;
+  } catch (e) {
+    console.error('Error parsing initData from URL:', e);
+  }
+}
+
 export function useTelegram() {
     const onClose = () => {
         tg.close()
