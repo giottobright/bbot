@@ -69,14 +69,6 @@ export const countries = [
   { label: 'ireland', image: ireland },
 ];
 
-export const beerTypes = [
-  { id: 'gorkovskaya', label: 'Gorkovskaya Brewery', labelinfo: '7.5%  75 IBU', image: diGoroh, imageType: 'round', description: 'Характерная для стиля горечь, вкус и аромат достигнуты благодаря использованию сортов хмеля CITRA и NORTHERN BREWER', categories: ['light'], types: ['pale ale', 'ipa'] },
-  { id: 'kingjjj', label: 'King JJJuliusss', labelinfo: '8.4%  N/A IBU', image: kingJ, imageType: 'square', description: 'Манго, апельсин и сладкий грейпфрут преобладают в аромате с намеками на ананас и смешанный сок тропических фруктов. Вкус повторяет аромат с сочным ощущением во рту и правильной горечью.', categories: ['light'], types: ['pale ale', 'ipa'] },
-  { id: 'atomnaya', label: 'Атомная Прачечная XX', labelinfo: '9%  130 IBU', image: atomPrach, imageType: 'square', description: 'Не двойная прачка. Это «Атомная Прачечная», сваренная в стиле Double IPA: еще больше хмеля, еще мощне солодовая база и карамельный акцент, еще плотнее вкус', categories: ['light'], types: ['pale ale', 'ipa'] },
-  { id: 'sovngarde', label: 'Sovngarde', labelinfo: '8%  65 IBU', image: sovngarde, imageType: 'square', description: 'Насыщенный цветочно-цитрусовый аромат грейпфрута и апельсина и крепкий солодовый вкус с нежными тропическими нотками.', categories: ['dark'], types: ['porter'] },
-  { id: 'temnoe', label: 'Темное', labelinfo: '5%  20 IBU', image: dark, imageType: 'square', description: 'Классическое темное пиво с богатым, слегка сладковатым вкусом и нотками карамели и жареного солода.', categories: ['dark'], types: ['dark lager'] },
-  { id: 'cider', label: 'Яблочный сидр', labelinfo: '4.5%  N/A IBU', image: cider, imageType: 'square', description: 'Освежающий яблочный сидр с идеальным балансом сладости и кислинки. Легкий и игристый напиток для любого случая.', categories: ['cider'], types: ['cider'] },
-];
 
 export const bars = [
   { 
@@ -111,4 +103,80 @@ export const distanceFilters = [
   { value: 5000, label: '30 мин 🚖' },
 ];
 
- 
+export const userFavorites = {
+  'user123': ['gorkovskaya', 'atomnaya', 'kingjjj'],
+  'user456': ['sovngarde', 'atomnaya'],
+  'user789': ['kingjjj', 'gorkovskaya']
+};
+
+export const userHistory = {
+  'user123': [
+    { beerId: 'gorkovskaya', timestamp: '2024-03-15T14:30:00' },
+    { beerId: 'atomnaya', timestamp: '2024-03-14T16:20:00' }
+  ],
+  'user456': [
+    { beerId: 'sovngarde', timestamp: '2024-03-15T12:00:00' }
+  ]
+};
+
+
+export const beerTypes = [
+  { 
+    id: 'gorkovskaya', 
+    label: 'Gorkovskaya Brewery', 
+    labelinfo: '7.5%  75 IBU', 
+    image: diGoroh, 
+    imageType: 'round',
+    description: 'Характерная для стиля горечь, вкус и аромат достигнуты благодаря использованию сортов хмеля CITRA и NORTHERN BREWER',
+    categories: ['light'],
+    types: ['pale ale', 'ipa'],
+    popularity: 95,
+    isNew: true,
+    addedDate: '2024-03-15',
+    rating: 4.8
+  },
+  { 
+    id: 'atomnaya', 
+    label: 'Atomnaya Brewery', 
+    labelinfo: '5.0%  45 IBU', 
+    image: atomPrach, 
+    imageType: 'square',
+    description: 'Легкий светлый лагер с мягким солодовым вкусом',
+    categories: ['light'],
+    types: ['lager'],
+    popularity: 88,
+    isNew: false,
+    addedDate: '2024-01-10',
+    rating: 4.5
+  },
+  { 
+    id: 'kingjjj', 
+    label: 'King JJJ', 
+    labelinfo: '6.5%  60 IBU', 
+    image: kingJ, 
+    imageType: 'square',
+    description: 'Насыщенный темный эль с нотками карамели',
+    categories: ['dark'],
+    types: ['ale'],
+    popularity: 92,
+    isNew: true,
+    addedDate: '2024-03-10',
+    rating: 4.7
+  },
+  { 
+    id: 'sovngarde', 
+    label: 'Sovngarde', 
+    labelinfo: '4.8%  30 IBU', 
+    image: sovngarde, 
+    imageType: 'square',
+    description: 'Классический светлый лагер в чешском стиле',
+    categories: ['light'],
+    types: ['lager'],
+    popularity: 85,
+    isNew: false,
+    addedDate: '2023-12-20',
+    rating: 4.3
+  }
+];
+
+// Добавляем данные о любимом пиве пользователей

@@ -1,6 +1,7 @@
 .nearby-beers-section {
-    padding: 0 5px;
-  }
+  padding: 0 5px;
+  margin-top: 16px;
+}
   
   .nearby-beers-title {
     color: #F2DDCF !important;
@@ -22,4 +23,17 @@
   .nearby-beers-grid {
     padding: 0px;
     justify-content: left;
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .filter-buttons::-webkit-scrollbar {
+    display: none;
   }

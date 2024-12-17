@@ -26,6 +26,7 @@ import BasePage from './Components/BasePage/BasePage';
 import BarMap from './Components/BarMap/BarMap';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
 import PersonIcon from '@mui/icons-material/Person';
+import { UserProvider } from './context/UserContext';
 
 
 function AppContent() {
@@ -150,11 +151,13 @@ function AppContent() {
 
 function App() {
   return (
-    <GeolocationProvider>
-      <SearchProvider>
-        <AppContent />
-      </SearchProvider>
-    </GeolocationProvider>
+      <UserProvider>
+        <GeolocationProvider>
+          <SearchProvider>
+            <AppContent />
+          </SearchProvider>
+        </GeolocationProvider>
+      </UserProvider>
   );
 }
 
