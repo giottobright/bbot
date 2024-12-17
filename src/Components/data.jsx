@@ -104,7 +104,7 @@ export const distanceFilters = [
 ];
 
 export const userFavorites = {
-  'user123': ['gorkovskaya', 'atomnaya', 'kingjjj'],
+  '5200228179': ['gorkovskaya', 'atomnaya', 'kingjjj'],
   'user456': ['sovngarde', 'atomnaya'],
   'user789': ['kingjjj', 'gorkovskaya']
 };
