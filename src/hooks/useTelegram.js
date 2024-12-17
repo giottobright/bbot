@@ -54,9 +54,9 @@ export function useTelegram() {
     return {
         onToggleButton,
         onClose,
-        tg,
-        user: tg.initDataUnsafe?.user,
-        queryId: tg.initDataUnsafe?.query_id,
+        tg: window.Telegram.WebApp,
+        user: window.Telegram.WebApp.initDataUnsafe?.user,
+        queryId: window.Telegram.WebApp.initDataUnsafe?.query_id,
         getLocation
     }
 }
