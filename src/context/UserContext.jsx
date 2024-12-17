@@ -4,46 +4,33 @@ import { useTelegram } from '../hooks/useTelegram';
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [userId, setUserId] = useState(null);
-  const { tg } = useTelegram();
+    const [userId, setUserId] = useState(null);
+    const { user } = useTelegram();
 
-  useEffect(() => {
-    console.log('Telegram object:', tg);
-    console.log('InitData:', window.Telegram.WebApp.initData);
-    console.log('InitDataUnsafe:', window.Telegram.WebApp.initDataUnsafe);
-    
-    // Пробуем получить ID разными способами
-    const telegramUser = window.Telegram.WebApp.initDataUnsafe?.user || tg.initDataUnsafe?.user;
-
-    if (tg.initData) {
-        try {
-          const initData = JSON.parse(tg.initData);
-          if (initData.user?.id) {
-            const id = initData.user.id.toString();
-            console.log('Found user ID from initData:', id);
-            setUserId(id);
-            return;
-          }
-        } catch (e) {
-          console.error('Error parsing initData:', e);
+    useEffect(() => {
+        console.log('Telegram user data:', user);
+        if (user?.id) {
+            setUserId(user.id.toString());
+            console.log('Set user ID:', user.id.toString());
         }
-      }
+    }, [user]);
 
-      if (tg.initDataUnsafe?.user?.id) {
-        const id = tg.initDataUnsafe.user.id.toString();
-        console.log('Found user ID from initDataUnsafe:', id);
-        setUserId(id);
-      } else {
-        console.log('User ID not found in any source');
-      }
-    }, [tg]);
-    
+    const value = {
+        userId,
+        isAuthenticated: !!userId
+    };
 
-  return (
-    <UserContext.Provider value={{ userId }}>
-      {children}
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider value={value}>
+            {children}
+        </UserContext.Provider>
+    );
 }
 
-export const useUser = () => useContext(UserContext); 
+export const useUser = () => {
+    const context = useContext(UserContext);
+    if (!context) {
+        throw new Error('useUser must be used within a UserProvider');
+    }
+    return context;
+}; 
