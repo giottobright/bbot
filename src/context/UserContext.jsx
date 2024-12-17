@@ -14,15 +14,30 @@ export function UserProvider({ children }) {
     
     // Пробуем получить ID разными способами
     const telegramUser = window.Telegram.WebApp.initDataUnsafe?.user || tg.initDataUnsafe?.user;
+
+    if (tg.initData) {
+        try {
+          const initData = JSON.parse(tg.initData);
+          if (initData.user?.id) {
+            const id = initData.user.id.toString();
+            console.log('Found user ID from initData:', id);
+            setUserId(id);
+            return;
+          }
+        } catch (e) {
+          console.error('Error parsing initData:', e);
+        }
+      }
+
+      if (tg.initDataUnsafe?.user?.id) {
+        const id = tg.initDataUnsafe.user.id.toString();
+        console.log('Found user ID from initDataUnsafe:', id);
+        setUserId(id);
+      } else {
+        console.log('User ID not found in any source');
+      }
+    }, [tg]);
     
-    if (telegramUser?.id) {
-      const id = telegramUser.id.toString();
-      console.log('Found user ID:', id);
-      setUserId(id);
-    } else {
-      console.log('User ID not found in any source');
-    }
-  }, [tg.initDataUnsafe]);
 
   return (
     <UserContext.Provider value={{ userId }}>
