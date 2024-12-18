@@ -95,8 +95,6 @@
 
 .bar-item {
   border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.2s ease;
   cursor: pointer;
   margin-bottom: 1px;
 }
@@ -184,3 +182,4 @@
     padding: 8px 12px;
     border-radius: 20px;
 }
+
