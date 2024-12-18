@@ -117,30 +117,24 @@ function BeerDetailPage() {
       </Typography>
 
       <div className="bars-list">
-        {availableBars.map((bar) => (
-          <div key={bar.id} className="bar-item" onClick={() => navigate(`/bar/${bar.id}`, { state: { bar } })}>
-                <Card sx={{ 
-                    width: '100% !important', 
-                    bgcolor: 'rgba(242, 221, 207, 0.05)',
-                    marginBottom: '8px'
-                }}>
-              <CardMedia
-                sx={{ height: 170 }}
-                image={bar.image}
-                title={bar.name}
-              />
-              <CardContent className='cardcontentbar'>
-                <Typography level="title-lg" textColor="#F2DDCF" className='name'>
-                  {bar.name}
-                </Typography>
-                <Typography textColor="#F2DDCF" className='description'>
-                  До 23.00 ⚫️ м. Павелецкая ⚫️ {bar.distance.toFixed(2)} км ⚫️ {bar.price} ₽
-                </Typography>
-              </CardContent>
-            </Card>
+  {availableBars.map((bar) => (
+    <div key={bar.id} className="bar-item" onClick={() => navigate(`/bar/${bar.id}`, { state: { bar } })}>
+      <div className="bar-card">
+        <div className="bar-image-container">
+          <img src={bar.image} alt={bar.name} className="bar-image" />
+          <div className="bar-content-overlay">
+            <Typography variant="h6" className="bar-title">
+              {bar.name}
+            </Typography>
+            <Typography className="bar-details">
+              До 23.00 ⚫️ м. Павелецкая ⚫️ {bar.distance.toFixed(2)} км ⚫️ {bar.price} ₽
+            </Typography>
           </div>
-        ))}
+        </div>
       </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 }
