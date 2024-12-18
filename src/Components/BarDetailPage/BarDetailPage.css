@@ -200,23 +200,3 @@
   font-size: 12px;
 }
 
-
-.favorite-button {
-  color: #F2DDCF;
-  border-color: #F2DDCF;
-  border-radius: 20px;
-  text-transform: none;
-}
-
-.favorite-button:hover {
-  background-color: rgba(242, 221, 207, 0.1);
-}
-
-.bar.icon-button .favorite-bar-button {
-  background-color: rgba(242, 221, 207, 0.2);
-  color: #F2DDCF;
-  backdrop-filter: blur(10px);
-  border-radius: 50%;
-  padding: 5px;
-  margin-left: auto; /* This pushes the button to the right side */
-}

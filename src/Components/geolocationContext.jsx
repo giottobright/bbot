@@ -1,68 +1,18 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { useTelegram } from '../hooks/useTelegram';
+import React, { createContext, useContext } from 'react';
+import { useThrottledGeolocation } from '../hooks/useThrottledGeolocation';
 
 const GeolocationContext = createContext();
 
-export const GeolocationProvider = ({ children }) => {
-  const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { getLocation } = useTelegram();
-
-  useEffect(() => {
-    let watchId;
-
-    const startLocationWatch = async () => {
-      try {
-        watchId = await getLocation((locationData) => {
-          if (locationData) {
-            // Проверяем, изменилась ли локация существенно
-            const locationChanged = !location || 
-              Math.abs(location.lat - locationData.latitude) > 0.0001 || 
-              Math.abs(location.lng - locationData.longitude) > 0.0001;
-
-            if (locationChanged) {
-              setLocation({
-                lat: locationData.latitude,
-                lng: locationData.longitude,
-                accuracy: locationData.accuracy,
-                timestamp: locationData.timestamp
-              });
-              console.log('Локация обновлена:', locationData);
-            }
-          } else {
-            setError("Не удалось получить геолокацию");
-            setLocation({ lat: 55.7558, lng: 37.6173 }); // Москва по умолчанию
-          }
-          setLoading(false);
-        });
-      } catch (err) {
-        console.error('Ошибка при отслеживании геолокации:', err);
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
-    startLocationWatch();
-
-    // Очистка при размонтировании
-    return () => {
-      if (watchId) {
-        navigator.geolocation.clearWatch(watchId);
-      }
-    };
-  }, [getLocation]);
+export function GeolocationProvider({ children }) {
+  const geolocation = useThrottledGeolocation(30000); // обновление каждые 30 секунд
 
   return (
-    <GeolocationContext.Provider value={{ 
-      location, 
-      error, 
-      loading,
-      lastUpdated: location?.timestamp 
-    }}>
+    <GeolocationContext.Provider value={geolocation}>
       {children}
     </GeolocationContext.Provider>
   );
-};
+}
 
-export const useGeolocation = () => useContext(GeolocationContext);
+export function useGeolocation() {
+  return useContext(GeolocationContext);
+}

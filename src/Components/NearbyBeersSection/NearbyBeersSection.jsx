@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useGeolocation } from '../geolocationContext';
 import { bars, beerTypes, userFavorites } from '../data';
 import Card from '@mui/joy/Card';
@@ -12,36 +12,14 @@ import { useNavigate } from 'react-router-dom';
 import './NearbyBeersSection.css';
 import { useUser } from '../../context/UserContext';
 
-
 function NearbyBeersSection() {
   const [nearbyBeers, setNearbyBeers] = useState([]);
   const [activeFilter, setActiveFilter] = useState('popular');
-  const { location: userLocation } = useGeolocation();
+  const { location: userLocation, loading } = useGeolocation();
   const navigate = useNavigate();
   const { userId } = useUser();
 
-  const handleBeerClick = (beer) => {
-    navigate(`/beer/${beer.id}`, { 
-      state: { 
-        beer: {
-          ...beer,
-          id: beer.id,
-          name: beer.label,
-          description: beer.description || 'Описание отсутствует',
-          abv: beer.abv || 'N/A',
-          ibu: beer.ibu || 'N/A',
-        } 
-      } 
-    });
-  };
-
-  const filters = [
-    { id: 'popular', label: 'Популярное рядом' },
-    { id: 'favorite', label: 'Любимое рядом' },
-    { id: 'new', label: 'Новинки' }
-  ];
-
-  const calculateDistance = (point1, point2) => {
+  const calculateDistance = useMemo(() => (point1, point2) => {
     const R = 6371;
     const dLat = (point2.lat - point1.lat) * Math.PI / 180;
     const dLon = (point2.lng - point1.lng) * Math.PI / 180;
@@ -50,9 +28,9 @@ function NearbyBeersSection() {
               Math.sin(dLon/2) * Math.sin(dLon/2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
-  };
+  }, []);
 
-  const getNearbyBars = (location) => {
+  const getNearbyBars = useMemo(() => (location) => {
     let SEARCH_RADIUS = 5;
     let nearbyBars = bars.filter(bar => {
       const distance = calculateDistance(location, { lat: bar.lat, lng: bar.lng });
@@ -67,10 +45,12 @@ function NearbyBeersSection() {
       });
     }
     return nearbyBars;
-  };
+  }, [calculateDistance]);
 
-  const getAvailableBeers = (nearbyBars) => {
-    const availableBeers = nearbyBars.flatMap(bar => 
+  const getAvailableBeers = useMemo(() => (nearbyBars) => {
+    if (!userLocation) return [];
+    
+    const availableBeers = nearbyBars.flatMap(bar =>
       bar.beers.map(beer => ({
         ...beer,
         barName: bar.name,
@@ -91,11 +71,10 @@ function NearbyBeersSection() {
           distance: barInfo.distance.toFixed(1)
         };
       });
-  };
+  }, [userLocation, calculateDistance]);
 
   useEffect(() => {
-    console.log('Current userId:', userId);
-    if (userLocation) {
+    if (!loading && userLocation) {
       const nearbyBars = getNearbyBars(userLocation);
       const allAvailableBeers = getAvailableBeers(nearbyBars);
       
@@ -121,11 +100,32 @@ function NearbyBeersSection() {
       
       setNearbyBeers(filteredBeers.slice(0, 4));
     }
-  }, [userLocation, activeFilter]);
+  }, [userLocation, activeFilter, loading, getNearbyBars, getAvailableBeers, userId]);
 
-  const handleBarClick = (barId) => {
-    navigate(`/bar/${barId}`);
+  const handleBeerClick = (beer) => {
+    navigate(`/beer/${beer.id}`, { 
+      state: { 
+        beer: {
+          ...beer,
+          id: beer.id,
+          name: beer.label,
+          description: beer.description || 'Описание отсутствует',
+          abv: beer.abv || 'N/A',
+          ibu: beer.ibu || 'N/A',
+        } 
+      } 
+    });
   };
+
+  const filters = [
+    { id: 'popular', label: 'Популярное рядом' },
+    { id: 'favorite', label: 'Любимое рядом' },
+    { id: 'new', label: 'Новинки' }
+  ];
+
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
 
   return (
     <div className="nearby-beers-section">
@@ -151,44 +151,57 @@ function NearbyBeersSection() {
           </Button>
         ))}
       </Box>
-      <Grid container spacing={1} className="nearby-beers-grid">
+
+      <Grid container spacing={2}>
         {nearbyBeers.map((beer) => (
-          <Grid item xs={6} key={`${beer.id}-${beer.barId}`}>
-            <Card 
+          <Grid item xs={6} key={beer.id}>
+            <Card
               onClick={() => handleBeerClick(beer)}
-              sx={{ 
-                height: 140,
-                bgcolor: 'rgba(242, 221, 207, 0.05)',
-                borderRadius: '12px'
-              }} 
-              variant="plain"
+              sx={{
+                height: 200,
+                cursor: 'pointer',
+                backgroundColor: 'rgba(242, 221, 207, 0.05)',
+                borderRadius: '12px',
+                overflow: 'hidden'
+              }}
             >
               <CardCover>
-                <img
-                  src={beer.image}
+                <img 
+                  src={beer.image} 
                   alt={beer.label}
-                  loading="lazy"
                   style={{
-                    objectFit: beer.imageType === 'square' ? 'contain' : 'cover',
-                    backgroundColor: beer.imageType === 'square' ? 'rgba(242, 221, 207, 0.05)' : 'transparent'
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%'
                   }}
                 />
               </CardCover>
               <CardCover
                 sx={{
                   background:
-                    'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0) 200px)',
+                    'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)',
                 }}
               />
               <CardContent sx={{ justifyContent: 'flex-end' }}>
-                <Typography level="title-md" textColor="#F2DDCF">
+                <Typography
+                  level="title-lg"
+                  textColor="#fff"
+                  sx={{ 
+                    textShadow: '0 0 10px rgba(0,0,0,0.5)',
+                    fontSize: '1.1rem',
+                    fontWeight: 500
+                  }}
+                >
                   {beer.label}
                 </Typography>
-                <Typography level="body-sm" textColor="#F2DDCF">
-                  {beer.labelinfo}
-                </Typography>
-                <Typography level="body-sm" textColor="#F2DDCF">
-                  {beer.price} ₽ • {beer.barName}
+                <Typography
+                  textColor="neutral.300"
+                  sx={{ 
+                    textShadow: '0 0 10px rgba(0,0,0,0.5)',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  {beer.barName} • {beer.distance} км
                 </Typography>
               </CardContent>
             </Card>
