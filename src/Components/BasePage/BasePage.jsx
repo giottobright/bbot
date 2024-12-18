@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import './BasePage.css';
 import { categories, types, beerTypes, bars, countries } from '../data';
@@ -8,7 +8,7 @@ import logo from '../img/logoBB.png'
 import { useSwipeable } from 'react-swipeable';
 import BeerOfDayCardOne from '../BeerOfDayCardOne/BeerOfDayCardOne';
 import NearbyBeersSection from '../NearbyBeersSection/NearbyBeersSection';
-
+import { useTelegram } from '../../hooks/useTelegram';
 
 
 import { Card } from '@telegram-apps/telegram-ui';
@@ -23,6 +23,7 @@ import CategoryMain from '../CategoryMain/CategoryMain';
 
 
 function BasePage() {
+    const { user } = useTelegram();
     const [currentBeerIndex, setCurrentBeerIndex] = useState(0);
     const beersOfTheDay = beerTypes.slice(0, 3);
     const navigate = useNavigate();
@@ -32,6 +33,19 @@ function BasePage() {
   const handleCategoryClick = (id, isType = false) => {
     navigate('/form', { state: { selectedId: id, isType: isType } });
   };
+
+  useEffect(() => {
+    console.log('BasePage - Current user:', user);
+}, [user]);
+
+  const getUserGreeting = () => {
+    if (user?.username) {
+        return `Привет, @${user.username}!`;
+    } else if (user?.first_name) {
+        return `Привет, ${user.first_name}!`;
+    }
+    return 'Привет!';
+};
 
   const handleSwipe = (direction) => {
     setActiveIndex((prevIndex) => {
@@ -73,6 +87,9 @@ function BasePage() {
                                 />
             </Box>
             <Box className='base-up-text'>
+                <Typography fontSize={15} fontWeight={300} className="base-title">
+                    {getUserGreeting()}
+                </Typography>
                 <Typography fontSize={15} fontWeight={300} className="base-title">
                     Добро пожаловать в GeoBeer!
                 </Typography>
