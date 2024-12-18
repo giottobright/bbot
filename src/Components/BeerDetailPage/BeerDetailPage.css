@@ -46,13 +46,13 @@
   }
   
   .beer-description {
-    margin: 16px 20px;
+    margin: 16px 0px;
     text-align: left;
     line-height: 1.6;
     font-size: 14px;
     color: rgba(242, 221, 207, 0.7);
     background-color: rgba(242, 221, 207, 0.05);
-    padding: 16px;
+    padding: 5px;
     border-radius: 12px;
     backdrop-filter: blur(10px);
   }
@@ -66,13 +66,13 @@
   }
   
   .section-title {
-    margin: 24px 20px 16px;
+    margin: 24px 1px 16px;
     font-weight: 550 !important;
     font-size: 20px !important;
   }
   
   .bars-list {
-    padding: 0 16px;
+    padding: 0 1px;
     display: flex;
     flex-direction: column;
     gap: 12px;
