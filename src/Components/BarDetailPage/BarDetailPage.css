@@ -35,18 +35,21 @@
 }
 
 .map-button {
-  background-color: rgba(242, 221, 207, 0.2);
-  color: #F2DDCF;
+  background-color: rgba(242, 221, 207, 0.2) !important;
+  color: #F2DDCF !important;
   backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  text-transform: none;
+  border-radius: 20px !important;
+  padding: 4px 12px !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+  margin-bottom: 5px !important;
 }
 
 .right-buttons {
   display: flex;
   gap: 10px;
+  margin-left: auto; 
+  margin-right: 0;
 }
 
 .icon-button {
@@ -59,6 +62,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 10px;
 }
 
 .back-button {
@@ -70,6 +74,7 @@
   color: #F2DDCF;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-top: 0 !important;
 }
 
 /* Rest of the CSS remains the same */
