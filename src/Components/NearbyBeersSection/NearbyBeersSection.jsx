@@ -20,6 +20,21 @@ function NearbyBeersSection() {
   const navigate = useNavigate();
   const { userId } = useUser();
 
+  const handleBeerClick = (beer) => {
+    navigate(`/beer/${beer.id}`, { 
+      state: { 
+        beer: {
+          ...beer,
+          id: beer.id,
+          name: beer.label,
+          description: beer.description || 'Описание отсутствует',
+          abv: beer.abv || 'N/A',
+          ibu: beer.ibu || 'N/A',
+        } 
+      } 
+    });
+  };
+
   const filters = [
     { id: 'popular', label: 'Популярное рядом' },
     { id: 'favorite', label: 'Любимое рядом' },
@@ -140,6 +155,7 @@ function NearbyBeersSection() {
         {nearbyBeers.map((beer) => (
           <Grid item xs={6} key={`${beer.id}-${beer.barId}`}>
             <Card 
+              onClick={() => handleBeerClick(beer)}
               sx={{ 
                 height: 140,
                 bgcolor: 'rgba(242, 221, 207, 0.05)',

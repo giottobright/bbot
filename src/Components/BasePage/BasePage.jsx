@@ -88,9 +88,6 @@ function BasePage() {
             </Box>
             <Box className='base-up-text'>
                 <Typography fontSize={15} fontWeight={300} className="base-title">
-                    {getUserGreeting()}
-                </Typography>
-                <Typography fontSize={15} fontWeight={300} className="base-title">
                     Добро пожаловать в GeoBeer!
                 </Typography>
             </Box>

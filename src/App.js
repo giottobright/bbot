@@ -21,6 +21,7 @@ import BarDetailPage from './Components/BarDetailPage/BarDetailPage';
 import BasePage from './Components/BasePage/BasePage';
 import BarMap from './Components/BarMap/BarMap';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
+import BeerDetailPage from './Components/BeerDetailPage/BeerDetailPage';
 import { UserProvider } from './context/UserContext';
 
 function AppContent() {
@@ -82,6 +83,7 @@ function AppContent() {
         <Route path="/bar/:id" element={<BarDetailPage />} />
         <Route path="/map" element={<BarMap />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/beer/:id" element={<BeerDetailPage />} />
       </Routes>
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation

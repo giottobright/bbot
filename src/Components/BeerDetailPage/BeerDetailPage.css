@@ -1,0 +1,48 @@
+.beer-detail-page {
+  padding: 16px;
+  color: #F2DDCF;
+}
+
+.beer-header {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.beer-image {
+  width: 200px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.beer-name {
+  margin: 16px 0;
+}
+
+.beer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 12px 0;
+}
+
+.beer-description {
+  margin: 16px 0;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.section-title {
+  margin: 24px 0 16px;
+}
+
+.bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bar-card {
+  background-color: rgba(242, 221, 207, 0.05) !important;
+  color: #F2DDCF !important;
+} 

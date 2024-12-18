@@ -14,6 +14,9 @@ function BeerCard({ beer, price }) {
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(false);
 
+    const handleClick = () => {
+      navigate(`/beer/${beer.id}`, { state: { beer } });
+    };
 
     const toggleFavorite = (event) => {
         event.stopPropagation();
@@ -22,7 +25,7 @@ function BeerCard({ beer, price }) {
       };
 
   return (
-    <Card sx={{ height: '200px', position: 'relative' }} variant="plain">
+    <Card onClick={handleClick} sx={{ height: '200px', position: 'relative' }} variant="plain">
       <CardCover>
         <img
           src={beer.image}
