@@ -59,19 +59,20 @@ function BeerDetailPage() {
 
   return (
     <div className="beer-detail-page">
-      <IconButton className="back-button" onClick={() => navigate(-1)}>
-        <ArrowBackIcon />
-      </IconButton>
-      
-      <Box className="beer-header">
-        <img src={beer.image} alt={beer.name} className="beer-image" />
-        <Typography variant="h4" className="beer-name">{beer.name}</Typography>
-        <Box className="beer-stats">
-          <Typography>ABV: {beer.abv}%</Typography>
-          <Typography>IBU: {beer.ibu}</Typography>
-        </Box>
-        <Typography className="beer-description">{beer.description}</Typography>
-      </Box>
+          <IconButton className="back-button" onClick={() => navigate(-1)}>
+    <ArrowBackIcon />
+  </IconButton>
+<Box className="beer-header">
+  <img src={beer.image} alt={beer.name} className="beer-image" />
+  <Box className="beer-content">
+    <Typography variant="h4" className="beer-name">{beer.name}</Typography>
+    <Box className="beer-stats">
+      <Typography>ABV: {beer.abv}%</Typography>
+      <Typography>IBU: {beer.ibu}</Typography>
+    </Box>
+    <Typography className="beer-description">{beer.description}</Typography>
+  </Box>
+</Box>
 
       <Box className="filter-buttons">
       <Button
@@ -135,7 +136,10 @@ function BeerDetailPage() {
               {bar.name}
             </Typography>
             <Typography className="bar-details">
-              До 23.00 ⚫️ м. Павелецкая ⚫️ {bar.distance.toFixed(2)} км ⚫️ {bar.price} ₽
+              До 23.00 ⚫️ м. Павелецкая ⚫️ {bar.distance.toFixed(2)} км 
+            </Typography>
+            <Typography className="bar-price">
+            {bar.price} ₽
             </Typography>
           </div>
         </div>

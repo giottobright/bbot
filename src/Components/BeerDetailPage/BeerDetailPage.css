@@ -4,18 +4,16 @@
   color: #F2DDCF;
   padding: 0;
   position: relative;
-  margin-top: -60px;
 }
 
 .beer-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(10px);
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+  }
 
 .beer-image {
   width: 180px;
@@ -78,7 +76,7 @@
 
 
   .section-title {
-    margin: 24px 16px 16px;
+    margin: 24px 1px 16px;
     font-weight: 550 !important;
     font-size: 20px !important;
     color: #F2DDCF;
@@ -155,18 +153,34 @@
     color: #F2DDCF !important;
     font-size: 14px !important;
     line-height: 1.4 !important;
-    background-color: rgba(0, 0, 0, 0.4);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     padding: 8px 12px;
     border-radius: 20px;
   }
 
-.back-button {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 2;
-  color: #F2DDCF !important;
-  background-color: rgba(242, 221, 207, 0.1) !important;
-  backdrop-filter: blur(10px);
-} 
+  .back-button {
+    position: absolute !important;
+    top: 20px !important;
+    left: 20px !important;
+    z-index: 2;
+    color: #F2DDCF !important;
+    background-color: rgba(242, 221, 207, 0.1) !important;
+    backdrop-filter: blur(10px);
+  }
+
+.bar-price {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    color: #F2DDCF !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 8px 12px;
+    border-radius: 20px;
+}
