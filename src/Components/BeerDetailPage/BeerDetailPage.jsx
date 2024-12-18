@@ -73,40 +73,46 @@ function BeerDetailPage() {
         <Typography className="beer-description">{beer.description}</Typography>
       </Box>
 
-      <Box className="sort-buttons">
+      <Box className="filter-buttons">
         <Button
-          startIcon={<LocationOnIcon />}
           onClick={() => setSortBy('distance')}
-          variant={sortBy === 'distance' ? "contained" : "outlined"}
           sx={{
-            color: '#F2DDCF',
-            borderColor: '#F2DDCF',
-            backgroundColor: sortBy === 'distance' ? 'rgba(242, 221, 207, 0.2)' : 'transparent',
+            color: sortBy === 'distance' ? '#0E1621' : '#F2DDCF',
+            backgroundColor: sortBy === 'distance' ? '#F2DDCF' : 'transparent',
+            borderRadius: '20px',
+            border: '1px solid #F2DDCF',
             '&:hover': {
-              backgroundColor: 'rgba(242, 221, 207, 0.1)',
+              backgroundColor: sortBy === 'distance' ? '#E5C8B5' : 'rgba(242, 221, 207, 0.1)',
             },
+            whiteSpace: 'nowrap',
+            minWidth: 'auto',
+            padding: '4px 12px'
           }}
+          startIcon={<LocationOnIcon />}
         >
           По расстоянию
         </Button>
         <Button
-          startIcon={<AttachMoneyIcon />}
           onClick={() => setSortBy('price')}
-          variant={sortBy === 'price' ? "contained" : "outlined"}
           sx={{
-            color: '#F2DDCF',
-            borderColor: '#F2DDCF',
-            backgroundColor: sortBy === 'price' ? 'rgba(242, 221, 207, 0.2)' : 'transparent',
+            color: sortBy === 'price' ? '#0E1621' : '#F2DDCF',
+            backgroundColor: sortBy === 'price' ? '#F2DDCF' : 'transparent',
+            borderRadius: '20px',
+            border: '1px solid #F2DDCF',
             '&:hover': {
-              backgroundColor: 'rgba(242, 221, 207, 0.1)',
+              backgroundColor: sortBy === 'price' ? '#E5C8B5' : 'rgba(242, 221, 207, 0.1)',
             },
+            whiteSpace: 'nowrap',
+            minWidth: 'auto',
+            padding: '4px 12px'
           }}
+          startIcon={<AttachMoneyIcon />}
         >
           По цене
         </Button>
       </Box>
 
-      <Typography variant="h6" className="section-title">
+      <Typography fontSize={20} fontWeight={550} className="section-title">
         Где можно попробовать
       </Typography>
 
