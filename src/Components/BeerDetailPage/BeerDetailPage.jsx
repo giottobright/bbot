@@ -74,42 +74,50 @@ function BeerDetailPage() {
       </Box>
 
       <Box className="filter-buttons">
-        <Button
-          onClick={() => setSortBy('distance')}
-          sx={{
-            color: sortBy === 'distance' ? '#0E1621' : '#F2DDCF',
-            backgroundColor: sortBy === 'distance' ? '#F2DDCF' : 'transparent',
-            borderRadius: '20px',
-            border: '1px solid #F2DDCF',
-            '&:hover': {
-              backgroundColor: sortBy === 'distance' ? '#E5C8B5' : 'rgba(242, 221, 207, 0.1)',
-            },
-            whiteSpace: 'nowrap',
-            minWidth: 'auto',
-            padding: '4px 12px'
-          }}
-          startIcon={<LocationOnIcon />}
-        >
-          По расстоянию
-        </Button>
-        <Button
-          onClick={() => setSortBy('price')}
-          sx={{
-            color: sortBy === 'price' ? '#0E1621' : '#F2DDCF',
-            backgroundColor: sortBy === 'price' ? '#F2DDCF' : 'transparent',
-            borderRadius: '20px',
-            border: '1px solid #F2DDCF',
-            '&:hover': {
-              backgroundColor: sortBy === 'price' ? '#E5C8B5' : 'rgba(242, 221, 207, 0.1)',
-            },
-            whiteSpace: 'nowrap',
-            minWidth: 'auto',
-            padding: '4px 12px'
-          }}
-          startIcon={<AttachMoneyIcon />}
-        >
-          По цене
-        </Button>
+      <Button
+  onClick={() => setSortBy('distance')}
+  sx={{
+    color: sortBy === 'distance' ? '#0E1621' : '#F2DDCF',
+    backgroundColor: sortBy === 'distance' ? '#F2DDCF' : 'transparent',
+    borderRadius: '20px',
+    border: '1px solid #F2DDCF',
+    '&:hover': {
+      backgroundColor: sortBy === 'distance' ? '#E5C8B5' : 'rgba(242, 221, 207, 0.1)',
+    },
+    whiteSpace: 'nowrap',
+    minWidth: 'auto',
+    padding: '4px 12px',
+    textTransform: 'none',
+    fontFamily: 'Roboto',
+    fontWeight: 500,
+    fontSize: '14px'
+  }}
+  startIcon={<LocationOnIcon />}
+>
+  По расстоянию
+</Button>
+<Button
+  onClick={() => setSortBy('price')}
+  sx={{
+    color: sortBy === 'price' ? '#0E1621' : '#F2DDCF',
+    backgroundColor: sortBy === 'price' ? '#F2DDCF' : 'transparent',
+    borderRadius: '20px',
+    border: '1px solid #F2DDCF',
+    '&:hover': {
+      backgroundColor: sortBy === 'price' ? '#E5C8B5' : 'rgba(242, 221, 207, 0.1)',
+    },
+    whiteSpace: 'nowrap',
+    minWidth: 'auto',
+    padding: '4px 12px',
+    textTransform: 'none',
+    fontFamily: 'Roboto',
+    fontWeight: 500,
+    fontSize: '14px'
+  }}
+  startIcon={<AttachMoneyIcon />}
+>
+  По цене
+</Button>
       </Box>
 
       <Typography fontSize={20} fontWeight={550} className="section-title">

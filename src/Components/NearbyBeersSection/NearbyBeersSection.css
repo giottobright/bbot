@@ -28,8 +28,10 @@
   .filter-buttons {
     display: flex;
     gap: 8px;
+    padding: 0 16px;
+    justify-content: flex-start;
+    margin: 20px 0;
     overflow-x: auto;
-    padding-bottom: 8px;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
@@ -37,3 +39,5 @@
   .filter-buttons::-webkit-scrollbar {
     display: none;
   }
+
+  
