@@ -41,30 +41,6 @@ const ProfilePage = () => {
             </Box>
           </Box>
         </Paper>
-
-        <Box className="activities-container">
-          <Typography variant="h6" className="section-title">Активности</Typography>
-          <List className="activities-list">
-            <ListItem className="activity-item">
-              <ListItemText 
-                primary="Double IPA Maximus добавлено в избранное" 
-                secondary="Jaws Москва • 19/08/2024" 
-              />
-            </ListItem>
-            <ListItem className="activity-item">
-              <ListItemText 
-                primary="Написан отзыв о Chocolate Milk IPA" 
-                secondary="Harats Pub Москва • 15/08/2024" 
-              />
-            </ListItem>
-            <ListItem className="activity-item">
-              <ListItemText 
-                primary="Бар Стрелка добавлен в Избранное" 
-                secondary="Открытие Москва • 17/08/2024" 
-              />
-            </ListItem>
-          </List>
-        </Box>
       </Box>
     </Box>
   );

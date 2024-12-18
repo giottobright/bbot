@@ -23,6 +23,7 @@ import BarMap from './Components/BarMap/BarMap';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
 import BeerDetailPage from './Components/BeerDetailPage/BeerDetailPage';
 import { UserProvider } from './context/UserContext';
+import ScrollToTop from './Components/ScrollToTop';
 
 function AppContent() {
   const { tg } = useTelegram();
@@ -112,6 +113,7 @@ function AppContent() {
 function App() {
   return (
     <UserProvider>
+      <ScrollToTop />
       <GeolocationProvider>
         <SearchProvider>
           <AppContent />

@@ -1,15 +1,19 @@
 .beer-detail-page {
-  background-color: #0E1621;
-  min-height: 100vh;
-  color: #F2DDCF;
-  padding: 1px;
-}
+    background-color: #0E1621;
+    min-height: 100vh;
+    color: #F2DDCF;
+    padding: 0;
+    position: relative;
+  }
 
-.beer-header {
-  position: relative;
-  margin-top: 20px;
-  text-align: center;
-}
+  .beer-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin-top: 0;
+    position: relative;
+  }
 
 .beer-image {
   width: 200px;
@@ -91,12 +95,14 @@
 }
 
 .back-button {
-  position: absolute;
-  top: -60px;
-  left: 0;
-  color: #F2DDCF !important;
-  background-color: rgba(242, 221, 207, 0.1) !important;
-}
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    color: #F2DDCF;
+    background-color: rgba(242, 221, 207, 0.1);
+    backdrop-filter: blur(10px);
+  }
 
 .bar-card {
   background-color: rgba(242, 221, 207, 0.05) !important;
