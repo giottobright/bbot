@@ -2,7 +2,7 @@
   background-color: #0E1621;
   min-height: 100vh;
   color: #F2DDCF;
-  padding: 16px;
+  padding: 1px;
 }
 
 .beer-header {
@@ -56,18 +56,18 @@
 }
 
 .bars-list {
-  padding: 16px;
+  padding: 0 0px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 .bar-item {
-  margin-bottom: 15px;
-  padding: 5px;
+  margin-bottom: 8px;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  width: 100% !important;
 }
 
 .bar-item:hover {

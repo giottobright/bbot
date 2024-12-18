@@ -113,7 +113,11 @@ function BeerDetailPage() {
       <div className="bars-list">
         {availableBars.map((bar) => (
           <div key={bar.id} className="bar-item" onClick={() => navigate(`/bar/${bar.id}`, { state: { bar } })}>
-            <Card sx={{ maxWidth: 555, bgcolor: 'rgba(242, 221, 207, 0.05)' }}>
+                <Card sx={{ 
+                    width: '100% !important', 
+                    bgcolor: 'rgba(242, 221, 207, 0.05)',
+                    marginBottom: '8px'
+                }}>
               <CardMedia
                 sx={{ height: 170 }}
                 image={bar.image}

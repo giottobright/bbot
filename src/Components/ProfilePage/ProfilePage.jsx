@@ -1,6 +1,5 @@
 import React from 'react';
-import { Typography, Avatar, Box, Paper, IconButton, List, ListItem, ListItemText, ListItemAvatar } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Typography, Avatar, Box, Paper, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './ProfilePage.css';
 
@@ -9,21 +8,23 @@ const ProfilePage = () => {
     <Box className="profile-page">
       <Box className="background-image" />
       <Box className="profile-content">
-        <Box className="header-actions">
-          <IconButton className="action-button">
-            <SettingsIcon />
-          </IconButton>
+        <Box className="header-section">
+          <Box className="header-actions">
+            <IconButton className="action-button">
+              <SettingsIcon />
+            </IconButton>
+          </Box>
+          <Avatar
+            alt="Dmitrii Kozlov"
+            src="/path/to/avatar.jpg"
+            className="profile-avatar"
+          />
+          <Box className="name-location-container">
+            <Typography variant="h5" className="profile-name">Dmitrii Kozlov</Typography>
+            <Typography variant="subtitle1" className="profile-location">Москва, Россия</Typography>
+          </Box>
         </Box>
-        <Avatar
-          alt="Christian Slater"
-          src="/path/to/avatar.jpg"
-          className="profile-avatar"
-        />
-        <Box className="name-location-container">
-          <Typography variant="h5" className="profile-name">Dmitrii Kozlov</Typography>
-          <Typography variant="subtitle1" className="profile-location">Москва, Россия</Typography>
-        </Box>
-        
+
         <Paper elevation={3} className="profile-details">
           <Box className="profile-stats">
             <Box className="stat-item">
@@ -60,24 +61,6 @@ const ProfilePage = () => {
               <ListItemText 
                 primary="Бар Стрелка добавлен в Избранное" 
                 secondary="Открытие Москва • 17/08/2024" 
-              />
-            </ListItem>
-            <ListItem className="activity-item">
-              <ListItemText 
-                primary="Бар Онегин добавлен в Избранное" 
-                secondary="Рюмочная Azor Москва • 25/08/2024" 
-              />
-            </ListItem>
-            <ListItem className="activity-item">
-              <ListItemText 
-                primary="Написан отзыв о Corona Extra" 
-                secondary="Визави Паб Москва • 15/08/2024" 
-              />
-            </ListItem>
-            <ListItem className="activity-item">
-              <ListItemText 
-                primary="IPA Citrus добавлено в избранное" 
-                secondary="Рюмочная Довлатов Москва • 19/08/2024" 
               />
             </ListItem>
           </List>

@@ -158,11 +158,12 @@ function NearbyBeersSection() {
             <Card
               onClick={() => handleBeerClick(beer)}
               sx={{
-                height: 200,
+                height: 160,
                 cursor: 'pointer',
                 backgroundColor: 'rgba(242, 221, 207, 0.05)',
                 borderRadius: '12px',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                border: 'none'
               }}
             >
               <CardCover>

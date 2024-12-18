@@ -3,6 +3,7 @@
     min-height: 100vh;
     color: #F2DDCF;
     position: relative;
+    padding-bottom: 80px;
   }
   
   .background-image {
@@ -10,7 +11,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 300px; /* Adjust this value to control where the image ends */
+    height: 250px;
     background-image: url('../img/city.jpeg');
     background-size: cover;
     background-position: center;
@@ -19,18 +20,26 @@
   .profile-content {
     position: relative;
     z-index: 1;
-    padding: 5px;
+  }
+  
+  .header-section {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
   }
   
   .header-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    z-index: 2;
   }
   
   .action-button {
     background-color: rgba(242, 221, 207, 0.1) !important;
-    margin-left: 10px !important;
+    backdrop-filter: blur(10px);
   }
   
   .action-button svg {
@@ -41,55 +50,34 @@
     width: 100px !important;
     height: 100px !important;
     border: 4px solid #252B33;
-    margin: 0 auto;
-    display: block;
+    margin-top: 20px;
   }
   
   .name-location-container {
-    background-color: rgba(14, 22, 33, 0.5); /* Semi-transparent background */
-    backdrop-filter: blur(1px); /* Blur effect */
+    background-color: rgba(14, 22, 33, 0.5);
+    backdrop-filter: blur(1px);
     border-radius: 16px;
     padding: 10px 20px;
     margin-top: 10px;
-    display: inline-block;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
   }
   
   .profile-name {
-    text-align: center;
-    font-weight: bold;
     color: #F2DDCF;
+    font-weight: bold;
     margin-bottom: 5px;
   }
   
   .profile-location {
-    text-align: center;
     color: rgba(242, 221, 207, 0.7);
   }
   
-  /* Rest of the CSS remains the same */
-  
   .profile-details {
+    margin: 20px;
     border-radius: 16px !important;
     padding: 20px;
-    margin-bottom: 20px;
     background-color: rgba(242, 221, 207, 0.25) !important;
     backdrop-filter: blur(10px) !important;
-  }
-  
-  .profile-connections {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .connection-avatar {
-    width: 30px !important;
-    height: 30px !important;
-    margin: 0 -5px;
-    border: 2px solid #252B33;
   }
   
   .profile-stats {
@@ -103,7 +91,7 @@
     flex: 1;
     position: relative;
   }
-
+  
   .stat-item:not(:last-child)::after {
     content: '';
     position: absolute;
@@ -127,51 +115,48 @@
     font-size: 14px;
   }
   
-  /* Previous CSS remains the same */
-
-.activities-section {
-    margin-top: 20px;
+  .activities-container {
+    padding: 0 16px;
+    margin-bottom: 80px;
   }
   
   .section-title {
     color: #F2DDCF;
     font-family: 'Roboto', sans-serif;
     font-weight: 600 !important;
-    font-style: normal;
     font-size: 25px !important;
     margin-bottom: 15px;
+  }
+  
+  .activities-list {
+    background-color: rgba(37, 43, 51, 0.7);
+    border-radius: 16px;
+    overflow: hidden;
   }
   
   .activity-item {
     background-color: rgba(37, 43, 51, 0.7);
     backdrop-filter: blur(10px);
-    border-radius: 16px;
-    margin-bottom: 10px;
-    padding: 10px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(242, 221, 207, 0.1);
   }
   
-  .MuiListItemAvatar-root .MuiAvatar-root {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
+  .activity-item:last-child {
+    border-bottom: none;
   }
   
   .MuiListItemText-primary {
-    color: #F2DDCF;
-    font-weight: bold;
+    color: #F2DDCF !important;
     font-size: 15px !important;
     font-weight: 800 !important;
   }
   
   .MuiListItemText-secondary {
-    color: #F2DDCF !important;
-    font-size: 10px !important;
+    color: rgba(242, 221, 207, 0.7) !important;
+    font-size: 12px !important;
     font-weight: 200 !important;
   }
   
-  /* Adjust the list to remove default padding */
   .MuiList-root {
     padding: 0 !important;
   }
-  
-  /* Remove the Paper component styles if they're no longer needed */
