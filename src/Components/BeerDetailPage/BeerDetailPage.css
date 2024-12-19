@@ -13,6 +13,8 @@
     padding: 10px;
     margin-bottom: 20px;
     backdrop-filter: blur(10px);
+    position: relative;
+    margin-top: 0;
   }
 
 .beer-content{
